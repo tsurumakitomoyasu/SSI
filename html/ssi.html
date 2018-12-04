@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SSI</title>
+  <link rel="stylesheet" href="../css/ress.min.css">
+  <script src="../js/three.min.js"></script>
+  <script src="../js/orbitcontrols.js"></script>
+  <script src="../js/preloadjs-min.js"></script>
+  <style>
+    body {
+      overflow: hidden;
+    }
+
+    canvas {
+      widows: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="stage"></canvas>
+  <script src="../js/ssi.js"></script>
+  <script>
+    $(window).on('touchmove.noScroll', function (e) {
+      e.preventDefault();
+    });
+
+    // スクロール無効を解除する
+    $(window).off('.noScroll');
+  </script>
+</body>
+
+</html>
