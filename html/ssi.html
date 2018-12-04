@@ -9,10 +9,6 @@
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
   <style>
-    body {
-      overflow: hidden;
-    }
-
     canvas {
       widows: 100%;
       height: 100%;
@@ -23,14 +19,8 @@
 <body>
   <canvas id="stage"></canvas>
   <script src="../js/ssi.js"></script>
-  <script>
-    $(window).on('touchmove.noScroll', function (e) {
-      e.preventDefault();
-    });
-
-    // スクロール無効を解除する
-    $(window).off('.noScroll');
-  </script>
+  <script src="../js/piking.js"></script>
+  <script src="../js/btn.js"></script>
 </body>
 
 </html>
