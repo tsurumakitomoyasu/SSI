@@ -62,16 +62,16 @@ function Keydown(event) {
   } else if (keyCode == 52) {
     alert('地球');
   } else if (keyCode == 53) {
-    alert('火星');
-  } else if (keyCode == 54) {
-    alert('木星');
-  } else if (keyCode == 55) {
-    alert('土星');
-  } else if (keyCode == 56) {
-    alert('天王星');
-  } else if (keyCode == 57) {
-    alert('海王星');
-  } else if (keyCode == 48) {
     alert('月');
+  } else if (keyCode == 54) {
+    alert('火星');
+  } else if (keyCode == 55) {
+    alert('木星');
+  } else if (keyCode == 56) {
+    alert('土星');
+  } else if (keyCode == 57) {
+    alert('天王星');
+  } else if (keyCode == 48) {
+    alert('海王星');
   }
 };
