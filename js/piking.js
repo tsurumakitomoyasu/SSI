@@ -23,8 +23,7 @@ function clickPosition(event) {
 
   //条件処理
   if (interMe.length > 0) {
-    //alert('水星');
-    location.href = "https://syncer.jp/";
+    alert('水星');
   } else if (interVe.length > 0) {
     alert('金星');
   } else if (interEa.length > 0) {
