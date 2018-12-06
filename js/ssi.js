@@ -13,6 +13,7 @@ let controls;
 let theta = 0;
 
 //ピッキング処理用変数
+let targetSun = [];
 let targetMercury = [];
 let targetVenus = [];
 let targetEarth = [];
@@ -21,6 +22,7 @@ let targetJupiter = [];
 let targetSaturn = [];
 let targetUranus = [];
 let targetNeptune = [];
+let targetMoon = [];
 
 // テクスチャー
 let textureSun;
@@ -262,6 +264,8 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         side: THREE.DoubleSide // 裏からも
       })
     );
+    targetSun.push(sphere);
+
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isMercury') {
     sphere = new THREE.Group();
@@ -275,6 +279,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereMercury);
     targetMercury.push(sphereMercury);
+
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isVenus') {
     sphere = new THREE.Group();
@@ -288,6 +293,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereVenus);
     targetVenus.push(sphereVenus);
+
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isEarth') {
     sphere = new THREE.Group();
@@ -312,6 +318,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereEarth);
     sphere.add(crowd);
+
     targetEarth.push(sphereEarth);
 
     /*sphere.position.set(
@@ -332,6 +339,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereMars);
     targetMars.push(sphereMars);
+
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isJupiter') {
     sphere = new THREE.Group();
@@ -345,6 +353,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereJupiter);
     targetJupiter.push(sphereJupiter);
+
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isSaturn') {
     sphere = new THREE.Group();
@@ -370,6 +379,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereSaturn);
     sphere.add(ring);
+
     targetSaturn.push(sphereSaturn);
 
     /*sphere.position.set(
@@ -402,6 +412,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereUranus);
     sphere.add(ring);
+
     targetUranus.push(sphereUranus);
 
     /*sphere.position.set(
@@ -422,6 +433,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     sphere.add(sphereNeptune);
     targetNeptune.push(sphereNeptune);
+
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isUniverse') {
     sphere = new THREE.Mesh(
@@ -439,6 +451,8 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         map: texture
       })
     );
+    targetMoon.push(sphere);
+
     /*sphere.position.set(
       Math.random() * 500 - 250,
       Math.random() * 500 - 250,

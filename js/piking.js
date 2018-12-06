@@ -12,6 +12,7 @@ function clickPosition(event) {
   raycaster.setFromCamera(mouse, camera);
 
   // オブジェクトの取得
+  let interSu = raycaster.intersectObjects(targetSun);
   let interMe = raycaster.intersectObjects(targetMercury);
   let interVe = raycaster.intersectObjects(targetVenus);
   let interEa = raycaster.intersectObjects(targetEarth);
@@ -20,9 +21,12 @@ function clickPosition(event) {
   let interSa = raycaster.intersectObjects(targetSaturn);
   let interUr = raycaster.intersectObjects(targetUranus);
   let interNe = raycaster.intersectObjects(targetNeptune);
+  let interMo = raycaster.intersectObjects(targetMoon);
 
   //条件処理
-  if (interMe.length > 0) {
+  if (interSu.length > 0) {
+    alert('太陽');
+  } else if (interMe.length > 0) {
     alert('水星');
   } else if (interVe.length > 0) {
     alert('金星');
@@ -38,5 +42,36 @@ function clickPosition(event) {
     alert('天王星');
   } else if (interNe.length > 0) {
     alert('海王星');
+  } else if (interMo.length > 0) {
+    alert('月');
+  }
+};
+
+window.addEventListener("keydown", Keydown);
+
+function Keydown(event) {
+  let keyCode = event.keyCode;
+
+  // 条件文で制御する
+  if (keyCode == 49) {
+    alert('太陽')
+  } else if (keyCode == 50) {
+    alert('水星');
+  } else if (keyCode == 51) {
+    alert('金星');
+  } else if (keyCode == 52) {
+    alert('地球');
+  } else if (keyCode == 53) {
+    alert('火星');
+  } else if (keyCode == 54) {
+    alert('木星');
+  } else if (keyCode == 55) {
+    alert('土星');
+  } else if (keyCode == 56) {
+    alert('天王星');
+  } else if (keyCode == 57) {
+    alert('海王星');
+  } else if (keyCode == 48) {
+    alert('月');
   }
 };
