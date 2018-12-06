@@ -236,7 +236,6 @@ controls.maxDistance = 1000; //カメラ最大値
 controls.enableDamping = true;
 controls.dampingFactor = .1;
 
-
 // レンダラー
 renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#stage')
