@@ -91,13 +91,13 @@ uranusimageText = new THREE.SpriteMaterial({
   map: new THREE.TextureLoader().load('../images/uranustext.png'),
 });
 uranusText = new THREE.Sprite(uranusimageText);
-uranusText.position.y = 30;
-uranusText.scale.set(70, 27, 40);
+uranusText.position.y = 25;
+uranusText.scale.set(50, 20, 40);
 
 //海王星
 neptuneimageText = new THREE.SpriteMaterial({
   map: new THREE.TextureLoader().load('../images/neptunetext.png'),
 });
 neptuneText = new THREE.Sprite(neptuneimageText);
-neptuneText.position.y = 30;
-neptuneText.scale.set(70, 27, 40);
+neptuneText.position.y = 25;
+neptuneText.scale.set(50, 20, 40);

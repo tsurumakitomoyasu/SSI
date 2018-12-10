@@ -70,8 +70,8 @@ let saturnX = 350;
 let saturnZ = 350;
 let uranusX = 410;
 let uranusZ = 410;
-let neptuneX = 460;
-let neptuneZ = 460;
+let neptuneX = 480;
+let neptuneZ = 480;
 let moonX = 25;
 let moonZ = 25;
 
@@ -227,7 +227,7 @@ scene.add(ambient);
 
 // カメラ
 camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000000);
-camera.position.set(400, 200, 300);
+camera.position.set(-6, 10, 17);
 
 // カメラ操作
 controls = new THREE.OrbitControls(camera);
@@ -493,33 +493,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 };
 
 function render() {
-  requestAnimationFrame(render);
-  //自転
-  sun.rotation.y += 0.003;
-  mercury.rotation.y += 0.005;
-  venus.rotation.y += 0.0010;
-  earth.rotation.y += 0.0005;
-  crowd.rotation.y += 0.0010;
-  mars.rotation.y += 0.002;
-  jupiter.rotation.y += 0.003;
-  saturn.rotation.y += 0.004;
-  uranus.rotation.y += 0.005;
-  neptune.rotation.y += 0.007;
-  moon.rotation.y += 0.007;
-
-  //惑星のスピード
-  mercuryTheta -= 0.78;
-  venusTheta -= 0.65;
-  earthTheta -= 0.59;
-  marsTheta -= 0.54;
-  jupiterTheta -= 0.43;
-  saturnTheta -= 0.4;
-  uranusTheta -= 0.37;
-  neptuneTheta -= 0.35;
-  moonTheta -= 1;
-
-  //回転固定
-  /*mercuryTheta = 0.78;
+  mercuryTheta = 0.78;
   venusTheta = 0.65;
   earthTheta = 0.59;
   marsTheta = 0.54;
@@ -527,7 +501,7 @@ function render() {
   saturnTheta = 0.4;
   uranusTheta = 0.37;
   neptuneTheta = 0.35;
-  moonTheta = 0.35;*/
+  moonTheta = 0.35;
 
   mercury.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * mercuryX;
   mercury.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * mercuryZ;
@@ -548,7 +522,7 @@ function render() {
   moon.position.x = Math.cos(THREE.Math.degToRad(moonTheta)) * moonX + earth.position.x;
   moon.position.z = Math.sin(THREE.Math.degToRad(moonTheta)) * moonZ + earth.position.z;
 
+  requestAnimationFrame(render);
   controls.update();
   renderer.render(scene, camera);
-
 };
