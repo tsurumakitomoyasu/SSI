@@ -53,25 +53,25 @@ function Keydown(event) {
   let keyCode = event.keyCode;
 
   // 条件文で制御する
-  if (keyCode == 49) {
+  if (keyCode == 49 || keyCode == 97) {
     alert('太陽')
-  } else if (keyCode == 50) {
+  } else if (keyCode == 50 || keyCode == 98) {
     alert('水星');
-  } else if (keyCode == 51) {
+  } else if (keyCode == 51 || keyCode == 99) {
     alert('金星');
-  } else if (keyCode == 52) {
+  } else if (keyCode == 52 || keyCode == 100) {
     alert('地球');
-  } else if (keyCode == 53) {
+  } else if (keyCode == 53 || keyCode == 101) {
     alert('月');
-  } else if (keyCode == 54) {
+  } else if (keyCode == 54 || keyCode == 102) {
     alert('火星');
-  } else if (keyCode == 55) {
+  } else if (keyCode == 55 || keyCode == 103) {
     alert('木星');
-  } else if (keyCode == 56) {
+  } else if (keyCode == 56 || keyCode == 104) {
     alert('土星');
-  } else if (keyCode == 57) {
+  } else if (keyCode == 57 || keyCode == 105) {
     alert('天王星');
-  } else if (keyCode == 48) {
+  } else if (keyCode == 48 || keyCode == 96) {
     alert('海王星');
   }
 };

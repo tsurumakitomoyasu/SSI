@@ -57,24 +57,24 @@ let universe;
 let moon;
 
 // ポジション
-let mercuryX = 100;
-let mercuryZ = 100;
-let venusX = 150;
-let venusZ = 150;
-let earthX = 200;
-let earthZ = 200;
-let marsX = 270;
-let marsZ = 270;
-let jupiterX = 320;
-let jupiterZ = 320;
-let saturnX = 380;
-let saturnZ = 380;
-let uranusX = 430;
-let uranusZ = 430;
-let neptuneX = 480;
-let neptuneZ = 480;
-let moonX = 30;
-let moonZ = 30;
+let mercuryX = 80;
+let mercuryZ = 80;
+let venusX = 120;
+let venusZ = 120;
+let earthX = 170;
+let earthZ = 170;
+let marsX = 230;
+let marsZ = 230;
+let jupiterX = 280;
+let jupiterZ = 280;
+let saturnX = 350;
+let saturnZ = 350;
+let uranusX = 410;
+let uranusZ = 410;
+let neptuneX = 460;
+let neptuneZ = 460;
+let moonX = 25;
+let moonZ = 25;
 
 let mercuryTheta = 10;
 let venusTheta = 160;
@@ -88,7 +88,6 @@ let moonTheta = 0;
 
 // ステージ
 scene = new THREE.Scene();
-
 // テクスチャーリスト
 let manifest = [{
     id: 'sun',
@@ -234,7 +233,7 @@ camera.position.set(400, 200, 300);
 // カメラ操作
 controls = new THREE.OrbitControls(camera);
 controls.minDistance = 350; //カメラ最小値
-controls.maxDistance = 1000; //カメラ最大値
+controls.maxDistance = 700; //カメラ最大値
 controls.enableDamping = true;
 controls.dampingFactor = .1;
 
@@ -256,7 +255,11 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     sphereNeptune,
     ring;
 
+  //太陽
   if (planetName === 'isSun') {
+    //グループ化
+    sphere = new THREE.Group();
+
     sphere = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
       new THREE.MeshBasicMaterial({ // 材質
@@ -264,11 +267,15 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         side: THREE.DoubleSide // 裏からも
       })
     );
+
+    sphere.add(sunText);
     targetSun.push(sphere);
 
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isMercury') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereMercury = new THREE.Group();
 
     sphereMercury = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
@@ -278,11 +285,14 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     );
 
     sphere.add(sphereMercury);
+    sphereMercury.add(mercuryText);
     targetMercury.push(sphereMercury);
 
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isVenus') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereVenus = new THREE.Group();
 
     sphereVenus = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
@@ -292,11 +302,14 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     );
 
     sphere.add(sphereVenus);
+    sphereVenus.add(venusText);
     targetVenus.push(sphereVenus);
 
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isEarth') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereEarth = new THREE.Group();
 
     sphereEarth = new THREE.Mesh(
       new THREE.SphereGeometry(13, 20, 20), // 形状
@@ -314,11 +327,9 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
       })
     );
 
-    sphereEarth.name = 'earth';
-
+    sphereEarth.add(earthText);
     sphere.add(sphereEarth);
     sphere.add(crowd);
-
     targetEarth.push(sphereEarth);
 
     /*sphere.position.set(
@@ -327,8 +338,30 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
       Math.random() * 500 - 250
     );*/
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isMars') {
+  } else if (planetName === 'isMoon') {
+    //グループ化
     sphere = new THREE.Group();
+
+    sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
+      new THREE.MeshLambertMaterial({ // 材質
+        map: texture
+      })
+    );
+
+    sphere.add(moonText);
+    targetMoon.push(sphere);
+
+    /*sphere.position.set(
+      Math.random() * 500 - 250,
+      Math.random() * 500 - 250,
+      Math.random() * 500 - 250
+    );*/
+    sphere.position.set(x, 0, z);
+  } else if (planetName === 'isMars') {
+    //グループ化
+    sphere = new THREE.Group();
+    sphereMars = new THREE.Group();
 
     sphereMars = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
@@ -337,12 +370,15 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
       })
     );
 
+    sphereMars.add(marsText);
     sphere.add(sphereMars);
     targetMars.push(sphereMars);
 
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isJupiter') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereJupiter = new THREE.Group();
 
     sphereJupiter = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
@@ -351,12 +387,15 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
       })
     );
 
+    sphereJupiter.add(jupiterText);
     sphere.add(sphereJupiter);
     targetJupiter.push(sphereJupiter);
 
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isSaturn') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereSaturn = new THREE.Group();
 
     sphereSaturn = new THREE.Mesh(
       new THREE.SphereGeometry(13, 20, 20), // 形状
@@ -374,9 +413,9 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         transparent: true
       })
     );
-
     ring.rotation.x = 1.5
 
+    sphereSaturn.add(saturnText);
     sphere.add(sphereSaturn);
     sphere.add(ring);
 
@@ -389,7 +428,9 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     );*/
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isUranus') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereUranus = new THREE.Group();
 
     sphereUranus = new THREE.Mesh(
       new THREE.SphereGeometry(13, 20, 20), // 形状
@@ -407,9 +448,9 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         transparent: true
       })
     );
-
     ring.rotation.x = 1.5
 
+    sphereUranus.add(uranusText);
     sphere.add(sphereUranus);
     sphere.add(ring);
 
@@ -422,7 +463,9 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     );*/
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isNeptune') {
+    //グループ化
     sphere = new THREE.Group();
+    sphereNeptune = new THREE.Group();
 
     sphereNeptune = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
@@ -431,6 +474,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
       })
     );
 
+    sphereNeptune.add(neptuneText);
     sphere.add(sphereNeptune);
     targetNeptune.push(sphereNeptune);
 
@@ -444,21 +488,6 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
       })
     );
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isMoon') {
-    sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
-        map: texture
-      })
-    );
-    targetMoon.push(sphere);
-
-    /*sphere.position.set(
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250
-    );*/
-    sphere.position.set(x, 0, z);
   }
   scene.add(sphere);
   return sphere;
@@ -466,6 +495,8 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
 function render() {
   requestAnimationFrame(render);
+  //自転
+  sun.rotation.y += 0.003;
   mercury.rotation.y += 0.005;
   venus.rotation.y += 0.0010;
   earth.rotation.y += 0.0005;
@@ -475,7 +506,7 @@ function render() {
   saturn.rotation.y += 0.004;
   uranus.rotation.y += 0.005;
   neptune.rotation.y += 0.007;
-  moon.rotation.y += 0.01;
+  moon.rotation.y += 0.007;
 
   //惑星のスピード
   //月は修正した方がいいかも
@@ -487,7 +518,18 @@ function render() {
   saturnTheta -= 0.4;
   uranusTheta -= 0.37;
   neptuneTheta -= 0.35;
-  moonTheta -= 0.35;
+  moonTheta -= 1;
+
+  //回転固定
+  /*mercuryTheta = 0.78;
+  venusTheta = 0.65;
+  earthTheta = 0.59;
+  marsTheta = 0.54;
+  jupiterTheta = 0.43;
+  saturnTheta = 0.4;
+  uranusTheta = 0.37;
+  neptuneTheta = 0.35;
+  moonTheta = 0.35;*/
 
   mercury.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * mercuryX;
   mercury.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * mercuryZ;
@@ -510,4 +552,5 @@ function render() {
 
   controls.update();
   renderer.render(scene, camera);
+
 };
