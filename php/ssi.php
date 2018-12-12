@@ -32,14 +32,13 @@
           if ($cnt["count(*)"] == 1) {
             //ログイン成功時
             $_SESSION["LOGINUSER"] = $user;
+            unset($_SESSION["ERROR"]);
           } else {
             //ログイン失敗
+            $script = "<script>setTimeout(function () { location.href = './login.php'; }, 0);</script>";
+            $_SESSION["ERROR"] = "error";
           }
-        } else {
-          //パスワード未入力
         }
-      } else {
-        //ユーザーID未入力
       }
     }
   }
@@ -51,25 +50,36 @@
   <title>SSI</title>
   <link rel="stylesheet" href="../css/ress.min.css">
   <link rel="stylesheet" href="../css/ssi.css">
-  <script src="../js/jquery-3.3.1.min.js"></script>
-  <script src="../js/three.min.js"></script>
-  <script src="../js/orbitcontrols.js"></script>
-  <script src="../js/preloadjs-min.js"></script>
 </head>
 
 <body>
-  <?php
-    if (isset($_SESSION["LOGINUSER"])) {
-      $text = "<div class=\"loading loadingOut loadingIn\"><div class=\"loadingimg loadingOut loadingIn\"><img src=\"../images/loadingimage.png\" alt=\"ローリング画像\"></div></div><canvas id=\"stage\"></canvas><div id=\"question\"><button id=\"questionBtn\"><img src=\"../images/question_off.png\" alt=\"操作方法\"></button></div>";
-      echo $text;
-    }
-  ?>
-  <script src="../js/font.js"></script>
-  <script src="../js/ssi.js"></script>
-  <script src="../js/piking.js"></script>
-  <script src="../js/btn.js"></script>
-  <script src="../js/imagechange.js"></script>
-  <script src="../js/loading.js"></script>
+  <?php if (isset($_SESSION["LOGINUSER"])): ?>
+    <div class="loading loadingOut loadingIn">
+      <div class="loadingimg loadingOut loadingIn">
+        <img src="../images/loadingimage.png" alt="ローリング画像">
+      </div>
+    </div>
+    <canvas id="stage"></canvas>
+    <div id="question">
+      <button id="questionBtn"><img src="../images/question_off.png" alt="操作方法"></button>
+    </div>
+    <div id="logout">
+      <form action="./login.php" method="post">
+        <input type="submit" name="logout" value="ログアウト">
+      </form>
+    </div>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/three.min.js"></script>
+    <script src="../js/orbitcontrols.js"></script>
+    <script src="../js/preloadjs-min.js"></script>
+    <script src="../js/font.js"></script>
+    <script src="../js/ssi.js"></script>
+    <script src="../js/piking.js"></script>
+    <script src="../js/btn.js"></script>
+    <script src="../js/imagechange.js"></script>
+    <script src="../js/loading.js"></script>
+  <?php endif; ?>
+  <?php echo $script; ?>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  margin-top: 9.5vh;
+  margin-top: 10vh;
 }
 
 h1 {
@@ -54,7 +54,7 @@ input {
 
 #login,
 #regist,
-#singup a {
+#singup {
   width: 100%;
   border: solid .1vw #fff;
   border-radius: .2vw;
@@ -62,6 +62,16 @@ input {
   color: #fff;
   transition: all 700ms;
   font-weight: bold;
+}
+
+#singup {
+  display: block;
+  width: 20vw;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  border: solid .1vw #0ff;
 }
 
 #login:hover {
@@ -75,15 +85,13 @@ input {
   padding: .8vw;
 }
 
-#singup a {
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  color: #fff;
-  border: solid .1vw #0ff;
-}
-
-#singup a:hover {
+#singup:hover {
   background: #0ff;
   color: #000;
+}
+
+#error {
+  color: #f00;
+  text-align: center;
+  font-size: 1.4vw;
 }

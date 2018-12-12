@@ -6,7 +6,7 @@ function handleKeydown(event) {
 
   //キーコードS
   if (keyCode == 83) {
-    location.href = './ssistop.html';
+    location.href = '../html/ssistop.html';
   }
 };
 
@@ -22,7 +22,7 @@ document.getElementById("stage").addEventListener("mousedown", function (e) {
     }, 350);
     // ダブルクリック
   } else {
-    location.href = './ssistop.html';
+    location.href = '../html/ssistop.html';
     clickCount = 0;
   }
 });
