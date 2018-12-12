@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+#user,
+#passwd {
+  border: solid .4vh #0ff;
+  color: #0ff;
+}
+
+#regist {
+  border: solid .1vw #0ff;
+}
+
+#regist:hover {
+  background: #0ff;
+  color: #000;
+}

@@ -6,7 +6,7 @@ function handleKeydown(event) {
 
   //キーコードS
   if (keyCode == 83) {
-    location.href = './ssi.html';
+    location.href = './ssi.php';
   }
 };
 

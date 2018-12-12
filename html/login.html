@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ログイン</title>
+  <link rel="stylesheet" href="../css/ress.min.css">
+  <link rel="stylesheet" href="../css/loginregist.css">
+</head>
+
+<body>
+  <header>
+    <h1><img src="../images/rogo.png" alt="SSI"></h1>
+  </header>
+  <form action="./ssi.php" method="POST">
+    <table>
+      <tr>
+        <td>
+          <input type="text" name="user" id="user" placeholder="ユーザID" autocomplete="off">
+        </td>
+      </tr>
+      <tr>
+        <td><input type="password" name="passwd" id="passwd" placeholder="パスワード" autocomplete="off"></td>
+      </tr>
+      <tr>
+        <td><input type="submit" name="login" value="ログイン" id="login">
+        </td>
+      </tr>
+      <tr>
+        <td id="or">-----------または-----------</td>
+      </tr>
+      <tr id="singupM">
+        <td id="singup"><a href="./regist.html">ユーザー登録</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

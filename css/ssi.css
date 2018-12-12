@@ -5,7 +5,86 @@ body {
   overflow: hidden;
 }
 
+body {
+  background: #000;
+}
+
 #stage {
-  widows: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+#question {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  z-index: 20;
+}
+
+.loadingOut {
+  opacity: 0;
+  transition: 1s;
+}
+
+.loadingIn {
+  opacity: 1;
+}
+
+.loading {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  background: #000;
+  animation: loadingOut 1ms linear 3900ms 1 forwards;
+}
+
+@keyframes loadingOut {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+.loadingimg img {
+  width: 40%;
+  position: absolute;
+  z-index: 40;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform-origin: center 52.6%;
+  animation: loadinOuta 1ms linear 3900ms 1 forwards;
+  animation: loading 2500ms linear 0s 1 forwards;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingOuta {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
 }

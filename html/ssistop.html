@@ -13,11 +13,27 @@
 </head>
 
 <body>
+  <!-- ローディング処理 -->
+  <div class="loading loadingOut loadingIn">
+    <div class="loadingimg loadingOut loadingIn">
+      <img src="../images/loadingimage.png" alt="ローリング画像">
+    </div>
+  </div>
+
+  <!-- キャンバス処理 -->
   <canvas id="stage"></canvas>
+
+  <!-- 操作方法 -->
+  <div id="question">
+    <button id="questionBtn"><img src="../images/question_off.png" alt="操作方法"></button>
+  </div>
+
   <script src="../js/font.js"></script>
   <script src="../js/ssistop.js"></script>
   <script src="../js/piking.js"></script>
   <script src="../js/backbtn.js"></script>
+  <script src="../js/imagechange.js"></script>
+  <script src="../js/loading.js"></script>
 </body>
 
 </html>
