@@ -57,18 +57,40 @@
     <div class="loading loadingOut loadingIn">
       <div class="loadingimg loadingOut loadingIn">
         <img src="../images/loadingimage.png" alt="ローリング画像">
+        <div id="cnt">
+          <p><span class="count fontType" data-num="100">0</span>％</p>
+        </div>
       </div>
     </div>
+
     <canvas id="stage"></canvas>
+
     <div id="question">
-      <button id="questionBtn"><img src="../images/question_off.png" alt="操作方法"></button>
+      <button class="infoBtn questionBtn"><img src="../images/question_off.png" alt="操作方法"></button>
     </div>
-    <div id="logout">
-      <form action="./login.php" method="post">
-        <input type="submit" name="logout" value="ログアウト">
-      </form>
+
+    <div class="infoWrap questioninfo">
+      <button id="questionBack">戻る</button>
     </div>
+
+    <div id="userWrap">
+      <button class="infoBtn userBtn"><img src="../images/user_off.png" alt="ユーザー情報"></button>
+    </div>
+
+    <div class="infoWrap userinfo">
+      <button id="userBack">戻る</button>
+      <div id="logout">
+        <form action="../php/login.php" method="post">
+          <input type="submit" name="logout" value="ログアウト">
+        </form>
+      </div>
+      <div id="userID">
+        <p><?php echo $_SESSION["LOGINUSER"] ?>さん</p>
+      </div>
+    </div>
+
     <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/count.js"></script>
     <script src="../js/three.min.js"></script>
     <script src="../js/orbitcontrols.js"></script>
     <script src="../js/preloadjs-min.js"></script>
@@ -76,8 +98,7 @@
     <script src="../js/ssi.js"></script>
     <script src="../js/piking.js"></script>
     <script src="../js/btn.js"></script>
-    <script src="../js/imagechange.js"></script>
-    <script src="../js/loading.js"></script>
+    <script src="../js/common.js"></script>
   <?php endif; ?>
   <?php echo $script; ?>
 </body>

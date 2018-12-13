@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>テストページ</title>
+  <link rel="stylesheet" href="../font/font.css">
   <style>
     #loading {
       position: absolute;
@@ -25,7 +26,7 @@
       right: 0;
       margin: auto;
       transform-origin: center 52.6%;
-      animation: loading 3s linear 0s infinite;
+      animation: loading 3s linear 0s 1;
     }
 
     @keyframes loading {
@@ -41,15 +42,59 @@
         transform: rotate(360deg);
       }
     }
+
+    p {
+      padding: 30px 0;
+      font-size: 5em;
+      font-weight: bold;
+      line-height: 1.2em;
+      color: #0ff;
+      margin-top: 42vh;
+      text-align: center;
+    }
+
+    .fontType3 {
+      font-family: 'Orbitron', sans-serif;
+    }
   </style>
+  <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
   <div id="loading">
     <div id="loadingimg">
       <img src="../images/loadingimage.png" alt="ローリング画像">
+      <div id="cnt">
+        <p><span class="count fontType3" data-num="100">0</span>%</p>
+      </div>
     </div>
   </div>
+  <script>
+    $(function () {
+      var countElm = $('.count'),
+        countSpeed = 30;
+
+      countElm.each(function () {
+        var self = $(this),
+          countMax = self.attr('data-num'),
+          thisCount = self.text(),
+          countTimer;
+
+        function timer() {
+          countTimer = setInterval(function () {
+            var countNext = thisCount++;
+            self.text(countNext);
+
+            if (countNext == countMax) {
+              clearInterval(countTimer);
+            }
+          }, countSpeed);
+        }
+        timer();
+      });
+
+    });
+  </script>
 </body>
 
 </html>
