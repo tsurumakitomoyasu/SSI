@@ -1,20 +1,10 @@
-<?php
- session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
-  <?php
-  if ($_POST["logout"]) {
-    session_destroy();
-  }//ログアウト終了
-  if (isset($_SESSION["ERROR"])) {
-    $Msg = "<p id=\"error\">ユーザID又はパスワードが間違ってます</p>";
-  }
-  ?>
+<?php require './decision.php'; ?>
 <head>
   <meta charset="UTF-8">
   <title>ログイン</title>
-  <link rel="stylesheet" href="../css/ress.min.css">
   <link rel="stylesheet" href="../css/loginregist.css">
 </head>
 
@@ -23,7 +13,7 @@
     <h1><img src="../images/rogo.png" alt="SSI"></h1>
   </header>
   <?php echo $Msg; ?>
-  <form action="./ssi.php" method="POST">
+  <form action="./operation.php" method="POST">
     <table>
       <tr>
         <td>
@@ -31,8 +21,9 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <input type="password" name="passwd" id="passwd" placeholder="パスワード" autocomplete="off" required></td>
+        <td class="passMa">
+          <input type="password" name="passwd" id="passwd"placeholder="パスワード" autocomplete="off" required required minlength="4">
+        </td>
       </tr>
       <tr>
         <td>

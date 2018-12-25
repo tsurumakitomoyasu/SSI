@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+body {
+  background: #000;
+}
+
+#stage {
+  width: 50%;
+}
+
+#info {
+  position: absolute;
+  background: #fff;
+  opacity: .8;
+  padding: 1.5vw;
+  top: 2%;
+  right: 1%;
+  z-index: 99;
+  width: 48vw;
+  height: 96vh;
+  border: solid .5vw #0ff;
+  border-radius: 10%;
+}
+
+h1 {
+  text-align: center;
+}
+
+#main {
+  width: 44.5vw;
+  height: 75vh;
+}
+
+p {
+  font-size: 1.3vw;
+  letter-spacing: .2em;
+  line-height: 1.5em;
+}
+
+button {
+  position: absolute;
+  top: 3%;
+  left: 1%;
+  width: 20vw;
+  padding: .3vw;
+  padding-top: .8vw;
+  padding-bottom: .8vw;
+  margin-bottom: 4vh;
+  border: solid .4vh #fff;
+  color: #fff;
+  border-radius: .2vw;
+  font-size: 1.3vw;
+}

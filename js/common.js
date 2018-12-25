@@ -1,19 +1,37 @@
+//ローディング
 setTimeout(function () {
-  $(".loading").removeClass("loadingIn")
-}, 3500);
+  let countElm = $('.count'),
+    countSpeed = 8;
 
-setTimeout(function () {
-  $(".loadingimg").removeClass("loadingIn")
-}, 3500);
+  countElm.each(function () {
+    let self = $(this),
+      countMax = self.attr('data-num'),
+      thisCount = self.text(),
+      countTimer;
 
+    function timer() {
+      countTimer = setInterval(function () {
+        let countNext = thisCount++;
+        self.text(countNext);
 
+        if (countNext == countMax) {
+          clearInterval(countTimer);
+          $('.loading').addClass('loadingOut');
+          $('.loadingimg').addClass('loadingOut');
+        }
+      }, countSpeed);
+    }
+    timer();
+  });
+}, 50);
+
+//画像変更処理
 $(function () {
-  //画像変更処理　
-  $(".infoBtn img").hover(function () {
-    $(this).attr("src", $(this).attr("src").replace("_off", "_on"))
+  $('.infoBtn img').hover(function () {
+    $(this).attr('src', $(this).attr('src').replace('_off', '_on'));
   }, function () {
-    if (!$(this).hasClass("currentPage")) {
-      $(this).attr("src", $(this).attr("src").replace("_on", "_off"))
+    if (!$(this).hasClass('currentPage')) {
+      $(this).attr('src', $(this).attr('src').replace('_on', '_off'));
     }
   });
 });
@@ -22,28 +40,75 @@ $(function () {
 //ユーザー
 $(function () {
   $('.userBtn').click(function () {
-    $('.userinfo').animate({
-      width: 'show' //表示
-    }, {
-      duration: 500, //スピード
-    });
+    if ($('.userinfo').hasClass('userOut')) {
+      $('.userinfo').removeClass('userOut');
+      $('.userinfo').addClass('userIn');
+      $('#logout').removeClass('lognone');
+      $('#logout').addClass('logblock');
+    }
   });
 
   $('#userBack').click(function () {
-    $('.userinfo').animate({
-      width: 'hide' //非表示表示
-    }, {
-      duration: 350, //スピード
-    });
+    if (!$('.userinfo').hasClass('userOut')) {
+      $('.userinfo').removeClass('userIn');
+      $('.userinfo').addClass('userOut');
+      $('#logout').removeClass('logblock');
+      $('#logout').addClass('lognone');
+    }
   });
-});
+})
+
+//Web Speech API
+SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+let recognition = new SpeechRecognition();
+recognition.lang = 'ja-JP';
 
 $(function () {
-  $('#questionBack').click(function () {
-    $('.questioninfo').fadeOut(500);
-  });
-
-  $('.questionBtn').click(function () {
-    $('.questioninfo').fadeIn(300);
+  $('.speechBtn').click(function () {
+    if ($(this).hasClass('speechout')) {
+      recognition.stop();
+      $(this).removeClass('speechout');
+    } else {
+      recognition.start();
+      $(this).addClass('speechout');
+    }
   });
 });
+
+history.pushState(null, null, null);
+$(window).on('popstate', function (event) {
+  if (!event.originalEvent.state) {
+    history.pushState(null, null, null);
+    return;
+  }
+});
+
+window.addEventListener('keydown', Keydown);
+
+function Keydown(event) {
+  let keyCode = event.keyCode;
+
+  if (keyCode == 68) {
+    if ($('.speechBtn').hasClass('speechout')) {
+      recognition.stop();
+      $('.speechBtn').removeClass('speechout');
+    } else {
+      recognition.start();
+      $('.speechBtn').addClass('speechout');
+    }
+  }
+
+  if (keyCode == 65) {
+    if ($('.userinfo').hasClass('userOut')) {
+      $('.userinfo').removeClass('userOut');
+      $('.userinfo').addClass('userIn');
+      $('#logout').removeClass('lognone');
+      $('#logout').addClass('logblock');
+    } else {
+      $('.userinfo').removeClass('userIn');
+      $('.userinfo').addClass('userOut');
+      $('#logout').removeClass('logblock');
+      $('#logout').addClass('lognone');
+    }
+  }
+};

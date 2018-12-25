@@ -497,9 +497,9 @@ function render() {
   //自転
   sun.rotation.y += 0.003;
   mercury.rotation.y += 0.005;
-  venus.rotation.y += 0.0010;
-  earth.rotation.y += 0.0005;
-  crowd.rotation.y += 0.0010;
+  venus.rotation.y += 0.005;
+  earth.rotation.y += 0.005;
+  crowd.rotation.y += 0.008;
   mars.rotation.y += 0.002;
   jupiter.rotation.y += 0.003;
   saturn.rotation.y += 0.004;

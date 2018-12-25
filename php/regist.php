@@ -1,17 +1,14 @@
-<?php
-  session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
-  <?php
-    if (($_POST["clear"])) {
-      session_destroy();
-    }
-  ?>
+<?php
+  if (($_POST["clear"])) {
+    session_destroy();
+  }
+?>
 <head>
   <meta charset="UTF-8">
   <title>ユーザー登録</title>
-  <link rel="stylesheet" href="../css/ress.min.css">
   <link rel="stylesheet" href="../css/loginregist.css">
   <link rel="stylesheet" href="../css/regist.css">
 </head>
@@ -28,7 +25,10 @@
         </td>
       </tr>
       <tr>
-        <td><input type="password" name="passwd" id="passwd" placeholder="パスワード" autocomplete="off" required></td>
+        <td><input type="password" name="passwd" id="passwd" placeholder="パスワード(4文字以上)" autocomplete="off" required minlength="4"></td>
+      </tr>
+      <tr>
+        <td><input type="text" name="username" id="name" placeholder="ユーザーネーム(日本語可)" autocomplete="off" required></td>
       </tr>
       <tr>
         <td><input type="submit" name="regist" value="登録" id="regist">

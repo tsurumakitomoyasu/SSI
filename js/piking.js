@@ -12,6 +12,7 @@ function clickPosition(event) {
   raycaster.setFromCamera(mouse, camera);
 
   // オブジェクトの取得
+  //メッシュ
   let interSu = raycaster.intersectObjects(targetSun);
   let interMe = raycaster.intersectObjects(targetMercury);
   let interVe = raycaster.intersectObjects(targetVenus);
@@ -23,55 +24,98 @@ function clickPosition(event) {
   let interNe = raycaster.intersectObjects(targetNeptune);
   let interMo = raycaster.intersectObjects(targetMoon);
 
-  //条件処理
-  if (interSu.length > 0) {
-    alert('太陽');
-  } else if (interMe.length > 0) {
-    alert('水星');
-  } else if (interVe.length > 0) {
-    alert('金星');
-  } else if (interEa.length > 0) {
-    alert('地球');
-  } else if (interMa.length > 0) {
-    alert('火星');
-  } else if (interJu.length > 0) {
-    alert('木星');
-  } else if (interSa.length > 0) {
-    alert('土星');
-  } else if (interUr.length > 0) {
-    alert('天王星');
-  } else if (interNe.length > 0) {
-    alert('海王星');
-  } else if (interMo.length > 0) {
-    alert('月');
+  //テキスト
+  let interTSU = raycaster.intersectObjects(targetTextSun);
+  let interTME = raycaster.intersectObjects(targetTextMercury);
+  let interTV = raycaster.intersectObjects(targetTextVenus);
+  let interTE = raycaster.intersectObjects(targetTextEarth);
+  let interTMO = raycaster.intersectObjects(targetTextMoon);
+  let interTMA = raycaster.intersectObjects(targetTextMars);
+  let interTJ = raycaster.intersectObjects(targetTextJupiter);
+  let interTSA = raycaster.intersectObjects(targetTextSaturn);
+  let interTU = raycaster.intersectObjects(targetTextUranus);
+  let interTN = raycaster.intersectObjects(targetTextNeptune);
+
+  //マウス操作
+  if (interSu.length > 0 || interTSU.length > 0) {
+    //alert('太陽');
+    location.href = '../html/sun.html';
+  } else if (interMe.length > 0 || interTME.length > 0) {
+    location.href = '../html/mercury.html';
+  } else if (interVe.length > 0 || interTV.length > 0) {
+    location.href = '../html/venus.html';
+  } else if (interEa.length > 0 || interTE.length > 0) {
+    location.href = '../html/earth.html';
+  } else if (interMa.length > 0 || interTMA.length > 0) {
+    location.href = '../html/mars.html';
+  } else if (interJu.length > 0 || interTJ.length > 0) {
+    location.href = '../html/jupiter.html';
+  } else if (interSa.length > 0 || interTSA.length > 0) {
+    location.href = '../html/saturn.html';
+  } else if (interUr.length > 0 || interTU.length > 0) {
+    location.href = '../html/uranus.html';
+  } else if (interNe.length > 0 || interTN.length > 0) {
+    location.href = '../html/neptune.html';
+  } else if (interMo.length > 0 || interTMO.length > 0) {
+    location.href = '../html/moon.html';
   }
 };
 
-window.addEventListener("keydown", Keydown);
+window.addEventListener('keydown', pikingKeydown);
 
-function Keydown(event) {
+function pikingKeydown(event) {
   let keyCode = event.keyCode;
 
-  // 条件文で制御する
+  //キーボード操作
   if (keyCode == 49 || keyCode == 97) {
-    alert('太陽')
+    //alert('太陽');
+    location.href = '../html/sun.html';
   } else if (keyCode == 50 || keyCode == 98) {
-    alert('水星');
+    location.href = '../html/mercury.html';
   } else if (keyCode == 51 || keyCode == 99) {
-    alert('金星');
+    location.href = '../html/venus.html';
   } else if (keyCode == 52 || keyCode == 100) {
-    alert('地球');
+    location.href = '../html/earth.html';
   } else if (keyCode == 53 || keyCode == 101) {
-    alert('月');
+    location.href = '../html/moon.html';
   } else if (keyCode == 54 || keyCode == 102) {
-    alert('火星');
+    location.href = '../html/mars.html';
   } else if (keyCode == 55 || keyCode == 103) {
-    alert('木星');
+    location.href = '../html/jupiter.html';
   } else if (keyCode == 56 || keyCode == 104) {
-    alert('土星');
+    location.href = '../html/saturn.html';
   } else if (keyCode == 57 || keyCode == 105) {
-    alert('天王星');
+    location.href = '../html/uranus.html';
   } else if (keyCode == 48 || keyCode == 96) {
-    alert('海王星');
+    location.href = '../html/neptune.html';
+  }
+};
+
+//音声操作
+recognition.onresult = (e) => {
+  if (e.results[0][0].transcript == '太陽') {
+    location.href = '../html/sun.html';
+  } else if (e.results[0][0].transcript == '彗星' || e.results[0][0].transcript == '水星') {
+    location.href = '../html/mercury.html';
+  } else if (e.results[0][0].transcript == 'きんせい' || e.results[0][0].transcript == '金星') {
+    location.href = '../html/venus.html';
+  } else if (e.results[0][0].transcript == '地球') {
+    location.href = '../html/earth.html';
+  } else if (e.results[0][0].transcript == '火星') {
+    location.href = '../html/mars.html';
+  } else if (e.results[0][0].transcript == '木星') {
+    location.href = '../html/jupiter.html';
+  } else if (e.results[0][0].transcript == '土星') {
+    location.href = '../html/saturn.html';
+  } else if (e.results[0][0].transcript == '天王星') {
+    location.href = '../html/uranus.html';
+  } else if (e.results[0][0].transcript == '海王星') {
+    location.href = '../html/neptune.html';
+  } else if (e.results[0][0].transcript == '月') {
+    location.href = '../html/moon.html';
+  } else {
+    $(".speechBtn").removeClass("speechout");
+    recognition.stop();
+    //alert(e.results[0][0].transcript);
   }
 };

@@ -56,22 +56,24 @@ let universe;
 let moon;
 
 // ポジション
-let mercuryX = 80;
-let mercuryZ = 80;
-let venusX = 120;
-let venusZ = 120;
-let earthX = 170;
-let earthZ = 170;
-let marsX = 230;
-let marsZ = 230;
-let jupiterX = 280;
-let jupiterZ = 280;
-let saturnX = 350;
-let saturnZ = 350;
-let uranusX = 410;
-let uranusZ = 410;
-let neptuneX = 480;
-let neptuneZ = 480;
+let sunX = -230;
+let sunZ = -230;
+let mercuryX = -150;
+let mercuryZ = -150;
+let venusX = -110;
+let venusZ = -110;
+let earthX = -60;
+let earthZ = -60;
+let marsX = 0;
+let marsZ = 0;
+let jupiterX = 50;
+let jupiterZ = 50;
+let saturnX = 120;
+let saturnZ = 120;
+let uranusX = 180;
+let uranusZ = 180;
+let neptuneX = 230;
+let neptuneZ = 230;
 let moonX = 25;
 let moonZ = 25;
 
@@ -199,7 +201,7 @@ loadQueue.on('complete', function () {
   textureUniverse.needsUpdate = true;
   textureMoon.needsUpdate = true;
 
-  sun = planetFactory(textureSun, 50, 20, 20, 0, 0, 'isSun');
+  sun = planetFactory(textureSun, 50, 20, 20, sunX, sunZ, 'isSun');
   mercury = planetFactory(textureMercury, 5, 20, 20, mercuryX, mercuryZ, 'isMercury');
   venus = planetFactory(textureVenus, 10, 20, 20, venusX, venusZ, 'isVenus');
   earth = planetFactory(textureEarth, 13, 20, 20, earthX, earthZ, 'isEarth');
@@ -218,7 +220,7 @@ loadQueue.loadManifest(manifest);
 
 // 点光源
 light = new THREE.PointLight(0xffffff, 3, 0);
-light.position.set(0, 0, 0);
+light.position.set(sunX, 0, 0);
 scene.add(light);
 
 // 環境光
@@ -227,7 +229,7 @@ scene.add(ambient);
 
 // カメラ
 camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000000);
-camera.position.set(-6, 10, 17);
+camera.position.set(-6, 14, 17);
 
 // カメラ操作
 controls = new THREE.OrbitControls(camera);
@@ -493,6 +495,18 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 };
 
 function render() {
+  sun.rotation.y += 0.003;
+  mercury.rotation.y += 0.005;
+  venus.rotation.y += 0.005;
+  earth.rotation.y += 0.005;
+  crowd.rotation.y += 0.008;
+  mars.rotation.y += 0.002;
+  jupiter.rotation.y += 0.003;
+  saturn.rotation.y += 0.004;
+  uranus.rotation.y += 0.005;
+  neptune.rotation.y += 0.007;
+  moon.rotation.y += 0.007;
+
   mercuryTheta = 0.78;
   venusTheta = 0.65;
   earthTheta = 0.59;
@@ -503,6 +517,8 @@ function render() {
   neptuneTheta = 0.35;
   moonTheta = 0.35;
 
+  sun.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * sunX;
+  sun.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * sunZ;
   mercury.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * mercuryX;
   mercury.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * mercuryZ;
   venus.position.x = Math.cos(THREE.Math.degToRad(venusTheta)) * venusX;

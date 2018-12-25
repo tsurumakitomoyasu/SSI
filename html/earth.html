@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>地球/EARTH</title>
+  <link rel="stylesheet" href="../css/ress.min.css">
+  <link rel="stylesheet" href="../css/planet.css">
+</head>
+
+<body>
+  <button>戻る</button>
+  <canvas id="stage"></canvas>
+  <div id="info">
+    <div id="text">
+      <h1>地球/EARTH</h1>
+      <p>hogehoge</p>
+    </div>
+  </div>
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/three.min.js"></script>
+  <script src="../js/orbitcontrols.js"></script>
+  <script>
+    window.addEventListener('load', init);
+    let scene;
+    let camera;
+    let controls;
+    let materialEarth;
+    let materialCrowd;
+    let geometryEarth;
+    let geometryCrowd;
+    let earthMesh;
+    let crowdMesh;
+    let renderer;
+    let light
+    let width = $('#stage').width();
+    let height = innerHeight;
+
+    function init() {
+      renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#stage'),
+      });
+      renderer.setSize(width, height);
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, 200);
+      controls = new THREE.OrbitControls(camera);
+      controls.minDistance = 200;
+      controls.maxDistance = 200;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.6;
+
+      light = new THREE.AmbientLight(0xFFFFFF, 2.0);
+      scene.add(light);
+
+      materialEarth = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('../images/earth.jpg')
+      });
+
+      materialCrowd = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('../images/crowd.png'),
+        transparent: true,
+        side: THREE.DoubleSide
+      });
+
+      geometryEarth = new THREE.SphereGeometry(50, 20, 20);
+      geometryCrowd = new THREE.SphereGeometry(51, 20, 20);
+      earthMesh = new THREE.Mesh(geometryEarth, materialEarth);
+      crowdMesh = new THREE.Mesh(geometryCrowd, materialCrowd);
+      scene.add(earthMesh);
+      scene.add(crowdMesh);
+
+      tick();
+
+      function tick() {
+        earthMesh.rotation.y += 0.005;
+        crowdMesh.rotation.y += 0.008;
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+    };
+
+    $(function () {
+      $('button').click(function () {
+        history.back();
+      });
+    });
+
+    window.addEventListener('keydown', Keydown);
+
+    function Keydown(event) {
+      let keycode = event.keyCode;
+
+      if (keycode == 66) {
+        history.back();
+      }
+    };
+  </script>
+</body>
+
+</html>

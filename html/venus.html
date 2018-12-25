@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>金星/VENUS</title>
+  <link rel="stylesheet" href="../css/ress.min.css">
+  <link rel="stylesheet" href="../css/planet.css">
+</head>
+
+<body>
+  <button>戻る</button>
+  <canvas id="stage"></canvas>
+  <div id="info">
+    <div id="text">
+      <h1>金星/VENUS</h1>
+      <p>hogehoge</p>
+    </div>
+  </div>
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/three.min.js"></script>
+  <script src="../js/orbitcontrols.js"></script>
+  <script>
+    window.addEventListener('load', init);
+    let scene;
+    let camera;
+    let controls;
+    let material;
+    let geometry;
+    let venusMesh;
+    let renderer;
+    let light
+    let width = $('#stage').width();
+    let height = innerHeight;
+
+    function init() {
+      renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#stage'),
+      });
+      renderer.setSize(width, height);
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, 200);
+      controls = new THREE.OrbitControls(camera);
+      controls.minDistance = 200;
+      controls.maxDistance = 200;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.6;
+
+      light = new THREE.AmbientLight(0xFFFFFF, 2.0);
+      scene.add(light);
+
+      material = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('../images/venus.jpg')
+      });
+
+      geometry = new THREE.SphereGeometry(50, 20, 20);
+      venusMesh = new THREE.Mesh(geometry, material);
+      scene.add(venusMesh);
+
+      tick();
+
+      function tick() {
+        venusMesh.rotation.y += 0.005;
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+    };
+
+    $(function () {
+      $('button').click(function () {
+        history.back();
+      });
+    });
+
+    window.addEventListener('keydown', Keydown);
+
+    function Keydown(event) {
+      let keycode = event.keyCode;
+
+      if (keycode == 66) {
+        history.back();
+      }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,28 +1,23 @@
-window.addEventListener("keydown", handleKeydown);
+window.addEventListener('keydown', handleKeydown);
 
 function handleKeydown(event) {
   // キーコード(どのキーが押されたか)を取得
-  let keyCode = event.keyCode;
+  let keycode = event.keyCode;
 
   //キーコードS
-  if (keyCode == 83) {
+  if (keycode == 83) {
     location.href = '../html/ssistop.html';
   }
 };
 
-let clickCount;
-
-document.getElementById("stage").addEventListener("mousedown", function (e) {
-  // シングルクリックの場合
-  if (!clickCount) {
-    ++clickCount;
-    //シングルクリック
-    setTimeout(function () {
-      clickCount = 0;
-    }, 350);
-    // ダブルクリック
-  } else {
+$(function () {
+  $('.stopBtn').click(function () {
     location.href = '../html/ssistop.html';
-    clickCount = 0;
-  }
+  });
 });
+
+recognition.onresult = (e) => {
+  if (e.results[0][0].transcript == 'チェンジ') {
+    location.href = '../html/ssistop.html';
+  }
+};

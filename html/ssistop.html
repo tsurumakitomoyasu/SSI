@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
   <title>SSI</title>
-  <link rel="stylesheet" href="../css/ress.min.css">
   <link rel="stylesheet" href="../css/ssi.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
   <!-- ローディング処理 -->
-  <div class="loading loadingOut loadingIn">
-    <div class="loadingimg loadingOut loadingIn">
+  <div class="loading loadingIn">
+    <div class="loadingimg loadingIn">
       <img src="../images/loadingimage.png" alt="ローリング画像">
       <div id="cnt">
         <p><span class="count fontType" data-num="100">0</span>％</p>
@@ -22,38 +22,36 @@
   <!-- キャンバス処理 -->
   <canvas id="stage"></canvas>
 
-  <!-- 操作方法 -->
-  <div id="question">
-    <button class="infoBtn questionBtn"><img src="../images/question_off.png" alt="操作方法"></button>
-  </div>
-
-  <div class="infoWrap questioninfo quesStop">
-    <button id="questionBack">戻る</button>
-  </div>
-
   <div id="userWrap">
     <button class="infoBtn userBtn"><img src="../images/user_off.png" alt="ユーザー情報"></button>
   </div>
 
-  <div class="infoWrap userinfo">
-    <button id="userBack">戻る</button>
-    <div id="logout">
+  <div class="infoWrap userinfo userOut">
+    <button id="userBack"><img src="../images/back_on.png" alt="戻るボタン"></button>
+    <div id="logout" class="lognone">
       <form action="../php/login.php" method="post">
         <input type="submit" name="logout" value="ログアウト">
       </form>
     </div>
   </div>
 
+  <div id="stopWrap">
+    <button class="infoBtn stopBtn"><img src="../images/stop_off.png" alt="画面切り替え"></button>
+  </div>
+
+  <div id="speechWrap">
+    <button class="infoBtn speechBtn"><img src="../images/speech_off.png" alt="音声操作"></button>
+  </div>
+
   <script src="../js/jquery-3.3.1.min.js"></script>
-  <script src="../js/count.js"></script>
+  <script src="../js/common.js"></script>
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
-  <script src="../js/font.js"></script>
   <script src="../js/ssistop.js"></script>
+  <script src="../js/font.js"></script>
   <script src="../js/piking.js"></script>
   <script src="../js/backbtn.js"></script>
-  <script src="../js/common.js"></script>
 </body>
 
 </html>

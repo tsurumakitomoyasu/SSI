@@ -4,97 +4,43 @@
 <head>
   <meta charset="UTF-8">
   <title>テストページ</title>
-  <link rel="stylesheet" href="../font/font.css">
+  <link rel="stylesheet" href="../css/ress.min.css">
+  <link rel="stylesheet" href="../css/test.css">
   <style>
-    #loading {
-      position: absolute;
-      z-index: 20;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-    }
 
-    #loadingimg img {
-      width: 40%;
-      position: absolute;
-      z-index: 30;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      transform-origin: center 52.6%;
-      animation: loading 3s linear 0s 1;
-    }
 
-    @keyframes loading {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      50% {
-        transform: rotate(180deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    p {
-      padding: 30px 0;
-      font-size: 5em;
-      font-weight: bold;
-      line-height: 1.2em;
-      color: #0ff;
-      margin-top: 42vh;
-      text-align: center;
-    }
-
-    .fontType3 {
-      font-family: 'Orbitron', sans-serif;
-    }
   </style>
-  <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
-  <div id="loading">
-    <div id="loadingimg">
-      <img src="../images/loadingimage.png" alt="ローリング画像">
-      <div id="cnt">
-        <p><span class="count fontType3" data-num="100">0</span>%</p>
-      </div>
-    </div>
-  </div>
-  <script>
-    $(function () {
-      var countElm = $('.count'),
-        countSpeed = 30;
+  <!DOCTYPE html>
 
-      countElm.each(function () {
-        var self = $(this),
-          countMax = self.attr('data-num'),
-          thisCount = self.text(),
-          countTimer;
+  <head lang="ja-JP">
+    <meta charset="utf-8">
+    <title>HTML5 ボイスコントロール テスト</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link href="style.css" rel="stylesheet">
+  </head>
 
-        function timer() {
-          countTimer = setInterval(function () {
-            var countNext = thisCount++;
-            self.text(countNext);
+  <body>
+    <script>
+      SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+      let recognition = new SpeechRecognition();
 
-            if (countNext == countMax) {
-              clearInterval(countTimer);
-            }
-          }, countSpeed);
+      recognition.lang = 'ja-JP';
+
+      recognition.onresult = (event) => {
+        if (event.results[0][0].transcript == '太陽') {
+          alert('月');
         }
-        timer();
-      });
+      }
 
-    });
-  </script>
+      recognition.start();
+    </script>
+  </body>
+
+</html>
 </body>
 
 </html>

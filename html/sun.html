@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>太陽/SUN</title>
+  <link rel="stylesheet" href="../css/ress.min.css">
+  <link rel="stylesheet" href="../css/planet.css">
+</head>
+
+<body>
+  <button>戻る</button>
+  <canvas id="stage"></canvas>
+  <div id="info">
+    <div id="text">
+      <header>
+        <h1>太陽/SUN</h1>
+      </header>
+      <main id="main">
+        <!-- １ページ目 -->
+        <div class="iofotext">
+          <h2>太陽の特徴</h2>
+          <p>太陽は自ら光を放出する巨大な恒星である。太陽系全体の質量の99.86%を占めている。膨大な占有率で他の惑星は太陽からのエネルギーを受け取り、影響をを受け、重力によって引くつけられている。</p>
+          <p>太陽の大気はほとんど水素である。太陽の中心は、1500万℃もの高温になっている。表面の温度は中心より低いが6000℃もある。</p>
+          <p>太陽内部からのエネルギーの流れが磁場でとめられて、温度が下がった所が黒く見える。これを黒点といい、1609年にガリレオ・ガリレイによって発見された。太陽の表面のすぐ外側にある大気はという1万℃ある「彩層」がある。彩層から吹き上がるプロミネンスを観測することもできす。</p>
+
+          <h2>太陽の日食</h2>
+          <p>日食は月が太陽を覆って起こる。</p>
+          <p>部分日食は、月が太陽の真上を通らないので、太陽が全て隠れず、三日月状になる日食のことである。</p>
+          <p>金環日食は月から太陽が少しはみ出して細い指輪のように見える。</p>
+          <p>皆既日食は太陽が月に丁度隠れる日食である。太陽にコロナが光って見れる。</p>
+          <p>日本で見れる日食は2019年1月6日になる。</p>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/three.min.js"></script>
+  <script src="../js/orbitcontrols.js"></script>
+  <script>
+    window.addEventListener('load', init);
+    let scene;
+    let camera;
+    let controls;
+    let material;
+    let geometry;
+    let sunMesh;
+    let renderer;
+    let light
+    let width = $('#stage').width();
+    let height = innerHeight;
+
+    function init() {
+      renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#stage'),
+      });
+      renderer.setSize(width, height);
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, 200);
+      controls = new THREE.OrbitControls(camera);
+      controls.minDistance = 200;
+      controls.maxDistance = 200;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.6;
+
+      light = new THREE.AmbientLight(0xFFFFFF, 2.0);
+      scene.add(light);
+
+      material = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('../images/sun.jpg')
+      });
+
+      geometry = new THREE.SphereGeometry(50, 20, 20);
+      sunMesh = new THREE.Mesh(geometry, material);
+      scene.add(sunMesh);
+
+      tick();
+
+      function tick() {
+        sunMesh.rotation.y += 0.005;
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+    };
+
+    $(function () {
+      $('button').click(function () {
+        history.back();
+      });
+    });
+
+    window.addEventListener('keydown', Keydown);
+
+    function Keydown(event) {
+      let keycode = event.keyCode;
+
+      if (keycode == 66) {
+        history.back();
+      }
+    };
+  </script>
+</body>
+
+</html>
