@@ -4,22 +4,33 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>登録完了しました</title>
+  <title>SSI/登録完了</title>
   <link rel="stylesheet" href="../css/ress.min.css">
   <link rel="stylesheet" href="../css/registcompletion.css">
 </head>
 
 <body>
-  <main>
+  <!-- background -->
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="clouds"></div>
+  <header>
     <h1>登録完了しました</h1>
-    <p id="loginBtn"><a href="../php/login.php">ログイン画面に戻る</a></p>
+  </header>
+  <main>
+    <?php echo $Msg; ?>
+    <p id="loginBtn" onclick="eventClick();">ログイン画面に戻る</p>
     <p id="time">5秒後にログイン画面に戻ります</p>
     <?php echo $Msg; ?>
   </main>
   <script>
     setTimeout(function () {
-      location.href = '../php/login.php';
+      location.href = './login.php';
     }, 5000);
+
+    function eventClick() {
+      location.href = "./login.php";
+    };
   </script>
 </body>
 

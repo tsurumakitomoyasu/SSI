@@ -56,12 +56,7 @@ $(function () {
       $('#logout').addClass('lognone');
     }
   });
-})
-
-//Web Speech API
-SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
-let recognition = new SpeechRecognition();
-recognition.lang = 'ja-JP';
+});
 
 $(function () {
   $('.speechBtn').click(function () {

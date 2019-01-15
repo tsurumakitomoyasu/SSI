@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+html,
+body {
+  overflow: hidden;
+}
+
 body {
   background: #000;
 }
@@ -37,7 +42,7 @@ p {
   line-height: 1.5em;
 }
 
-button {
+#back {
   position: absolute;
   top: 3%;
   left: 1%;
@@ -50,4 +55,37 @@ button {
   color: #fff;
   border-radius: .2vw;
   font-size: 1.3vw;
+}
+
+.title {
+  margin-top: 1.5vh;
+}
+
+.clear {
+  clear: both;
+}
+
+.none {
+  display: none;
+}
+
+.pnBtn {
+  position: absolute;
+  bottom: 0vh;
+}
+
+.pnBtn img {
+  width: 4vw;
+}
+
+.prev {
+  left: 10vw;
+}
+
+.next {
+  right: 10vw;
+}
+
+.infotext2 {
+  margin-top: 1.5vh;
 }

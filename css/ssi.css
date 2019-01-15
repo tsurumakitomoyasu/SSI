@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import "../font/login_font.css";
-@import "../css/ress.min.css";
+@import '//fonts.googleapis.com/css?family=Lobster|Orbitron';
+@import "./ress.min.css";
 
 html,
 body {

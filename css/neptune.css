@@ -1,0 +1,16 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#neptuneimg1 img {
+  margin-left: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#neptuneimg2 img {
+  margin-top: .5vh;
+  margin-left: 1vw;
+  float: right;
+  width: 17vw;
+}

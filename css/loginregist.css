@@ -1,5 +1,6 @@
 @charset "utf-8";
-@import "../css/ress.min.css";
+@import "./ress.min.css";
+@import "./bg.css";
 
 html,
 body {
@@ -101,4 +102,10 @@ input {
   color: #f00;
   text-align: center;
   font-size: 1.4vw;
+}
+
+header,
+main {
+  position: relative;
+  z-index: 30;
 }

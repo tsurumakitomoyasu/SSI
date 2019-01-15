@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#mercuryimg1 img {
+  margin-left: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#mercuryimg2 img {
+  margin-right: 1vw;
+  margin-top: .8vh;
+  float: left;
+  width: 11vw;
+}
+
+#mercuryimg3 img {
+  margin-right: 1vw;
+  float: left;
+  width: 18vw;
+}

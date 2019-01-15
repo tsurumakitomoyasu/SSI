@@ -15,9 +15,3 @@ $(function () {
     location.href = '../php/ssi.php';
   });
 });
-
-recognition.onresult = (e) => {
-  if (e.results[0][0].transcript == 'チェンジ') {
-    location.href = '../php/ssi.php';
-  }
-};

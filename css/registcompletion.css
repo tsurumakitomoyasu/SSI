@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import "./bg.css";
 
 body {
   background: #000;
@@ -21,12 +22,12 @@ h1 {
   margin-bottom: 7vh;
 }
 
-#loginBtn a {
-  display: block;
-  width: 20vw;
+#loginBtn {
   padding: .3vw;
   padding-top: .8vw;
   padding-bottom: .8vw;
+  cursor: pointer;
+  width: 20vw;
   border-radius: .2vw;
   font-weight: bold;
   font-size: 1.3vw;
@@ -37,11 +38,17 @@ h1 {
   transition: all 700ms;
 }
 
-#loginBtn a:hover {
+#loginBtn:hover {
   background: #0ff;
   color: #000;
 }
 
 #time {
   font-size: 1vw;
+}
+
+header,
+main {
+  position: relative;
+  z-index: 30;
 }

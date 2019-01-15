@@ -1,0 +1,26 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#sunimg1 img {
+  margin-left: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#sunimg2 {
+  margin-top: 1vh;
+}
+
+#sunimg2 img {
+  margin-right: 1vw;
+  float: left;
+  width: 15vw;
+}
+
+#sunimg3 img {
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+  float: right;
+  width: 15vw;
+}

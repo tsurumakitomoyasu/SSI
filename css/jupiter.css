@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#jupiterimg1 img {
+  margin-left: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#jupiterimg2 img {
+  margin-left: 1vw;
+  float: right;
+  width: 20vw;
+}
+
+#jupiterimg3 img {
+  margin-top: .5vh;
+  margin-right: 1vw;
+  float: left;
+  width: 14vw;
+}

@@ -234,6 +234,7 @@ controls = new THREE.OrbitControls(camera);
 controls.minDistance = 350; //カメラ最小値
 controls.maxDistance = 700; //カメラ最大値
 controls.enableDamping = true;
+controls.enableKeys = false;
 controls.dampingFactor = .1;
 
 // レンダラー
@@ -497,7 +498,7 @@ function render() {
   //自転
   sun.rotation.y += 0.003;
   mercury.rotation.y += 0.005;
-  venus.rotation.y += 0.005;
+  venus.rotation.y -= 0.005;
   earth.rotation.y += 0.005;
   crowd.rotation.y += 0.008;
   mars.rotation.y += 0.002;

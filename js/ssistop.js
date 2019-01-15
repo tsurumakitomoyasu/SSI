@@ -236,6 +236,7 @@ controls = new THREE.OrbitControls(camera);
 controls.minDistance = 350; //カメラ最小値
 controls.maxDistance = 700; //カメラ最大値
 controls.enableDamping = true;
+controls.enableKeys = false;
 controls.dampingFactor = .1;
 
 // レンダラー
@@ -414,7 +415,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         transparent: true
       })
     );
-    ring.rotation.x = 1.5
+    ring.rotation.x = 1.5;
 
     sphereSaturn.add(saturnText);
     sphere.add(sphereSaturn);
@@ -449,7 +450,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
         transparent: true
       })
     );
-    ring.rotation.x = 1.5
+    ring.rotation.x = 1.5;
 
     sphereUranus.add(uranusText);
     sphere.add(sphereUranus);
@@ -497,7 +498,7 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 function render() {
   sun.rotation.y += 0.003;
   mercury.rotation.y += 0.005;
-  venus.rotation.y += 0.005;
+  venus.rotation.y -= 0.005;
   earth.rotation.y += 0.005;
   crowd.rotation.y += 0.008;
   mars.rotation.y += 0.002;

@@ -1,0 +1,15 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#saturnimg1 img {
+  margin-left: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#saturnimg2 img {
+  margin-left: 1vw;
+  float: right;
+  width: 18vw;
+}

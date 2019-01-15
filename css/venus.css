@@ -1,0 +1,21 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#venusimg1 img {
+  margin-right: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#venusimg2 img {
+  margin-right: 1vw;
+  float: left;
+  width: 14.5vw;
+}
+
+#venusimg3 img {
+  margin-left: 1vw;
+  float: right;
+  width: 8vw;
+}

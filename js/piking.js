@@ -91,31 +91,57 @@ function pikingKeydown(event) {
   }
 };
 
-//音声操作
-recognition.onresult = (e) => {
-  if (e.results[0][0].transcript == '太陽') {
-    location.href = '../html/sun.html';
-  } else if (e.results[0][0].transcript == '彗星' || e.results[0][0].transcript == '水星') {
-    location.href = '../html/mercury.html';
-  } else if (e.results[0][0].transcript == 'きんせい' || e.results[0][0].transcript == '金星') {
-    location.href = '../html/venus.html';
-  } else if (e.results[0][0].transcript == '地球') {
-    location.href = '../html/earth.html';
-  } else if (e.results[0][0].transcript == '火星') {
-    location.href = '../html/mars.html';
-  } else if (e.results[0][0].transcript == '木星') {
-    location.href = '../html/jupiter.html';
-  } else if (e.results[0][0].transcript == '土星') {
-    location.href = '../html/saturn.html';
-  } else if (e.results[0][0].transcript == '天王星') {
-    location.href = '../html/uranus.html';
-  } else if (e.results[0][0].transcript == '海王星') {
-    location.href = '../html/neptune.html';
-  } else if (e.results[0][0].transcript == '月') {
-    location.href = '../html/moon.html';
-  } else {
-    $(".speechBtn").removeClass("speechout");
-    recognition.stop();
-    //alert(e.results[0][0].transcript);
+//web Speech API
+let recognition = new webkitSpeechRecognition();
+recognition.lang = "ja-JP";
+
+recognition.addEventListener('result', function (e) {
+  let speechtext = e.results[0][0].transcript;
+  switch (speechtext) {
+    case '太陽':
+      location.href = '../html/sun.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '彗星':
+      location.href = '../html/mercury.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case 'きんせい':
+      location.href = '../html/venus.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '地球':
+      location.href = '../html/earth.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '月':
+      location.href = '../html/moon.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '火星':
+      location.href = '../html/mars.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '木星':
+      location.href = '../html/jupiter.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '土星':
+      location.href = '../html/saturn.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '天王星':
+      location.href = '../html/uranus.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    case '海王星':
+      location.href = '../html/neptune.html';
+      //alert(e.results[0][0].transcript);
+      break;
+    default:
+      //alert(e.results[0][0].transcript);
+      $(".speechBtn").removeClass("speechout");
+      recognition.stop();
+      break;
   }
-};
+});

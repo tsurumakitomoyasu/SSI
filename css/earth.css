@@ -1,0 +1,32 @@
+@charset "utf-8";
+@import "./ress.min.css";
+@import "./planet.css";
+
+#earthimg1 img {
+  margin-left: 1vw;
+  float: right;
+  width: 24vw;
+}
+
+#earthimg2 img {
+  margin-right: 1vw;
+  float: left;
+  width: 15vw;
+}
+
+#earthimg3 img {
+  margin-left: 1vw;
+  float: right;
+  width: 23.5vw;
+}
+
+#earthimg4 {
+  margin-top: 1vh;
+}
+
+#earthimg4 img {
+  margin-top: .5vh;
+  margin-right: 1vw;
+  float: left;
+  width: 9vw;
+}
