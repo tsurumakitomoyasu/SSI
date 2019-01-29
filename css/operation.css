@@ -1,5 +1,5 @@
 @charset "utf-8";
-/*@import "../font/operation_font.css";*/
+/* @import "../font/operation_font.css"; */
 @import "//fonts.googleapis.com/earlyaccess/kokoro.css";
 @import "./ress.min.css";
 @import "./bg.css";
@@ -12,11 +12,18 @@ body {
 
 body {
   font-family: "Kokoro", sans-serif;
+  cursor: default;
 }
 
 header {
   margin-top: 2vh;
   margin-bottom: 3vh;
+}
+
+header,
+main,
+.btn {
+  opacity: 0;
 }
 
 h1 {
@@ -83,6 +90,7 @@ header,
   z-index: 30;
   bottom: 25vh;
   outline: none;
+  cursor: pointer;
 }
 
 .prev {
@@ -139,19 +147,56 @@ header,
 }
 
 .page4 {
-  margin: 0 auto;
-  margin-top: 17.3vw;
-  width: 20vw;
+  margin: 29vh auto 0;
+  position: relative;
+  z-index: 50;
+  width: 25.2vw;
+  height: 7.2vw;
 }
 
 .page4 p {
+  width: 25.2vw;
+  height: 7.2vw;
+  position: relative;
+  z-index: 50;
   cursor: pointer;
-  padding: .5vw;
   text-align: center;
-  border-radius: 1.5vw;
-  color: #000;
+  color: #00f;
+  background: #fff;
+  border-radius: .5vw;
   font-weight: bold;
-  background: #0ff;
-  font-size: 3vw;
+  font-size: 5vw;
   text-decoration: none;
+}
+
+.bgcolor {
+  position: absolute;
+  cursor: pointer;
+}
+
+.color1 {
+  z-index: 51;
+  top: .9vh;
+  left: .9vh;
+  width: 24.2vw;
+  height: 6.2vw;
+  border: dashed .3vh #00f;
+  border-radius: .5vw;
+}
+
+.color2 {
+  width: 25.2vw;
+  height: 7.2vw;
+  position: absolute;
+  z-index: 51;
+  background: #00f;
+  opacity: 0.3;
+  border-radius: .5vw;
+  transform-origin: center;
+  transform: scale(0);
+  transition: all 500ms cubic-bezier(0.86, 0, 0.07, 1) 0s;
+}
+
+.page4:hover .color2 {
+  transform: scale(1);
 }

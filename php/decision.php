@@ -34,6 +34,7 @@
             $resultName = mysqli_query($con, $sqlName);
             $row = mysqli_fetch_array($resultName);
             $name = $row["UserNAME"];
+            $_SESSION["LOGINDATE"] = Date("n/d");
             $_SESSION["LOGINTIME"] = Date("H:i");
             $_SESSION["NAME"] = $name;
             $_SESSION["LOGINUSER"] = $user;
@@ -71,9 +72,11 @@
               //SQL生成(挿入)
               $sql = "insert into ssi values ('".$user."','".$passwd."','".$name."','".$nowDate."');";
               $result = mysqli_query($con,$sql);
+              unset($_SESSION["KEYERROR"]);
               if (!$result) {
                 //挿入SQLが失敗
-                $Msg = "<h2>SQLの実行に失敗しました。:".$sql."</h2>";
+                //$Msg = "<h2>SQLの実行に失敗しました。:".$sql."</h2>";
+                $_SESSION["KEYERROR"] = "error";
               }
             }
           }

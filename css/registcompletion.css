@@ -3,11 +3,17 @@
 
 body {
   background: #000;
+  cursor: default;
 }
 
 main {
-  width: 20vw;
   margin: 0 auto;
+  width: 20vw;
+}
+
+header,
+main {
+  opacity: 0;
 }
 
 h1,
@@ -17,9 +23,9 @@ p {
 }
 
 h1 {
-  font-size: 2.5vw;
   margin-top: 35vh;
   margin-bottom: 7vh;
+  font-size: 2.5vw;
 }
 
 #loginBtn {
@@ -44,6 +50,7 @@ h1 {
 }
 
 #time {
+  margin-top: 1vh;
   font-size: 1vw;
 }
 

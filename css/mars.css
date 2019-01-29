@@ -4,19 +4,19 @@
 
 #marsimg1 img {
   margin-left: 1vw;
-  float: right;
   width: 24vw;
+  float: right;
 }
 
 #marsimg2 img {
   margin-left: 1vw;
-  float: right;
   width: 23vw;
+  float: right;
 }
 
 #marsimg3 img {
   margin-top: .5vh;
   margin-right: 1vw;
-  float: left;
   width: 22vw;
+  float: left;
 }

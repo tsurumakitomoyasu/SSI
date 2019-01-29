@@ -44,6 +44,20 @@
       <input type="submit" name="clear" value="ユーザー登録" id="singup">
     </form>
   </main>
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/jquery.fademover.min.js"></script>
+  <script>
+    history.pushState(null, null, null);
+    $(window).on('popstate', function (event) {
+      if (!event.originalEvent.state) {
+        history.pushState(null, null, null);
+        return;
+      }
+    });
+    $(function(){
+      $('main').fadeMover();
+    });
+  </script>
 </body>
 
 </html>

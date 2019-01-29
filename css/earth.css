@@ -4,20 +4,20 @@
 
 #earthimg1 img {
   margin-left: 1vw;
-  float: right;
   width: 24vw;
+  float: right;
 }
 
 #earthimg2 img {
   margin-right: 1vw;
-  float: left;
   width: 15vw;
+  float: left;
 }
 
 #earthimg3 img {
   margin-left: 1vw;
-  float: right;
   width: 23.5vw;
+  float: right;
 }
 
 #earthimg4 {
@@ -27,6 +27,6 @@
 #earthimg4 img {
   margin-top: .5vh;
   margin-right: 1vw;
-  float: left;
   width: 9vw;
+  float: left;
 }

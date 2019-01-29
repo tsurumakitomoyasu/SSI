@@ -6,6 +6,10 @@ $(window).on('popstate', function (event) {
   }
 });
 
+$(function () {
+  $('header, main, .btn').fadeMover();
+});
+
 // next
 $(function () {
   $('.next').click(function () {

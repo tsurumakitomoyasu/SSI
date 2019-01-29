@@ -7,6 +7,7 @@ body {
 
 body {
   background: #000;
+  cursor: default;
 }
 
 #stage {
@@ -14,6 +15,8 @@ body {
 }
 
 #info {
+  width: 48vw;
+  height: 96vh;
   position: absolute;
   background: #fff;
   opacity: .8;
@@ -21,8 +24,6 @@ body {
   top: 2%;
   right: 1%;
   z-index: 99;
-  width: 48vw;
-  height: 96vh;
   border: solid .5vw #0ff;
   border-radius: 10%;
 }
@@ -43,18 +44,22 @@ p {
 }
 
 #back {
+  padding: .8vw .3vw;
+  margin-bottom: 4vh;
   position: absolute;
   top: 3%;
   left: 1%;
-  width: 20vw;
-  padding: .3vw;
-  padding-top: .8vw;
-  padding-bottom: .8vw;
-  margin-bottom: 4vh;
+  width: 18vw;
   border: solid .4vh #fff;
   color: #fff;
   border-radius: .2vw;
   font-size: 1.3vw;
+  transition: all 700ms;
+}
+
+#back:hover {
+  background: #fff;
+  color: #000;
 }
 
 .title {
@@ -71,7 +76,7 @@ p {
 
 .pnBtn {
   position: absolute;
-  bottom: 0vh;
+  bottom: 0;
 }
 
 .pnBtn img {

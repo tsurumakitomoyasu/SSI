@@ -29,7 +29,7 @@
           <td><input type="password" name="passwd" id="passwd" placeholder="パスワード(4文字以上)" autocomplete="off" required minlength="4"></td>
         </tr>
         <tr>
-          <td><input type="text" name="username" id="name" placeholder="ユーザーネーム(6文字以下)" autocomplete="off" required pattern=".{1,6}"></td>
+          <td><input type="text" name="username" id="name" placeholder="ユーザーネーム(5文字以下)" autocomplete="off" required pattern=".{1,5}"></td>
         </tr>
         <tr>
           <td><input type="submit" name="regist" value="登録" id="regist"></td>
@@ -37,11 +37,32 @@
       </table>
     </form>
   </main>
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/jquery.fademover.min.js"></script>
   <script>
     function eventClick() {
       location.href = "./login.php";
     };
+    $(function(){
+      $('main').fadeMover();
+    });
   </script>
+  <?php if($_SESSION["KEYERROR"]): ?>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery.fademover.min.js"></script>
+    <script>
+      history.pushState(null, null, null);
+      $(window).on('popstate', function (event) {
+        if (!event.originalEvent.state) {
+          history.pushState(null, null, null);
+          return;
+        }
+      });
+      $(function(){
+        $('main').fadeMover();
+    });
+    </script>
+  <?php endif; ?>
 </body>
 
 </html>

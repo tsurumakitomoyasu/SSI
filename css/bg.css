@@ -19,15 +19,15 @@
 }
 
 .twinkling {
-  background: transparent url(../images/twinkling.png) repeat top center;
+  background: transparent url(../images/twinkling.png) top center;
   z-index: 1;
-  animation: move-twink-back 90s linear infinite;
+  animation: move-twink-back 86400s linear infinite;
 }
 
 .clouds {
-  background: transparent url(../images/clouds.png) repeat top center;
+  background: transparent url(../images/clouds.png) repeat-x top center;
   z-index: 3;
-  animation: move-clouds-back 20s linear infinite;
+  animation: move-clouds-back 86400s linear infinite;
 }
 
 @keyframes move-twink-back {
@@ -36,7 +36,7 @@
   }
 
   to {
-    background-position: -200% 100%;
+    background-position: -150000% 120000%;
   }
 }
 
@@ -46,6 +46,6 @@
   }
 
   to {
-    background-position: -365% 0;
+    background-position: -450000% 0;
   }
 }

@@ -1,7 +1,7 @@
 //ローディング
 setTimeout(function () {
   let countElm = $('.count'),
-    countSpeed = 8;
+    countSpeed = 10;
 
   countElm.each(function () {
     let self = $(this),
@@ -23,7 +23,7 @@ setTimeout(function () {
     }
     timer();
   });
-}, 50);
+}, 400);
 
 //画像変更処理
 $(function () {

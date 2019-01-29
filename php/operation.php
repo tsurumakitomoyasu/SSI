@@ -60,6 +60,8 @@
 
       <!-- 4ページ目 -->
       <div class="page4 pagenone">
+        <div class="bgcolor color1"></div>
+        <div class="bgcolor color2" onclick="eventClick();"></div>
         <p onclick="eventClick();">スタート</p>
       </div>
     </main>
@@ -69,6 +71,7 @@
     <!-- next -->
     <button class="btn next">&rsaquo;</button>
     <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery.fademover.min.js"></script>
     <script src="../js/operation.js"></script>
   <?php else: ?>
     <script>

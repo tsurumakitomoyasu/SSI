@@ -14,13 +14,13 @@
 
 #sunimg2 img {
   margin-right: 1vw;
-  float: left;
   width: 15vw;
+  float: left;
 }
 
 #sunimg3 img {
   margin-left: 1vw;
   margin-bottom: 1vh;
-  float: right;
   width: 15vw;
+  float: right;
 }

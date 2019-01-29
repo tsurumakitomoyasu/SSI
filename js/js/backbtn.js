@@ -6,12 +6,12 @@ function handleKeydown(event) {
 
   //キーコードS
   if (keycode == 83) {
-    location.href = '../html/ssistop.html';
+    location.href = './ssi.php';
   }
 };
 
 $(function () {
   $('.stopBtn').click(function () {
-    location.href = '../html/ssistop.html';
+    location.href = './ssi.php';
   });
 });

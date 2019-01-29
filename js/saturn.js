@@ -28,6 +28,7 @@ function init() {
   controls.maxDistance = 200;
   controls.enableDamping = true;
   controls.enableKeys = false;
+  controls.enablePan = false;
   controls.dampingFactor = 0.6;
 
   light = new THREE.AmbientLight(0xFFFFFF, 2.0);

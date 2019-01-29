@@ -4,19 +4,19 @@
 
 #mercuryimg1 img {
   margin-left: 1vw;
-  float: right;
   width: 24vw;
+  float: right;
 }
 
 #mercuryimg2 img {
   margin-right: 1vw;
   margin-top: .8vh;
-  float: left;
   width: 11vw;
+  float: left;
 }
 
 #mercuryimg3 img {
   margin-right: 1vw;
-  float: left;
   width: 18vw;
+  float: left;
 }

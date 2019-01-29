@@ -4,13 +4,13 @@
 
 #moonimg1 img {
   margin-left: 1vw;
-  float: right;
   width: 21vw;
+  float: right;
 }
 
 #moonimg2 img {
   margin-top: .5vh;
   margin-right: 1vw;
-  float: left;
   width: 25vw;
+  float: left;
 }

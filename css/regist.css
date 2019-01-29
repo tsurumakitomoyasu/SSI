@@ -4,6 +4,10 @@ header img {
   cursor: pointer;
 }
 
+main {
+  opacity: 0;
+}
+
 #user,
 #passwd,
 #name {
