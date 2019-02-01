@@ -13,3 +13,25 @@
   width: 18vw;
   float: right;
 }
+
+.loadingani1,
+.loadingani2,
+.loadingani3 {
+  transform-origin: top right;
+}
+
+.loadingbg {
+  top: 0;
+  right: 0;
+  transform: rotate(90deg);
+}
+
+@keyframes loadingbg {
+  from {
+    transform: rotate(90deg);
+  }
+
+  to {
+    transform: rotate(-90deg);
+  }
+}

@@ -46,18 +46,33 @@
   </main>
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/jquery.fademover.min.js"></script>
-  <script>
-    history.pushState(null, null, null);
-    $(window).on('popstate', function (event) {
-      if (!event.originalEvent.state) {
-        history.pushState(null, null, null);
-        return;
-      }
-    });
-    $(function(){
-      $('main').fadeMover();
-    });
-  </script>
+  <?php if($Msg === "<p id=\"error\">ユーザID又はパスワードが間違ってます</p>"): ?>
+    <script>
+      history.pushState(null, null, null);
+      $(window).on('popstate', function (event) {
+        if (!event.originalEvent.state) {
+          history.pushState(null, null, null);
+          return;
+        }
+      });
+      $(function(){
+        $('main').fadeMover({});
+      });
+    </script>
+  <?php else: ?>
+    <script>
+      history.pushState(null, null, null);
+      $(window).on('popstate', function (event) {
+        if (!event.originalEvent.state) {
+          history.pushState(null, null, null);
+          return;
+        }
+      });
+      $(function(){
+        $('main').fadeMover({'inSpeed': 2000});
+      });
+    </script>
+  <?php endif; ?>
 </body>
 
 </html>

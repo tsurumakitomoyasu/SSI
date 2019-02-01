@@ -9,6 +9,20 @@
 </head>
 
 <body>
+  <div class="planetloadWrap">
+    <div class="loadingWrap">
+      <div class="loadingtext">
+        <p class="text text1">地</p>
+      </div>
+      <div class="loadingtext">
+        <p class="text text3">球</p>
+      </div>
+    </div>
+  </div>
+  <div class="loadingbg loadingbg1"></div>
+  <div class="loadingbg loadingbg2"></div>
+  <div class="loadingbg loadingbg3"></div>
+
   <button id="back">戻る</button>
   <canvas id="stage"></canvas>
   <div id="info">
@@ -21,7 +35,7 @@
         <div class="title">
           <h2>地球の特徴</h2>
         </div>
-        <p id="earthimg1"><img src="../images/earthinfo.gif" alt="地球情報"><?php echo $_SESSION["NAME"]; ?>さんが生活している惑星。<br>地球は約46億年前に誕生いたと考えられている。<br>最初は宇宙のガスやちりが集まっただけで、大気はありませんでした。それがだんだんと水ができて生命が生まれ、今の地球のように酸素ができました。地球の表面の7割は水がしめている。<br>太陽系の惑星の中で生命が存在しているのは地球だけである。</p>
+        <p id="earthimg1"><img src="../images/earthinfo.gif" alt="地球情報"><?php echo $_SESSION["NAME"]; ?>さんが生活している惑星。<br>地球は約46億年前に誕生いたと考えられている。<br>最初は宇宙のガスやちりが集まっただけで、大気はありませんでした。それが徐々に水ができて生命が生まれ、今の地球のように酸素ができました。地球の表面の7割は水がしめている。<br>太陽系の惑星の中で生命が存在しているのは地球だけである。</p>
         <div class="clear"></div>
         <div class="title">
           <h2>生命の誕生</h2>

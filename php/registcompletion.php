@@ -35,7 +35,7 @@
       });
 
       $(function () {
-        $('header, main').fadeMover();
+        $('header, main').fadeMover({'inSpeed': 300});
       });
 
       setTimeout(function () {
@@ -66,7 +66,7 @@
       });
 
       $(function () {
-        $('header, main').fadeMover();
+        $('header, main').fadeMover({'inSpeed': 300});
       });
 
       setTimeout(function () {

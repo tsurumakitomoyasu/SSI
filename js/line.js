@@ -1,7 +1,7 @@
 //ローディング
 setTimeout(function () {
   let countElm = $('.count'),
-    countSpeed = 15;
+    countSpeed = 10;
 
   countElm.each(function () {
     let self = $(this),
@@ -78,6 +78,12 @@ $(window).on('popstate', function (event) {
   }
 });
 
+$(function () {
+  setTimeout(function () {
+    $('#stage').addClass('moveani');
+  }, 1500);
+});
+
 window.addEventListener('keydown', Keydown);
 
 function Keydown(event) {
@@ -90,18 +96,6 @@ function Keydown(event) {
     } else {
       recognition.start();
       $('.speechBtn').addClass('speechout');
-    }
-  }
-
-  if (keyCode == 77) {
-    if ($('#stage').hasClass('move')) {
-      $('#stage').removeClass('move');
-      $('#stage').removeClass('moveani');
-      $('#stage').addClass('stop');
-    } else if ($('#stage').hasClass('stop')) {
-      $('#stage').removeClass('stop');
-      $('#stage').addClass('move');
-      $('#stage').addClass('moveani');
     }
   }
 
@@ -207,6 +201,39 @@ let saturnTheta;
 let uranusTheta;
 let neptuneTheta;
 let moonTheta;
+
+let sunimageText;
+let mercuryimageText;
+let venusimageText;
+let earthimageText;
+let moonimageText;
+let marsimageText;
+let jupiterimageText;
+let saturnimageText;
+let uranusimageText;
+let neptuneimageText;
+
+let sunText;
+let mercuryText;
+let venusText;
+let earthText;
+let moonText;
+let marsText;
+let jupiterText;
+let saturnText;
+let uranusText;
+let neptuneText;
+
+let targetTextSun = [];
+let targetTextMercury = [];
+let targetTextVenus = [];
+let targetTextEarth = [];
+let targetTextMoon = [];
+let targetTextMars = [];
+let targetTextJupiter = [];
+let targetTextSaturn = [];
+let targetTextUranus = [];
+let targetTextNeptune = [];
 
 // ステージ
 scene = new THREE.Scene();
@@ -341,7 +368,6 @@ loadQueue.loadManifest(manifest);
 
 // 点光源
 light = new THREE.PointLight(0xffffff, 3, 0);
-light.position.set(0, 0, 0);
 scene.add(light);
 
 // 環境光
@@ -621,29 +647,29 @@ function render() {
   requestAnimationFrame(render);
   //自転
   if ($('#stage').hasClass('move')) {
-    mercuryTheta = 10;
-    venusTheta = 160;
-    earthTheta = 0;
-    marsTheta = 100;
-    jupiterTheta = 160;
-    saturnTheta = 80;
-    uranusTheta = 200;
-    neptuneTheta = 270;
-    moonTheta = 0;
+    if (!$('#stage').hasClass('moveani')) {
+      mercuryTheta = 10;
+      venusTheta = 240;
+      earthTheta = 0;
+      marsTheta = 100;
+      jupiterTheta = 160;
+      saturnTheta = 80;
+      uranusTheta = 200;
+      neptuneTheta = 300;
+      moonTheta = 0;
+    }
   }
-  if ($('#stage').hasClass('moveani')) {
-    sun.rotation.y += 0.003;
-    mercury.rotation.y += 0.005;
-    venus.rotation.y -= 0.005;
-    earth.rotation.y += 0.005;
-    crowd.rotation.y += 0.008;
-    mars.rotation.y += 0.002;
-    jupiter.rotation.y += 0.003;
-    saturn.rotation.y += 0.004;
-    uranus.rotation.y += 0.005;
-    neptune.rotation.y += 0.007;
-    moon.rotation.y += 0.007;
-  }
+  sun.rotation.y += 0.003;
+  mercury.rotation.y += 0.005;
+  venus.rotation.y -= 0.005;
+  earth.rotation.y += 0.005;
+  crowd.rotation.y += 0.008;
+  mars.rotation.y += 0.002;
+  jupiter.rotation.y += 0.003;
+  saturn.rotation.y += 0.004;
+  uranus.rotation.y += 0.005;
+  neptune.rotation.y += 0.007;
+  moon.rotation.y += 0.007;
   //惑星のスピード
   if ($('#stage').hasClass('move')) {
     mercuryTheta -= 0.78;
@@ -720,6 +746,12 @@ function render() {
     moonZ = 25;
   }
 
+  if ($('#stage').hasClass('move')) {
+    light.position.set(0, 0, 0);
+  } else if ($('#stage').hasClass('stop')) {
+    light.position.set(sunX, 0, 0);
+  }
+
   sun.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * sunX;
   sun.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * sunZ;
   mercury.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * mercuryX;
@@ -744,38 +776,6 @@ function render() {
   controls.update();
   renderer.render(scene, camera);
 };
-let sunimageText;
-let mercuryimageText;
-let venusimageText;
-let earthimageText;
-let moonimageText;
-let marsimageText;
-let jupiterimageText;
-let saturnimageText;
-let uranusimageText;
-let neptuneimageText;
-
-let sunText;
-let mercuryText;
-let venusText;
-let earthText;
-let moonText;
-let marsText;
-let jupiterText;
-let saturnText;
-let uranusText;
-let neptuneText;
-
-let targetTextSun = [];
-let targetTextMercury = [];
-let targetTextVenus = [];
-let targetTextEarth = [];
-let targetTextMoon = [];
-let targetTextMars = [];
-let targetTextJupiter = [];
-let targetTextSaturn = [];
-let targetTextUranus = [];
-let targetTextNeptune = [];
 
 sunimageText = new THREE.SpriteMaterial({
   map: new THREE.TextureLoader().load('../images/suntext.png')
@@ -903,7 +903,7 @@ function clickPosition(event) {
   } else if (interVe.length > 0 || interTV.length > 0) {
     location.href = '../html/venus.html';
   } else if (interEa.length > 0 || interTE.length > 0) {
-    location.href = '../html/earth.html';
+    location.href = '../php/earth.php';
   } else if (interMa.length > 0 || interTMA.length > 0) {
     location.href = '../html/mars.html';
   } else if (interJu.length > 0 || interTJ.length > 0) {
@@ -933,7 +933,7 @@ function pikingKeydown(event) {
   } else if (keyCode == 51 || keyCode == 99) {
     location.href = '../html/venus.html';
   } else if (keyCode == 52 || keyCode == 100) {
-    location.href = '../html/earth.html';
+    location.href = '../php/earth.php';
   } else if (keyCode == 53 || keyCode == 101) {
     location.href = '../html/moon.html';
   } else if (keyCode == 54 || keyCode == 102) {
@@ -969,7 +969,7 @@ recognition.addEventListener('result', function (e) {
       //alert(e.results[0][0].transcript);
       break;
     case '地球':
-      location.href = '../html/earth.html';
+      location.href = '../php/earth.php';
       //alert(e.results[0][0].transcript);
       break;
     case '月':
@@ -1011,12 +1011,32 @@ function handleKeydown(event) {
 
   //キーコードS
   if (keycode == 83) {
-    location.href = './ssistop.php';
+    if ($('#stage').hasClass('move')) {
+      $('#stage').removeClass('move');
+      $('#stage').removeClass('moveani');
+      $('#stage').addClass('stop');
+    } else if ($('#stage').hasClass('stop')) {
+      $('#stage').removeClass('stop');
+      $('#stage').addClass('move');
+      setTimeout(function () {
+        $('#stage').addClass('moveani');
+      }, 50);
+    }
   }
 };
 
 $(function () {
   $('.stopBtn').click(function () {
-    location.href = './ssistop.php';
+    if ($('#stage').hasClass('move')) {
+      $('#stage').removeClass('move');
+      $('#stage').removeClass('moveani');
+      $('#stage').addClass('stop');
+    } else if ($('#stage').hasClass('stop')) {
+      $('#stage').removeClass('stop');
+      $('#stage').addClass('move');
+      setTimeout(function () {
+        $('#stage').addClass('moveani');
+      }, 50);
+    }
   });
 });

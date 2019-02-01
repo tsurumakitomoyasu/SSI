@@ -1,3 +1,12 @@
+setTimeout(function () {
+  $('.loadingbg1').addClass('loadingani1');
+  $('.loadingbg2').addClass('loadingani2');
+  $('.loadingbg3').addClass('loadingani3');
+}, 900);
+setTimeout(function () {
+  $('.planetloadWrap').addClass('none');
+}, 1600);
+
 window.addEventListener('load', init);
 let scene;
 let camera;

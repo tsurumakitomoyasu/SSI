@@ -50,11 +50,13 @@
     <button class="infoBtn speechBtn"><img src="../images/speech_off.png" alt="音声操作"></button>
   </div>
 
+  <div class="inbg"></div>
+
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
-  <script src="../js/sc.tes.min.js"></script>
+  <script src="../js/all.min.js"></script>
 </body>
 
 </html>

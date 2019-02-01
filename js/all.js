@@ -78,37 +78,31 @@ $(window).on('popstate', function (event) {
   }
 });
 
-window.addEventListener('keydown', Keydown);
+$(function () {
+  setTimeout(function () {
+    $('#stage').addClass('moveani');
+  }, 1500);
+});
 
-function Keydown(event) {
-  let keyCode = event.keyCode;
-
-  if (keyCode == 68) {
-    if ($('.speechBtn').hasClass('speechout')) {
-      recognition.stop();
-      $('.speechBtn').removeClass('speechout');
-    } else {
-      recognition.start();
-      $('.speechBtn').addClass('speechout');
+$(function () {
+  $('.stopBtn').click(function () {
+    if ($('#stage').hasClass('move')) {
+      $('#stage').removeClass('move');
+      $('#stage').removeClass('moveani');
+    } else if (!$('#stage').hasClass('stop')) {
+      if (!$('#stage').hasClass('move')) {
+        $('#stage').addClass('stop');
+      }
+    } else if ($('#stage').hasClass('stop')) {
+      $('#stage').removeClass('stop');
+      $('#stage').addClass('move');
+      setTimeout(function () {
+        $('#stage').addClass('moveani');
+      }, 50);
     }
-  }
+  });
+});
 
-  if (keyCode == 65) {
-    if ($('.userinfo').hasClass('userOut')) {
-      $('.userinfo').removeClass('userOut');
-      $('.userinfo').addClass('userIn');
-      $('#logout').removeClass('lognone');
-      $('#logout').addClass('logblock');
-    } else {
-      $('.userinfo').removeClass('userIn');
-      $('.userinfo').addClass('userOut');
-      $('#logout').removeClass('logblock');
-      $('#logout').addClass('lognone');
-    }
-  }
-};
-
-// 3Dメッシュ
 let scene;
 let camera;
 let light;
@@ -167,36 +161,37 @@ let universe;
 let moon;
 
 // ポジション
-let mercuryX = 80;
-let mercuryZ = 80;
-let venusX = 120;
-let venusZ = 120;
-let earthX = 170;
-let earthZ = 170;
-let marsX = 230;
-let marsZ = 230;
-let jupiterX = 280;
-let jupiterZ = 280;
-let saturnX = 350;
-let saturnZ = 350;
-let uranusX = 410;
-let uranusZ = 410;
-let neptuneX = 460;
-let neptuneZ = 460;
-let moonX = 25;
-let moonZ = 25;
+let sunX;
+let sunZ;
+let mercuryX;
+let mercuryZ;
+let venusX;
+let venusZ;
+let earthX;
+let earthZ;
+let marsX;
+let marsZ;
+let jupiterX;
+let jupiterZ;
+let saturnX;
+let saturnZ;
+let uranusX;
+let uranusZ;
+let neptuneX;
+let neptuneZ;
+let moonX;
+let moonZ;
 
-let mercuryTheta = 10;
-let venusTheta = 240;
-let earthTheta = 0;
-let marsTheta = 100;
-let jupiterTheta = 160;
-let saturnTheta = 80;
-let uranusTheta = 200;
-let neptuneTheta = 300;
-let moonTheta = 0;
+let mercuryTheta;
+let venusTheta;
+let earthTheta;
+let marsTheta;
+let jupiterTheta;
+let saturnTheta;
+let uranusTheta;
+let neptuneTheta;
+let moonTheta;
 
-// テキストイメージ
 let sunimageText;
 let mercuryimageText;
 let venusimageText;
@@ -208,7 +203,6 @@ let saturnimageText;
 let uranusimageText;
 let neptuneimageText;
 
-// テキスト
 let sunText;
 let mercuryText;
 let venusText;
@@ -230,86 +224,6 @@ let targetTextJupiter = [];
 let targetTextSaturn = [];
 let targetTextUranus = [];
 let targetTextNeptune = [];
-
-sunimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/suntext.png')
-});
-sunText = new THREE.Sprite(sunimageText);
-sunText.position.y = 64;
-sunText.scale.set(50, 35, 50);
-targetTextSun.push(sunText);
-
-mercuryimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/mercurytext.png')
-});
-mercuryText = new THREE.Sprite(mercuryimageText);
-mercuryText.position.y = 15;
-mercuryText.scale.set(40, 27, 40);
-targetTextMercury.push(mercuryText);
-
-venusimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/venustext.png')
-});
-venusText = new THREE.Sprite(venusimageText);
-venusText.position.y = 20;
-venusText.scale.set(40, 27, 40);
-targetTextVenus.push(venusText);
-
-earthimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/earthtext.png')
-});
-earthText = new THREE.Sprite(earthimageText);
-earthText.position.y = 25;
-earthText.scale.set(40, 27, 40);
-targetTextEarth.push(earthText);
-
-moonimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/moontext.png')
-});
-moonText = new THREE.Sprite(moonimageText);
-moonText.position.y = 16;
-moonText.scale.set(17, 17, 17);
-targetTextMoon.push(moonText);
-
-marsimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/marstext.png')
-});
-marsText = new THREE.Sprite(marsimageText);
-marsText.position.y = 19;
-marsText.scale.set(40, 27, 40);
-targetTextMars.push(marsText);
-
-jupiterimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/jupitertext.png')
-});
-jupiterText = new THREE.Sprite(jupiterimageText);
-jupiterText.position.y = 43;
-jupiterText.scale.set(40, 27, 40);
-targetTextJupiter.push(jupiterText);
-
-saturnimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/saturntext.png')
-});
-saturnText = new THREE.Sprite(saturnimageText);
-saturnText.position.y = 25;
-saturnText.scale.set(40, 27, 40);
-targetTextSaturn.push(saturnText);
-
-uranusimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/uranustext.png')
-});
-uranusText = new THREE.Sprite(uranusimageText);
-uranusText.position.y = 25;
-uranusText.scale.set(50, 20, 40);
-targetTextUranus.push(uranusText);
-
-neptuneimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/neptunetext.png')
-});
-neptuneText = new THREE.Sprite(neptuneimageText);
-neptuneText.position.y = 25;
-neptuneText.scale.set(50, 20, 40);
-targetTextNeptune.push(neptuneText);
 
 // ステージ
 scene = new THREE.Scene();
@@ -425,7 +339,7 @@ loadQueue.on('complete', function () {
   textureUniverse.needsUpdate = true;
   textureMoon.needsUpdate = true;
 
-  sun = planetFactory(textureSun, 50, 20, 20, 0, 0, 'isSun');
+  sun = planetFactory(textureSun, 50, 20, 20, sunX, sunZ, 'isSun');
   mercury = planetFactory(textureMercury, 5, 20, 20, mercuryX, mercuryZ, 'isMercury');
   venus = planetFactory(textureVenus, 10, 20, 20, venusX, venusZ, 'isVenus');
   earth = planetFactory(textureEarth, 13, 20, 20, earthX, earthZ, 'isEarth');
@@ -444,7 +358,6 @@ loadQueue.loadManifest(manifest);
 
 // 点光源
 light = new THREE.PointLight(0xffffff, 3, 0);
-light.position.set(0, 0, 0);
 scene.add(light);
 
 // 環境光
@@ -723,6 +636,19 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 function render() {
   requestAnimationFrame(render);
   //自転
+  if ($('#stage').hasClass('move')) {
+    if (!$('#stage').hasClass('moveani')) {
+      mercuryTheta = 10;
+      venusTheta = 500;
+      earthTheta = 0;
+      marsTheta = 100;
+      jupiterTheta = 160;
+      saturnTheta = 80;
+      uranusTheta = 200;
+      neptuneTheta = 330;
+      moonTheta = 0;
+    }
+  }
   sun.rotation.y += 0.003;
   mercury.rotation.y += 0.005;
   venus.rotation.y -= 0.005;
@@ -734,7 +660,6 @@ function render() {
   uranus.rotation.y += 0.005;
   neptune.rotation.y += 0.007;
   moon.rotation.y += 0.007;
-
   //惑星のスピード
   if ($('#stage').hasClass('move')) {
     mercuryTheta -= 0.78;
@@ -746,6 +671,16 @@ function render() {
     uranusTheta -= 0.37;
     neptuneTheta -= 0.35;
     moonTheta -= 1;
+  } else if ($('#stage').hasClass('stop')) {
+    mercuryTheta = 0;
+    venusTheta = 0;
+    earthTheta = 0;
+    marsTheta = 0;
+    jupiterTheta = 0;
+    saturnTheta = 0;
+    uranusTheta = 0;
+    neptuneTheta = 0;
+    moonTheta = 0;
   }
   //回転固定
   /*mercuryTheta = 0.78;
@@ -757,7 +692,58 @@ function render() {
   uranusTheta = 0.37;
   neptuneTheta = 0.35;
   moonTheta = 0.35;*/
+  if ($('#stage').hasClass('move')) {
+    sunX = 0;
+    sunZ = 0;
+    mercuryX = 80;
+    mercuryZ = 80;
+    venusX = 120;
+    venusZ = 120;
+    earthX = 170;
+    earthZ = 170;
+    marsX = 230;
+    marsZ = 230;
+    jupiterX = 280;
+    jupiterZ = 280;
+    saturnX = 350;
+    saturnZ = 350;
+    uranusX = 410;
+    uranusZ = 410;
+    neptuneX = 460;
+    neptuneZ = 460;
+    moonX = 25;
+    moonZ = 25;
+  } else if ($('#stage').hasClass('stop')) {
+    sunX = -230;
+    sunZ = -230;
+    mercuryX = -150;
+    mercuryZ = -150;
+    venusX = -110;
+    venusZ = -110;
+    earthX = -60;
+    earthZ = -60;
+    marsX = 0;
+    marsZ = 0;
+    jupiterX = 50;
+    jupiterZ = 50;
+    saturnX = 120;
+    saturnZ = 120;
+    uranusX = 180;
+    uranusZ = 180;
+    neptuneX = 230;
+    neptuneZ = 230;
+    moonX = 25;
+    moonZ = 25;
+  }
 
+  if ($('#stage').hasClass('move')) {
+    light.position.set(0, 0, 0);
+  } else if ($('#stage').hasClass('stop')) {
+    light.position.set(sunX, 0, 0);
+  }
+
+  sun.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * sunX;
+  sun.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * sunZ;
   mercury.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * mercuryX;
   mercury.position.z = Math.sin(THREE.Math.degToRad(mercuryTheta)) * mercuryZ;
   venus.position.x = Math.cos(THREE.Math.degToRad(venusTheta)) * venusX;
@@ -781,6 +767,85 @@ function render() {
   renderer.render(scene, camera);
 };
 
+sunimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/suntext.png')
+});
+sunText = new THREE.Sprite(sunimageText);
+sunText.position.y = 64;
+sunText.scale.set(50, 35, 50);
+targetTextSun.push(sunText);
+
+mercuryimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/mercurytext.png')
+});
+mercuryText = new THREE.Sprite(mercuryimageText);
+mercuryText.position.y = 15;
+mercuryText.scale.set(40, 27, 40);
+targetTextMercury.push(mercuryText);
+
+venusimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/venustext.png')
+});
+venusText = new THREE.Sprite(venusimageText);
+venusText.position.y = 20;
+venusText.scale.set(40, 27, 40);
+targetTextVenus.push(venusText);
+
+earthimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/earthtext.png')
+});
+earthText = new THREE.Sprite(earthimageText);
+earthText.position.y = 25;
+earthText.scale.set(40, 27, 40);
+targetTextEarth.push(earthText);
+
+moonimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/moontext.png')
+});
+moonText = new THREE.Sprite(moonimageText);
+moonText.position.y = 16;
+moonText.scale.set(17, 17, 17);
+targetTextMoon.push(moonText);
+
+marsimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/marstext.png')
+});
+marsText = new THREE.Sprite(marsimageText);
+marsText.position.y = 19;
+marsText.scale.set(40, 27, 40);
+targetTextMars.push(marsText);
+
+jupiterimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/jupitertext.png')
+});
+jupiterText = new THREE.Sprite(jupiterimageText);
+jupiterText.position.y = 43;
+jupiterText.scale.set(40, 27, 40);
+targetTextJupiter.push(jupiterText);
+
+saturnimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/saturntext.png')
+});
+saturnText = new THREE.Sprite(saturnimageText);
+saturnText.position.y = 25;
+saturnText.scale.set(40, 27, 40);
+targetTextSaturn.push(saturnText);
+
+uranusimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/uranustext.png')
+});
+uranusText = new THREE.Sprite(uranusimageText);
+uranusText.position.y = 25;
+uranusText.scale.set(50, 20, 40);
+targetTextUranus.push(uranusText);
+
+neptuneimageText = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load('../images/neptunetext.png')
+});
+neptuneText = new THREE.Sprite(neptuneimageText);
+neptuneText.position.y = 25;
+neptuneText.scale.set(50, 20, 40);
+targetTextNeptune.push(neptuneText);
 //ピッキング処理
 document.addEventListener('mousedown', clickPosition, false);
 
@@ -822,55 +887,55 @@ function clickPosition(event) {
   //マウス操作
   if (interSu.length > 0 || interTSU.length > 0) {
     //alert('太陽');
-    location.href = '../html/sun.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/sun.html';
+    }, 600);
   } else if (interMe.length > 0 || interTME.length > 0) {
-    location.href = '../html/mercury.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/mercury.html';
+    }, 600);
   } else if (interVe.length > 0 || interTV.length > 0) {
-    location.href = '../html/venus.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/venus.html';
+    }, 600);
   } else if (interEa.length > 0 || interTE.length > 0) {
-    location.href = '../php/earth.php';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../php/earth.php';
+    }, 600);
   } else if (interMa.length > 0 || interTMA.length > 0) {
-    location.href = '../html/mars.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/mars.html';
+    }, 600);
   } else if (interJu.length > 0 || interTJ.length > 0) {
-    location.href = '../html/jupiter.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/jupiter.html';
+    }, 600);
   } else if (interSa.length > 0 || interTSA.length > 0) {
-    location.href = '../html/saturn.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/saturn.html';
+    }, 600);
   } else if (interUr.length > 0 || interTU.length > 0) {
-    location.href = '../html/uranus.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/uranus.html';
+    }, 600);
   } else if (interNe.length > 0 || interTN.length > 0) {
-    location.href = '../html/neptune.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/neptune.html';
+    }, 600);
   } else if (interMo.length > 0 || interTMO.length > 0) {
-    location.href = '../html/moon.html';
-  }
-};
-
-window.addEventListener('keydown', pikingKeydown);
-
-function pikingKeydown(event) {
-  let keyCode = event.keyCode;
-
-  //キーボード操作
-  if (keyCode == 49 || keyCode == 97) {
-    //alert('太陽');
-    location.href = '../html/sun.html';
-  } else if (keyCode == 50 || keyCode == 98) {
-    location.href = '../html/mercury.html';
-  } else if (keyCode == 51 || keyCode == 99) {
-    location.href = '../html/venus.html';
-  } else if (keyCode == 52 || keyCode == 100) {
-    location.href = '../php/earth.php';
-  } else if (keyCode == 53 || keyCode == 101) {
-    location.href = '../html/moon.html';
-  } else if (keyCode == 54 || keyCode == 102) {
-    location.href = '../html/mars.html';
-  } else if (keyCode == 55 || keyCode == 103) {
-    location.href = '../html/jupiter.html';
-  } else if (keyCode == 56 || keyCode == 104) {
-    location.href = '../html/saturn.html';
-  } else if (keyCode == 57 || keyCode == 105) {
-    location.href = '../html/uranus.html';
-  } else if (keyCode == 48 || keyCode == 96) {
-    location.href = '../html/neptune.html';
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/moon.html';
+    }, 600);
   }
 };
 
@@ -882,79 +947,183 @@ recognition.addEventListener('result', function (e) {
   let speechtext = e.results[0][0].transcript;
   switch (speechtext) {
     case '太陽':
-      location.href = '../html/sun.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/sun.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '彗星':
-      location.href = '../html/mercury.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/mercury.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case 'きんせい':
-      location.href = '../html/venus.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/venus.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '地球':
-      location.href = '../php/earth.php';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../php/earth.php';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '月':
-      location.href = '../html/moon.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/moon.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '火星':
-      location.href = '../html/mars.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/mars.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '木星':
-      location.href = '../html/jupiter.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/jupiter.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '土星':
-      location.href = '../html/saturn.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/saturn.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '天王星':
-      location.href = '../html/uranus.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/uranus.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     case '海王星':
-      location.href = '../html/neptune.html';
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/neptune.html';
+      }, 600);
       //alert(e.results[0][0].transcript);
       break;
     default:
       //alert(e.results[0][0].transcript);
       $(".speechBtn").removeClass("speechout");
       recognition.stop();
-      // recognition.addEventListener();
       break;
   }
 });
-window.addEventListener('keydown', handleKeydown);
 
-function handleKeydown(event) {
-  // キーコード(どのキーが押されたか)を取得
-  let keycode = event.keyCode;
+window.addEventListener('keydown', Keydown);
 
-  //キーコードS
-  if (keycode == 83) {
+function Keydown(event) {
+  let keyCode = event.keyCode;
+
+  // 惑星分岐
+  if (keyCode == 49 || keyCode == 97) {
+    //alert('太陽');
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/sun.html';
+    }, 600);
+  } else if (keyCode == 50 || keyCode == 98) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/mercury.html';
+    }, 600);
+  } else if (keyCode == 51 || keyCode == 99) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/venus.html';
+    }, 600);
+  } else if (keyCode == 52 || keyCode == 100) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../php/earth.php';
+    }, 600);
+  } else if (keyCode == 53 || keyCode == 101) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/moon.html';
+    }, 600);
+  } else if (keyCode == 54 || keyCode == 102) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/mars.html';
+    }, 600);
+  } else if (keyCode == 55 || keyCode == 103) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/jupiter.html';
+    }, 600);
+  } else if (keyCode == 56 || keyCode == 104) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/saturn.html';
+    }, 600);
+  } else if (keyCode == 57 || keyCode == 105) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/uranus.html';
+    }, 600);
+  } else if (keyCode == 48 || keyCode == 96) {
+    $('.inbg').addClass('inbgani');
+    setTimeout(function () {
+      location.href = '../html/neptune.html';
+    }, 600);
+  }
+
+  // Web Speech API分岐
+  if (keyCode == 68) {
+    if ($('.speechBtn').hasClass('speechout')) {
+      recognition.stop();
+      $('.speechBtn').removeClass('speechout');
+    } else {
+      recognition.start();
+      $('.speechBtn').addClass('speechout');
+    }
+  }
+
+  // ユーザー分岐
+  if (keyCode == 65) {
+    if ($('.userinfo').hasClass('userOut')) {
+      $('.userinfo').removeClass('userOut');
+      $('.userinfo').addClass('userIn');
+      $('#logout').removeClass('lognone');
+      $('#logout').addClass('logblock');
+    } else {
+      $('.userinfo').removeClass('userIn');
+      $('.userinfo').addClass('userOut');
+      $('#logout').removeClass('logblock');
+      $('#logout').addClass('lognone');
+    }
+  }
+
+  // ストップ分岐
+  if (keyCode == 83) {
     if ($('#stage').hasClass('move')) {
       $('#stage').removeClass('move');
-      $('#stage').addClass('stop');
+      $('#stage').removeClass('moveani');
+    } else if (!$('#stage').hasClass('stop')) {
+      if (!$('#stage').hasClass('move')) {
+        $('#stage').addClass('stop');
+      }
     } else if ($('#stage').hasClass('stop')) {
       $('#stage').removeClass('stop');
       $('#stage').addClass('move');
+      setTimeout(function () {
+        $('#stage').addClass('moveani');
+      }, 50);
     }
   }
 };
-
-$(function () {
-  $('.stopBtn').click(function () {
-    if ($('#stage').hasClass('move')) {
-      $('#stage').removeClass('move');
-      $('#stage').addClass('stop');
-    } else if ($('#stage').hasClass('stop')) {
-      $('#stage').removeClass('stop');
-      $('#stage').addClass('move');
-    }
-  });
-});

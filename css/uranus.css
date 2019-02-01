@@ -4,8 +4,8 @@
 
 #uranusimg1 img {
   margin-left: 1vw;
-  float: right;
   width: 24vw;
+  float: right;
 }
 
 #uranusimg2 img {
@@ -13,4 +13,34 @@
   margin-left: 1vw;
   width: 19vw;
   float: right;
+}
+
+.loadingWrap {
+  height: 92vw;
+}
+
+.text {
+  margin-top: -5vw;
+}
+
+.loadingani1,
+.loadingani2,
+.loadingani3 {
+  transform-origin: top right;
+}
+
+.loadingbg {
+  top: 0;
+  right: 0;
+  transform: rotate(90deg);
+}
+
+@keyframes loadingbg {
+  from {
+    transform: rotate(90deg);
+  }
+
+  to {
+    transform: rotate(-90deg);
+  }
 }

@@ -34,7 +34,7 @@
             $resultName = mysqli_query($con, $sqlName);
             $row = mysqli_fetch_array($resultName);
             $name = $row["UserNAME"];
-            $_SESSION["LOGINDATE"] = Date("n/d");
+            $_SESSION["LOGINDATE"] = Date("m/d");
             $_SESSION["LOGINTIME"] = Date("H:i");
             $_SESSION["NAME"] = $name;
             $_SESSION["LOGINUSER"] = $user;

@@ -4,8 +4,8 @@
 
 #sunimg1 img {
   margin-left: 1vw;
-  float: right;
   width: 24vw;
+  float: right;
 }
 
 #sunimg2 {
@@ -23,4 +23,26 @@
   margin-bottom: 1vh;
   width: 15vw;
   float: right;
+}
+
+.loadingani1,
+.loadingani2,
+.loadingani3 {
+  transform-origin: top left;
+}
+
+.loadingbg {
+  top: 0;
+  left: 0;
+  transform: rotate(90deg);
+}
+
+@keyframes loadingbg {
+  from {
+    transform: rotate(90deg);
+  }
+
+  to {
+    transform: rotate(-90deg);
+  }
 }

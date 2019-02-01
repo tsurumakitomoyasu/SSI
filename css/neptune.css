@@ -14,3 +14,33 @@
   width: 17vw;
   float: right;
 }
+
+.loadingWrap {
+  height: 92vw;
+}
+
+.text {
+  margin-top: -5vw;
+}
+
+.loadingani1,
+.loadingani2,
+.loadingani3 {
+  transform-origin: bottom left;
+}
+
+.loadingbg {
+  bottom: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+@keyframes loadingbg {
+  from {
+    transform: rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}

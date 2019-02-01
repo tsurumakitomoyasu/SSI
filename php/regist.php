@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
+
 <html lang="ja">
 <?php if (($_POST["clear"])) { session_destroy(); } ?>
 <head>
@@ -37,16 +38,6 @@
       </table>
     </form>
   </main>
-  <script src="../js/jquery-3.3.1.min.js"></script>
-  <script src="../js/jquery.fademover.min.js"></script>
-  <script>
-    function eventClick() {
-      location.href = "./login.php";
-    };
-    $(function(){
-      $('main').fadeMover();
-    });
-  </script>
   <?php if($_SESSION["KEYERROR"]): ?>
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/jquery.fademover.min.js"></script>
@@ -58,9 +49,23 @@
           return;
         }
       });
+      function eventClick() {
+        location.href = "./login.php";
+      };
       $(function(){
         $('main').fadeMover();
-    });
+      });
+    </script>
+  <?php else: ?>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery.fademover.min.js"></script>
+    <script>
+      function eventClick() {
+        location.href = "./login.php";
+      };
+      $(function(){
+        $('main').fadeMover({'inSpeed': 1800});
+      });
     </script>
   <?php endif; ?>
 </body>

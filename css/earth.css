@@ -30,3 +30,25 @@
   width: 9vw;
   float: left;
 }
+
+.loadingani1,
+.loadingani2,
+.loadingani3 {
+  transform-origin: top left;
+}
+
+.loadingbg {
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+@keyframes loadingbg {
+  from {
+    transform: rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}

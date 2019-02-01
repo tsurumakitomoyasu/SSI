@@ -7,7 +7,9 @@ $(window).on('popstate', function (event) {
 });
 
 $(function () {
-  $('header, main, .btn').fadeMover();
+  $('header, main, .btn').fadeMover({
+    'inSpeed': 800
+  });
 });
 
 // next

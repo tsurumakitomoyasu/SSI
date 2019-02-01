@@ -30,8 +30,8 @@ main {
 }
 
 table {
-  width: 20vw;
   margin: 0 auto;
+  width: 20vw;
 }
 
 input {
@@ -60,8 +60,8 @@ input {
   padding: .8vw .3vw;
   width: 20vw;
   border: solid .4vh #fff;
-  color: #fff;
   border-radius: .2vw;
+  color: #fff;
   font-size: 1.3vw;
 }
 
@@ -81,14 +81,14 @@ input {
   border: solid .1vw #fff;
   border-radius: .2vw;
   color: #fff;
-  transition: all 700ms;
   font-weight: bold;
+  transition: all 700ms;
 }
 
 #singup {
+  margin: 0 auto;
   display: block;
   width: 20vw;
-  margin: 0 auto;
   text-decoration: none;
   text-align: center;
   color: #fff;
@@ -102,9 +102,9 @@ input {
 
 
 #or {
+  padding: .8vw;
   color: #fff;
   text-align: center;
-  padding: .8vw;
 }
 
 #singup:hover {
