@@ -1,4 +1,3 @@
-//ローディング
 setTimeout(function () {
   let countElm = $('.count'),
     countSpeed = 10;
@@ -103,7 +102,7 @@ $(function () {
   });
 });
 
-let scene;
+let scene = new THREE.Scene();
 let camera;
 let light;
 let ambient;
@@ -225,8 +224,6 @@ let targetTextSaturn = [];
 let targetTextUranus = [];
 let targetTextNeptune = [];
 
-// ステージ
-scene = new THREE.Scene();
 // テクスチャーリスト
 let manifest = [{
     id: 'sun',
@@ -384,7 +381,7 @@ renderer = new THREE.WebGLRenderer({
 renderer.setSize(width, height);
 
 function planetFactory(texture, radius, widthSegments, heightSegments, x, z, planetName) {
-  let sphere,
+  var sphere,
     sphereMercury,
     sphereVenus,
     sphereEarth,

@@ -56,7 +56,7 @@
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
-  <script src="../js/all.min.js"></script>
+  <script src="../js/all.js"></script>
 </body>
 
 </html>
