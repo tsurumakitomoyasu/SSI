@@ -17,7 +17,6 @@
     $Msg = "<h2>データーの接続に失敗しました。</h2>";
   } else {
     mysqli_set_charset($con, "utf8");
-
     if (mysqli_select_db($con, "ssi")) {
       if (isset($_POST["login"])) {
         $user = $_POST["user"];

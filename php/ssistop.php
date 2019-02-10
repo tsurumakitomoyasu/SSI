@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
+<?php require './decision.php'; ?>
 
 <head>
   <meta charset="utf-8">
@@ -37,7 +38,7 @@
     </div>
     <div id="logout" class="lognone">
       <form action="./login.php" method="post">
-        <input type="submit" name="logout" value="ログアウト">
+        <input type="submit" name="logout" value="Landing">
       </form>
     </div>
   </div>
@@ -50,11 +51,13 @@
     <button class="infoBtn speechBtn"><img src="../images/speech_off.png" alt="音声操作"></button>
   </div>
 
+  <div class="inbg"></div>
+
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
-  <script src="../js/all.js"></script>
+  <script src="../js/all.min.js"></script>
 </body>
 
 </html>

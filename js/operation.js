@@ -7,7 +7,7 @@ $(window).on('popstate', function (event) {
 });
 
 $(function () {
-  $('header, main, .btn').fadeMover({
+  $('.topheader, main, .btn').fadeMover({
     'inSpeed': 800
   });
 });
@@ -21,6 +21,7 @@ $(function () {
       $('.page2').addClass('pagenext');
       $('.page2').removeClass('pagenone');
       $('.prev').removeClass('btnnone');
+      $('.footer').addClass('infooter');
     } else if ($('.page2').hasClass('pagenext')) {
       // 3ページ目
       $('.page3').removeClass('pagenone');
@@ -29,14 +30,6 @@ $(function () {
       $('.page2').addClass('pageprev');
       $('.page2').addClass('pagenone');
       $('.page3').addClass('pageNend');
-    } else if ($('.page3').hasClass('pageNend')) {
-      // 4ページ目
-      $('.page2').removeClass('pageprev1');
-      $('.page3').removeClass('pageNend');
-      $('.page4').removeClass('pagenone');
-      $('.page4').removeClass('pageNend');
-      $('.page3').addClass('pagenone');
-      $('.page3').addClass('pagePend');
       $('.next').addClass('btnnone');
     }
   });
@@ -53,24 +46,16 @@ $(function () {
       $('.page3').removeClass('pageNend');
       $('.page3').removeClass('pagePend');
       $('.page4').removeClass('pageNend');
+      $('.footer').removeClass('infooter');
       $('.page2').addClass('pagenone');
       $('.prev').addClass('btnnone');
     } else if ($('.page2').hasClass('pageprev1')) {
       // 3ページ目
       $('.page2').removeClass('pagenone');
       $('.page2').removeClass('pageprev');
+      $('.next').removeClass('btnnone');
       $('.page2').addClass('pagenext');
       $('.page3').addClass('pagenone');
-    } else if ($('.page3').hasClass('pagePend')) {
-      // 4ページ目
-      $('.page2').addClass('pageprev1');
-      $('.page2').addClass('pageprev');
-      $('.page3').addClass('pageNend');
-      $('.page4').addClass('pagenone');
-      $('.page4').addClass('pageNend');
-      $('.page3').removeClass('pagenone');
-      $('.paeg3').removeClass('pagePend');
-      $('.next').removeClass('btnnone');
     }
   });
 });
@@ -90,24 +75,16 @@ function Keydown(e) {
       $('.page3').removeClass('pageNend');
       $('.page3').removeClass('pagePend');
       $('.page4').removeClass('pageNend');
+      $('.footer').removeClass('infooter');
       $('.page2').addClass('pagenone');
       $('.prev').addClass('btnnone');
     } else if ($('.page2').hasClass('pageprev1')) {
       // 3ページ目
       $('.page2').removeClass('pagenone');
       $('.page2').removeClass('pageprev');
+      $('.next').removeClass('btnnone');
       $('.page2').addClass('pagenext');
       $('.page3').addClass('pagenone');
-    } else if ($('.page3').hasClass('pagePend')) {
-      // 4ページ目
-      $('.page2').addClass('pageprev1');
-      $('.page2').addClass('pageprev');
-      $('.page3').addClass('pageNend');
-      $('.page4').addClass('pagenone');
-      $('.page4').addClass('pageNend');
-      $('.page3').removeClass('pagenone');
-      $('.paeg3').removeClass('pagePend');
-      $('.next').removeClass('btnnone');
     }
   } else if (keycode == 39) {
     // 右
@@ -115,6 +92,7 @@ function Keydown(e) {
       // 2ページ目
       $('.page1').addClass('pagenone');
       $('.page2').addClass('pagenext');
+      $('.footer').addClass('infooter');
       $('.page2').removeClass('pagenone');
       $('.prev').removeClass('btnnone');
     } else if ($('.page2').hasClass('pagenext')) {
@@ -125,14 +103,6 @@ function Keydown(e) {
       $('.page2').addClass('pageprev');
       $('.page2').addClass('pagenone');
       $('.page3').addClass('pageNend');
-    } else if ($('.page3').hasClass('pageNend')) {
-      // 4ページ目
-      $('.page2').removeClass('pageprev1');
-      $('.page3').removeClass('pageNend');
-      $('.page4').removeClass('pagenone');
-      $('.page4').removeClass('pageNend');
-      $('.page3').addClass('pagenone');
-      $('.page3').addClass('pagePend');
       $('.next').addClass('btnnone');
     }
   }

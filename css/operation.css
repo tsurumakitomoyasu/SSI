@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* @import "../font/operation_font.css"; */
-@import "//fonts.googleapis.com/earlyaccess/kokoro.css";
+@import "//fonts.googleapis.com/css?family=M+PLUS+1p";
 @import "./ress.min.css";
 @import "./bg.css";
 
@@ -11,16 +11,16 @@ body {
 }
 
 body {
-  font-family: "Kokoro", sans-serif;
+  font-family: "M PLUS 1p", sans-serif;
   cursor: default;
 }
 
-header {
-  margin-top: 2vh;
+.topheader {
+  margin-top: 5vh;
   margin-bottom: 3vh;
 }
 
-header,
+.topheader,
 main,
 .btn {
   opacity: 0;
@@ -36,8 +36,10 @@ h1 {
 }
 
 #main {
-  margin: 8vh auto 0;
-  width: 90vw;
+  /* margin: 8vh auto 0; */
+  width: 100%;
+  height: 100%;
+  background: #fff;
 }
 
 header,
@@ -139,63 +141,101 @@ header,
 #sample p {
   color: #fff;
   font-size: 2vw;
+  letter-spacing: .2em;
 }
 
 #sample span {
   color: #f00;
 }
 
-.page4 {
-  margin: 27.4vh auto 0;
-  position: relative;
+.footer {
+  margin: 25.5vh auto 0;
+  position: absolute;
   z-index: 50;
   width: 25.2vw;
   height: 7.2vw;
+  top: 30vw;
+  left: 37vw;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.page4 p {
+.footer p {
+  padding-left: .2em;
+  position: relative;
+  z-index: 51;
+  cursor: pointer;
+  text-align: center;
   width: 25.2vw;
   height: 7.2vw;
-  position: relative;
-  z-index: 50;
-  cursor: pointer;
+  font-size: 5vw;
   background: #fff;
   border-radius: .5vw;
-  text-align: center;
-  color: #00f;
-  font-weight: bold;
-  font-size: 5vw;
   text-decoration: none;
+  letter-spacing: .2em;
+  transition: all 450ms linear 0s;
 }
 
-.bgcolor {
-  position: absolute;
-  cursor: pointer;
+.footer p:hover {
+  background: #aaa;
 }
 
-.color1 {
-  z-index: 51;
-  top: .9vh;
-  left: .9vh;
-  width: 24.2vw;
-  height: 6.2vw;
-  border: dashed .3vh #00f;
-  border-radius: .5vw;
+.textcolor {
+  color: black;
 }
 
-.color2 {
-  width: 25.2vw;
-  height: 7.2vw;
-  position: absolute;
-  z-index: 51;
-  opacity: 0.3;
-  background: #00f;
-  border-radius: .5vw;
-  transform-origin: center;
-  transform: scale(0);
-  transition: all 450ms cubic-bezier(0.85, 0.01, 0.17, 1) 0s;
+.textcolor1 {
+  transition: all 350ms linear 0s;
 }
 
-.page4:hover .color2 {
-  transform: scale(1);
+.textcolor2 {
+  transition: all 350ms linear 100ms;
+}
+
+.textcolor3 {
+  transition: all 350ms linear 200ms;
+}
+
+.textcolor4 {
+  transition: all 350ms linear 300ms;
+}
+
+.textcolor5 {
+  transition: all 350ms linear 400ms;
+}
+
+.footer:hover .textcolor1 {
+  color: yellow;
+}
+
+.footer:hover .textcolor2 {
+  color: yellow;
+}
+
+.footer:hover .textcolor3 {
+  color: yellow;
+}
+
+.footer:hover .textcolor4 {
+  color: yellow;
+}
+
+.footer:hover .textcolor5 {
+  color: yellow;
+}
+
+
+.infooter {
+  animation: footer 200ms ease-in 0s forwards;
+  pointer-events: auto;
+}
+
+@keyframes footer {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

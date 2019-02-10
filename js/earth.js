@@ -71,20 +71,10 @@ function init() {
   }
 };
 
-$(function () {
-  $('#back').click(function () {
-    history.back();
-  });
-});
-
 window.addEventListener('keydown', Keydown);
 
 function Keydown(event) {
   let keycode = event.keyCode;
-
-  if (keycode == 66) {
-    history.back();
-  }
 
   //ページ以降
   if (keycode == 39) {
@@ -117,4 +107,12 @@ $(function () {
     $('.next').addClass('none');
     $('.prev').removeClass('none');
   });
+});
+
+history.pushState(null, null, null);
+$(window).on('popstate', function (event) {
+  if (!event.originalEvent.state) {
+    history.pushState(null, null, null);
+    return;
+  }
 });

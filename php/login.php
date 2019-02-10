@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
-<?php require './decision.php'; ?>
+<?php  require './decision.php'; ?>
 <head>
   <meta charset="UTF-8">
   <title>SSI/ログインページ</title>
@@ -18,7 +18,7 @@
   </header>
   <main>
     <?php echo $Msg; ?>
-    <form action="./operation.php" method="POST">
+    <form action="./ssi.php" method="POST">
       <table>
         <tr>
           <td>
@@ -32,16 +32,16 @@
         </tr>
         <tr>
           <td>
-            <input type="submit" name="login" value="ログイン" id="login">
+            <input type="submit" name="login" value="Lift-Off" id="login">
           </td>
         </tr>
         <tr>
-          <td id="or">-----------または-----------</td>
+          <td id="or">---------  or  ---------</td>
         </tr>
       </table>
     </form>
     <form action="./regist.php" method="POST">
-      <input type="submit" name="clear" value="ユーザー登録" id="singup">
+      <input type="submit" name="clear" value="Create Account" id="singup">
     </form>
   </main>
   <script src="../js/jquery-3.3.1.min.js"></script>

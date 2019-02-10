@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import '//fonts.googleapis.com/css?family=Lobster|Orbitron';
 @import "./ress.min.css";
+@import "./bg.css";
 
 html,
 body {
@@ -15,7 +16,7 @@ body {
 
 .loading {
   position: absolute;
-  z-index: 30;
+  z-index: 90;
   top: 0;
   left: 0;
   width: 100%;
@@ -26,7 +27,7 @@ body {
 .loadingimg img {
   margin: auto;
   position: absolute;
-  z-index: 40;
+  z-index: 91;
   top: 0;
   bottom: 0;
   left: 0;
@@ -50,7 +51,8 @@ body {
   }
 }
 
-p {
+#cnt p,
+.userinfo p {
   margin-top: 42vh;
   padding: 30px 0;
   font-size: 10vh;
@@ -169,7 +171,8 @@ button {
 }
 
 
-#userBack {
+#userBack,
+#opeBack {
   position: absolute;
 }
 
@@ -301,4 +304,191 @@ button {
   to {
     width: 100%;
   }
+}
+
+/* bg上書き */
+.stars {
+  z-index: 25;
+}
+
+.twinkling {
+  z-index: 26;
+}
+
+.clouds {
+  z-index: 27;
+}
+
+.operationWrap {
+  position: absolute;
+  z-index: 28;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transform: scale(0);
+}
+
+.operationin {
+  animation: inope 500ms cubic-bezier(0.85, 0.01, 0.17, 1) 0s forwards;
+}
+
+@keyframes inope {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.operationout {
+  animation: outope 500ms cubic-bezier(0.85, 0.01, 0.17, 1) 0s forwards;
+}
+
+@keyframes outope {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0);
+  }
+}
+
+.opetitle {
+  position: relative;
+  z-index: 30;
+}
+
+.opetitle h1 {
+  margin-top: 4vw;
+  color: #fff;
+  text-align: center;
+  font-size: 5.5vw;
+  font-weight: normal;
+  letter-spacing: .2em;
+}
+
+.operationposi {
+  position: relative;
+  z-index: 30;
+  margin-top: 3vw;
+}
+
+.page1 {
+  display: flex;
+  justify-content: center;
+}
+
+.operation {
+  padding: 1vw;
+  width: 27vw;
+}
+
+.text {
+  margin-top: .7vw;
+  padding: 1vw;
+  padding-top: 1.2vw;
+  width: 25vw;
+  height: 5vw;
+  border: solid .3vh #0ff;
+  border-radius: 1.5vw;
+}
+
+.text p {
+  color: #fff;
+  text-align: center;
+  font-size: 1.5vw;
+  letter-spacing: .2em;
+}
+
+.operation img {
+  width: 25vw;
+  border: solid .3vh #0ff;
+  border-radius: 7vw;
+}
+
+.arrow {
+  margin-top: 9vh;
+  font-size: 12vw;
+  color: #0ff;
+}
+
+.btn {
+  position: absolute;
+  z-index: 30;
+  bottom: 25vh;
+  color: #fff;
+  font-size: 20vw;
+  outline: none;
+  cursor: pointer;
+}
+
+.prev {
+  left: 8vw;
+}
+
+.next {
+  right: 8vw;
+}
+
+.btnnone,
+.pagenone {
+  display: none;
+}
+
+.list {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.list img {
+  padding: .3vw;
+  width: 9%;
+  border: solid .1vw #0ff;
+}
+
+.list ul {
+  margin-top: 17vh;
+  list-style-type: none;
+}
+
+.list li {
+  margin: 2vw 0;
+  padding: 1vh;
+  color: #fff;
+  font-size: 2vw;
+  letter-spacing: .2em;
+}
+
+#sampleimg img {
+  margin-top: 2vh;
+  margin-right: 1vh;
+  padding: 0;
+  width: 24vw;
+  border: none;
+  border-radius: 2vw;
+}
+
+#sampletext {
+  color: #f00;
+}
+
+#opeBack {
+  z-index: 31;
+  top: 3vw;
+  left: 3vw;
+}
+
+#opeBack img {
+  width: 7vw;
+  height: 7vw;
+}
+
+.operationBtn {
+  position: absolute;
+  top: 27%;
+  right: 2%;
+  z-index: 20;
 }

@@ -1,3 +1,4 @@
+// ローディング
 setTimeout(function () {
   let countElm = $('.count'),
     countSpeed = 10;
@@ -24,8 +25,20 @@ setTimeout(function () {
   });
 }, 700);
 
-//画像変更処理
+// 初回Class付与
+setTimeout(function () {
+  $('#stage').addClass('moveani');
+}, 1500);
+
+// 初回以降
+if (backcnt > 0) {
+  $('#stage').addClass('plamouse');
+  $('.operationWrap').removeClass('operationin');
+  $('.operationWrap').addClass('operationout');
+}
+
 $(function () {
+  //画像変更処理
   $('.infoBtn img').hover(function () {
     $(this).attr('src', $(this).attr('src').replace('_off', '_on'));
   }, function () {
@@ -33,31 +46,39 @@ $(function () {
       $(this).attr('src', $(this).attr('src').replace('_on', '_off'));
     }
   });
-});
 
-//詳細表示
-//ユーザー
-$(function () {
+  //ユーザー
   $('.userBtn').click(function () {
     if ($('.userinfo').hasClass('userOut')) {
       $('.userinfo').removeClass('userOut');
-      $('.userinfo').addClass('userIn');
       $('#logout').removeClass('lognone');
+      $('.userinfo').addClass('userIn');
       $('#logout').addClass('logblock');
+      $('#stage').addClass('useropen');
     }
   });
 
+  // ユーザーバック
   $('#userBack').click(function () {
     if (!$('.userinfo').hasClass('userOut')) {
       $('.userinfo').removeClass('userIn');
-      $('.userinfo').addClass('userOut');
       $('#logout').removeClass('logblock');
+      $('#stage').removeClass('useropen');
+      $('.userinfo').addClass('userOut');
       $('#logout').addClass('lognone');
     }
   });
-});
 
-$(function () {
+  // 説明
+  $('#opeBack').click(function () {
+    if (!$('.operationWrap').hasClass('operationout')) {
+      $('#stage').addClass('plamouse');
+      $('.operationWrap').removeClass('operationin');
+      $('.operationWrap').addClass('operationout');
+    }
+  });
+
+  // API
   $('.speechBtn').click(function () {
     if ($(this).hasClass('speechout')) {
       recognition.stop();
@@ -65,6 +86,90 @@ $(function () {
     } else {
       recognition.start();
       $(this).addClass('speechout');
+    }
+  });
+
+  // ストップ処理
+  $('.stopBtn').click(function () {
+    if ($('#stage').hasClass('move')) {
+      $('#stage').removeClass('move');
+      $('#stage').removeClass('moveani');
+    } else if (!$('#stage').hasClass('stop')) {
+      if (!$('#stage').hasClass('move')) {
+        $('#stage').addClass('stop');
+        setTimeout(function () {
+          $('#stage').addClass('stopani');
+        }, 50);
+      }
+    } else if ($('#stage').hasClass('stop')) {
+      $('#stage').removeClass('stop');
+      $('#stage').addClass('move');
+      $('#stage').removeClass('stopani');
+      setTimeout(function () {
+        $('#stage').addClass('moveani');
+      }, 50);
+    }
+  });
+
+  // 説明処理
+  $('.opeBtn').click(function () {
+    if ($('#stage').hasClass('plamouse')) {
+      $('#stage').removeClass('plamouse');
+      $('.operationWrap').removeClass('operationout');
+      $('#logout').removeClass('logblock');
+      $('.userinfo').removeClass('userIn');
+      $('.operationWrap').addClass('operationin');
+      $('.userinfo').addClass('userOut');
+      $('#logout').addClass('lognone');
+    } else if (!$('.move').hasClass('plamouse')) {
+      $('.operationWrap').removeClass('operationin');
+      $('.operationWrap').addClass('operationout');
+      $('#stage').addClass('plamouse');
+    }
+  });
+
+  // 説明arrow
+  // next
+  $('.next').click(function () {
+    if (!$('.page1').hasClass('pagenone')) {
+      // 2ページ目
+      $('.page2').removeClass('pagenone');
+      $('.prev').removeClass('btnnone');
+      $('.footer').addClass('infooter');
+      $('.page1').addClass('pagenone');
+      $('.page2').addClass('pagenext');
+    } else if ($('.page2').hasClass('pagenext')) {
+      // 3ページ目
+      $('.page3').removeClass('pagenone');
+      $('.page2').removeClass('pagenext');
+      $('.page2').addClass('pageprev1');
+      $('.page2').addClass('pageprev');
+      $('.page2').addClass('pagenone');
+      $('.page3').addClass('pageNend');
+      $('.next').addClass('btnnone');
+    }
+  });
+
+  // prev
+  $('.prev').click(function () {
+    if (!$('.page2').hasClass('pageprev')) {
+      // 2ページ目
+      $('.page1').removeClass('pagenone');
+      $('.page2').removeClass('pagenext');
+      $('.page2').removeClass('pageprev1');
+      $('.page3').removeClass('pageNend');
+      $('.page3').removeClass('pagePend');
+      $('.page4').removeClass('pageNend');
+      $('.footer').removeClass('infooter');
+      $('.page2').addClass('pagenone');
+      $('.prev').addClass('btnnone');
+    } else if ($('.page2').hasClass('pageprev1')) {
+      // 3ページ目
+      $('.page2').removeClass('pagenone');
+      $('.page2').removeClass('pageprev');
+      $('.next').removeClass('btnnone');
+      $('.page2').addClass('pagenext');
+      $('.page3').addClass('pagenone');
     }
   });
 });
@@ -77,31 +182,7 @@ $(window).on('popstate', function (event) {
   }
 });
 
-$(function () {
-  setTimeout(function () {
-    $('#stage').addClass('moveani');
-  }, 1500);
-});
-
-$(function () {
-  $('.stopBtn').click(function () {
-    if ($('#stage').hasClass('move')) {
-      $('#stage').removeClass('move');
-      $('#stage').removeClass('moveani');
-    } else if (!$('#stage').hasClass('stop')) {
-      if (!$('#stage').hasClass('move')) {
-        $('#stage').addClass('stop');
-      }
-    } else if ($('#stage').hasClass('stop')) {
-      $('#stage').removeClass('stop');
-      $('#stage').addClass('move');
-      setTimeout(function () {
-        $('#stage').addClass('moveani');
-      }, 50);
-    }
-  });
-});
-
+// 変数定義
 let scene = new THREE.Scene();
 let camera;
 let light;
@@ -341,7 +422,7 @@ loadQueue.on('complete', function () {
   venus = planetFactory(textureVenus, 10, 20, 20, venusX, venusZ, 'isVenus');
   earth = planetFactory(textureEarth, 13, 20, 20, earthX, earthZ, 'isEarth');
   mars = planetFactory(textureMars, 7, 20, 20, marsX, marsZ, 'isMars');
-  jupiter = planetFactory(textureJupiter, 30, 20, 20, jupiterX, jupiterZ, 'isJupiter');
+  jupiter = planetFactory(textureJupiter, 40, 30, 30, jupiterX, jupiterZ, 'isJupiter');
   saturn = planetFactory(textureSaturn, 18, 20, 20, saturnX, saturnZ, 'isSaturn');
   uranus = planetFactory(textureUranus, 20, 20, 20, uranusX, uranusZ, 'isUranus');
   neptune = planetFactory(textureNeptune, 17, 20, 20, neptuneX, neptuneZ, 'isNeptune');
@@ -363,14 +444,13 @@ scene.add(ambient);
 
 // カメラ
 camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000000);
-camera.position.set(400, 200, 300);
 
 // カメラ操作
 controls = new THREE.OrbitControls(camera);
 controls.minDistance = 350; //カメラ最小値
 controls.maxDistance = 700; //カメラ最大値
-controls.enableDamping = true;
-controls.enableKeys = false;
+controls.enableDamping = true; //滑らか
+controls.enableKeys = false; //矢印
 controls.enablePan = false;
 controls.dampingFactor = .1;
 
@@ -633,19 +713,6 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 function render() {
   requestAnimationFrame(render);
   //自転
-  if ($('#stage').hasClass('move')) {
-    if (!$('#stage').hasClass('moveani')) {
-      mercuryTheta = 10;
-      venusTheta = 500;
-      earthTheta = 0;
-      marsTheta = 100;
-      jupiterTheta = 160;
-      saturnTheta = 80;
-      uranusTheta = 200;
-      neptuneTheta = 330;
-      moonTheta = 0;
-    }
-  }
   sun.rotation.y += 0.003;
   mercury.rotation.y += 0.005;
   venus.rotation.y -= 0.005;
@@ -659,6 +726,9 @@ function render() {
   moon.rotation.y += 0.007;
   //惑星のスピード
   if ($('#stage').hasClass('move')) {
+    // ライト
+    light.position.set(0, 0, 0);
+    // 公転スピード
     mercuryTheta -= 0.78;
     venusTheta -= 0.65;
     earthTheta -= 0.59;
@@ -668,28 +738,7 @@ function render() {
     uranusTheta -= 0.37;
     neptuneTheta -= 0.35;
     moonTheta -= 1;
-  } else if ($('#stage').hasClass('stop')) {
-    mercuryTheta = 0;
-    venusTheta = 0;
-    earthTheta = 0;
-    marsTheta = 0;
-    jupiterTheta = 0;
-    saturnTheta = 0;
-    uranusTheta = 0;
-    neptuneTheta = 0;
-    moonTheta = 0;
-  }
-  //回転固定
-  /*mercuryTheta = 0.78;
-  venusTheta = 0.65;
-  earthTheta = 0.59;
-  marsTheta = 0.54;
-  jupiterTheta = 0.43;
-  saturnTheta = 0.4;
-  uranusTheta = 0.37;
-  neptuneTheta = 0.35;
-  moonTheta = 0.35;*/
-  if ($('#stage').hasClass('move')) {
+    // ポジション
     sunX = 0;
     sunZ = 0;
     mercuryX = 80;
@@ -702,15 +751,41 @@ function render() {
     marsZ = 230;
     jupiterX = 280;
     jupiterZ = 280;
-    saturnX = 350;
-    saturnZ = 350;
-    uranusX = 410;
-    uranusZ = 410;
-    neptuneX = 460;
-    neptuneZ = 460;
+    saturnX = 355;
+    saturnZ = 355;
+    uranusX = 415;
+    uranusZ = 415;
+    neptuneX = 475;
+    neptuneZ = 475;
     moonX = 25;
     moonZ = 25;
+    // 開始位置
+    if (!$('#stage').hasClass('moveani')) {
+      mercuryTheta = 10;
+      venusTheta = 500;
+      earthTheta = 0;
+      marsTheta = 100;
+      jupiterTheta = 160;
+      saturnTheta = 80;
+      uranusTheta = 200;
+      neptuneTheta = 330;
+      moonTheta = 0;
+      camera.position.set(400, 400, 700);
+    }
   } else if ($('#stage').hasClass('stop')) {
+    // ライト
+    light.position.set(sunX, 0, 0);
+    // 公転スピード
+    mercuryTheta = 0;
+    venusTheta = 0;
+    earthTheta = 0;
+    marsTheta = 0;
+    jupiterTheta = 0;
+    saturnTheta = 0;
+    uranusTheta = 0;
+    neptuneTheta = 0;
+    moonTheta = 0;
+    // ポジション
     sunX = -230;
     sunZ = -230;
     mercuryX = -150;
@@ -721,22 +796,19 @@ function render() {
     earthZ = -60;
     marsX = 0;
     marsZ = 0;
-    jupiterX = 50;
-    jupiterZ = 50;
-    saturnX = 120;
-    saturnZ = 120;
-    uranusX = 180;
-    uranusZ = 180;
-    neptuneX = 230;
-    neptuneZ = 230;
+    jupiterX = 60;
+    jupiterZ = 60;
+    saturnX = 140;
+    saturnZ = 140;
+    uranusX = 200;
+    uranusZ = 200;
+    neptuneX = 260;
+    neptuneZ = 260;
     moonX = 25;
     moonZ = 25;
-  }
-
-  if ($('#stage').hasClass('move')) {
-    light.position.set(0, 0, 0);
-  } else if ($('#stage').hasClass('stop')) {
-    light.position.set(sunX, 0, 0);
+    if (!$('#stage').hasClass('stopani')) {
+      camera.position.set(0, 0, 300);
+    }
   }
 
   sun.position.x = Math.cos(THREE.Math.degToRad(mercuryTheta)) * sunX;
@@ -816,7 +888,7 @@ jupiterimageText = new THREE.SpriteMaterial({
   map: new THREE.TextureLoader().load('../images/jupitertext.png')
 });
 jupiterText = new THREE.Sprite(jupiterimageText);
-jupiterText.position.y = 43;
+jupiterText.position.y = 53;
 jupiterText.scale.set(40, 27, 40);
 targetTextJupiter.push(jupiterText);
 
@@ -854,7 +926,11 @@ function clickPosition(event) {
   mouse.x = (x / window.innerWidth) * 2 - 1;
   mouse.y = -(y / window.innerHeight) * 2 + 1;
   let raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(mouse, camera);
+  if ($('#stage').hasClass('plamouse')) {
+    if (!$('#stage').hasClass('useropen')) {
+      raycaster.setFromCamera(mouse, camera);
+    }
+  }
 
   // オブジェクトの取得
   //メッシュ
@@ -1026,101 +1102,174 @@ window.addEventListener('keydown', Keydown);
 function Keydown(event) {
   let keyCode = event.keyCode;
 
-  // 惑星分岐
-  if (keyCode == 49 || keyCode == 97) {
-    //alert('太陽');
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/sun.html';
-    }, 600);
-  } else if (keyCode == 50 || keyCode == 98) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/mercury.html';
-    }, 600);
-  } else if (keyCode == 51 || keyCode == 99) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/venus.html';
-    }, 600);
-  } else if (keyCode == 52 || keyCode == 100) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../php/earth.php';
-    }, 600);
-  } else if (keyCode == 53 || keyCode == 101) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/moon.html';
-    }, 600);
-  } else if (keyCode == 54 || keyCode == 102) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/mars.html';
-    }, 600);
-  } else if (keyCode == 55 || keyCode == 103) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/jupiter.html';
-    }, 600);
-  } else if (keyCode == 56 || keyCode == 104) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/saturn.html';
-    }, 600);
-  } else if (keyCode == 57 || keyCode == 105) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/uranus.html';
-    }, 600);
-  } else if (keyCode == 48 || keyCode == 96) {
-    $('.inbg').addClass('inbgani');
-    setTimeout(function () {
-      location.href = '../html/neptune.html';
-    }, 600);
-  }
-
-  // Web Speech API分岐
-  if (keyCode == 68) {
-    if ($('.speechBtn').hasClass('speechout')) {
-      recognition.stop();
-      $('.speechBtn').removeClass('speechout');
-    } else {
-      recognition.start();
-      $('.speechBtn').addClass('speechout');
-    }
-  }
-
-  // ユーザー分岐
-  if (keyCode == 65) {
-    if ($('.userinfo').hasClass('userOut')) {
-      $('.userinfo').removeClass('userOut');
-      $('.userinfo').addClass('userIn');
-      $('#logout').removeClass('lognone');
-      $('#logout').addClass('logblock');
-    } else {
+  // 説明分岐
+  if (keyCode == 70) {
+    if ($('#stage').hasClass('plamouse')) {
+      $('#stage').removeClass('plamouse');
+      $('.operationWrap').removeClass('operationout');
       $('.userinfo').removeClass('userIn');
-      $('.userinfo').addClass('userOut');
       $('#logout').removeClass('logblock');
+      $('.userinfo').addClass('userOut');
+      $('.operationWrap').addClass('operationin');
       $('#logout').addClass('lognone');
+    } else if (!$('.move').hasClass('plamouse')) {
+      $('.operationWrap').removeClass('operationin');
+      $('.operationWrap').addClass('operationout');
+      $('#stage').addClass('plamouse');
     }
   }
 
-  // ストップ分岐
-  if (keyCode == 83) {
-    if ($('#stage').hasClass('move')) {
-      $('#stage').removeClass('move');
-      $('#stage').removeClass('moveani');
-    } else if (!$('#stage').hasClass('stop')) {
-      if (!$('#stage').hasClass('move')) {
-        $('#stage').addClass('stop');
+  if (!$('#stage').hasClass('plamouse')) {
+    // arrow分岐
+    if (keyCode == 37) {
+      // 左
+      if (!$('.page2').hasClass('pageprev')) {
+        // 2ページ目
+        $('.page1').removeClass('pagenone');
+        $('.page2').removeClass('pagenext');
+        $('.page2').removeClass('pageprev1');
+        $('.page3').removeClass('pageNend');
+        $('.page3').removeClass('pagePend');
+        $('.page4').removeClass('pageNend');
+        $('.footer').removeClass('infooter');
+        $('.page2').addClass('pagenone');
+        $('.prev').addClass('btnnone');
+      } else if ($('.page2').hasClass('pageprev1')) {
+        // 3ページ目
+        $('.page2').removeClass('pagenone');
+        $('.page2').removeClass('pageprev');
+        $('.next').removeClass('btnnone');
+        $('.page2').addClass('pagenext');
+        $('.page3').addClass('pagenone');
       }
-    } else if ($('#stage').hasClass('stop')) {
-      $('#stage').removeClass('stop');
-      $('#stage').addClass('move');
+    } else if (keyCode == 39) {
+      // 右
+      if (!$('.page1').hasClass('pagenone')) {
+        // 2ページ目
+        $('.page2').removeClass('pagenone');
+        $('.prev').removeClass('btnnone');
+        $('.page1').addClass('pagenone');
+        $('.page2').addClass('pagenext');
+        $('.footer').addClass('infooter');
+      } else if ($('.page2').hasClass('pagenext')) {
+        // 3ページ目
+        $('.page3').removeClass('pagenone');
+        $('.page2').removeClass('pagenext');
+        $('.page2').addClass('pageprev1');
+        $('.page2').addClass('pageprev');
+        $('.page2').addClass('pagenone');
+        $('.page3').addClass('pageNend');
+        $('.next').addClass('btnnone');
+      }
+    }
+  }
+
+  // 説明未表示時
+  if ($('#stage').hasClass('plamouse')) {
+    // 惑星分岐
+    if (keyCode == 49 || keyCode == 97) {
+      //alert('太陽');
+      $('.inbg').addClass('inbgani');
       setTimeout(function () {
-        $('#stage').addClass('moveani');
-      }, 50);
+        location.href = '../html/sun.html';
+      }, 600);
+    } else if (keyCode == 50 || keyCode == 98) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/mercury.html';
+      }, 600);
+    } else if (keyCode == 51 || keyCode == 99) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/venus.html';
+      }, 600);
+    } else if (keyCode == 52 || keyCode == 100) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../php/earth.php';
+      }, 600);
+    } else if (keyCode == 53 || keyCode == 101) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/moon.html';
+      }, 600);
+    } else if (keyCode == 54 || keyCode == 102) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/mars.html';
+      }, 600);
+    } else if (keyCode == 55 || keyCode == 103) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/jupiter.html';
+      }, 600);
+    } else if (keyCode == 56 || keyCode == 104) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/saturn.html';
+      }, 600);
+    } else if (keyCode == 57 || keyCode == 105) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/uranus.html';
+      }, 600);
+    } else if (keyCode == 48 || keyCode == 96) {
+      $('.inbg').addClass('inbgani');
+      setTimeout(function () {
+        location.href = '../html/neptune.html';
+      }, 600);
+    }
+
+    // Web Speech API分岐
+    if (keyCode == 68) {
+      if (!$('#stage').hasClass('useropen')) {
+        if ($('.speechBtn').hasClass('speechout')) {
+          recognition.stop();
+          $('.speechBtn').removeClass('speechout');
+        } else {
+          recognition.start();
+          $('.speechBtn').addClass('speechout');
+        }
+      }
+    }
+
+    // ユーザー分岐
+    if (keyCode == 65) {
+      if ($('.userinfo').hasClass('userOut')) {
+        $('.userinfo').removeClass('userOut');
+        $('#logout').removeClass('lognone');
+        $('.userinfo').addClass('userIn');
+        $('#logout').addClass('logblock');
+        $('#stage').addClass('useropen');
+      } else {
+        $('#logout').removeClass('logblock');
+        $('.userinfo').removeClass('userIn');
+        $('#stage').removeClass('useropen');
+        $('.userinfo').addClass('userOut');
+        $('#logout').addClass('lognone');
+      }
+    }
+
+    // ストップ分岐
+    if (keyCode == 83) {
+      if ($('#stage').hasClass('move')) {
+        $('#stage').removeClass('move');
+        $('#stage').removeClass('moveani');
+      } else if (!$('#stage').hasClass('stop')) {
+        if (!$('#stage').hasClass('move')) {
+          $('#stage').addClass('stop');
+          setTimeout(function () {
+            $('#stage').addClass('stopani');
+          }, 50);
+        }
+      } else if ($('#stage').hasClass('stop')) {
+        $('#stage').removeClass('stop');
+        $('#stage').addClass('move');
+        $('#stage').removeClass('stopani');
+        setTimeout(function () {
+          $('#stage').addClass('moveani');
+        }, 50);
+      }
     }
   }
 };

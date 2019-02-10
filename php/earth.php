@@ -23,7 +23,11 @@
   <div class="loadingbg loadingbg2"></div>
   <div class="loadingbg loadingbg3"></div>
 
-  <button id="back">戻る</button>
+  <!-- BACK -->
+  <form action="./ssi.php" method="POST">
+    <input type="submit" value="BACK" id="back" name="backcnt">
+  </form>
+
   <canvas id="stage"></canvas>
   <div id="info">
     <header>

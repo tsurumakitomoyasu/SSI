@@ -14,7 +14,7 @@
   <div class="twinkling"></div>
   <div class="clouds"></div>
   <?php if (isset($_SESSION["LOGINUSER"])): ?>
-    <header>
+    <header class="topheader">
       <h1>操作説明</h1>
     </header>
     <main id="main">
@@ -23,7 +23,7 @@
         <div class="operation">
           <img src="../images/operation_one.png" alt="クリック画像">
           <div class="text">
-            <p>①知りたい惑星をクリック</p>
+            <p>①知りたい惑星を選択</p>
           </div>
         </div>
         <p class="arrow">&rarr;</p>
@@ -57,14 +57,11 @@
           </div>
         </div>
       </div>
-
-      <!-- 4ページ目 -->
-      <div class="page4 pagenone">
-        <div class="bgcolor color1"></div>
-        <div class="bgcolor color2" onclick="eventClick();"></div>
-        <p onclick="eventClick();">スタート</p>
-      </div>
     </main>
+
+    <footer class="footer">
+        <p onclick="eventClick();"><span class="textcolor textcolor1">S</span><span class="textcolor textcolor2">T</span><span class="textcolor textcolor3">A</span><span class="textcolor textcolor4">R</span><span class="textcolor textcolor5">T</span></p>
+    </footer>
 
     <!-- prev -->
     <button class="btn prev btnnone">&lsaquo;</button>

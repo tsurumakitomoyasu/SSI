@@ -33,7 +33,7 @@
           <td><input type="text" name="username" id="name" placeholder="ユーザーネーム(5文字以下)" autocomplete="off" required pattern=".{1,5}"></td>
         </tr>
         <tr>
-          <td><input type="submit" name="regist" value="登録" id="regist"></td>
+          <td><input type="submit" name="regist" value="Sign Up" id="regist"></td>
         </tr>
       </table>
     </form>
