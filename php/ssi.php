@@ -3,10 +3,10 @@
 
   $backcnt = 0;
   if ($_SESSION["BACKCNT"]) {
-    $backcnt = $_SESSION["BACKCNT"];
+      $backcnt = $_SESSION["BACKCNT"];
   }
   if ($_POST["backcnt"] && $backcnt != 1) {
-    $backcnt++;
+      $backcnt++;
   }
   $_SESSION["BACKCNT"] = $backcnt;
 ?>
@@ -48,14 +48,14 @@
           <div class="operation">
             <img src="../images/operation_one.png" alt="クリック画像">
             <div class="text">
-              <p>①知りたい惑星を選択</p>
+              <p>①惑星を選択すると...？</p>
             </div>
           </div>
-          <p class="arrow">&rarr;</p>
+          <p class="arrow">&gt;</p>
           <div class="operation">
             <img src="../images/operation_twe.png" alt="勉強例">
             <div class="text">
-              <p>②勉強！</p>
+              <p>②誰よりも物知りに！</p>
             </div>
           </div>
           <div class="clear"></div>
@@ -65,8 +65,10 @@
         <div class="page2 pagenone">
           <div class="list">
             <ul>
-              <li><img src="../images/user_off.png" alt="ユーザーボタン">：ログイン時間、ログアウトなどが出来る。Aキーでも可能。</li>
-              <li><img src="../images/stop_off.png" alt="ストップボタン">：惑星が動いている状態、止めている状態に切り替え可能。Sキー可能。</li>
+              <li><img src="../images/user_off.png" alt="ユーザーボタン">アカウント管理が出来る。<br>Aキーでも可能。</li>
+              <div class="clear"></div>
+              <li><img src="../images/stop_off.png" alt="ストップボタン">惑星の動きを制御出来る<br>Sキーでも可能。</li>
+              <div class="clear"></div>
             </ul>
           </div>
         </div>
@@ -75,8 +77,10 @@
         <div class="page3 pagenone">
           <div class="list">
             <ul>
-              <li><img src="../images/speech_off.png" alt="音声認識ボタン">：音声入力可能。Dキーでも可能。<br><span id="sampleimg"><img src="../images/speechsample.png" alt="サンプル画像"></span>タブの<span id="sampletext">赤丸</span>が目印。</li>
-              <li><img src="../images/operation_off.png" alt="操作説明ボタン">：操作説明表示。</li>
+              <li><img src="../images/speech_off.png" alt="音声認識ボタン">音声入力によって惑星選択が出来る。<br>Dキーでも可能。</li>
+              <div class="clear"></div>
+              <li><img src="../images/operation_off.png" alt="操作説明ボタン">操作説明表示が出来る。<br>Fキーでも可能。</li>
+              <div class="clear"></div>
             </ul>
           </div>
         </div>
@@ -101,7 +105,7 @@
         <p><?php echo $_SESSION["NAME"]; ?><br><span>さん</span></p>
       </div>
       <div id="logintime">
-        <p>-ログイン日時-<br><span><?php echo $_SESSION["LOGINDATE"]; ?><br><?php echo $_SESSION["LOGINTIME"]?></span></p>
+        <p>-日時と時刻-<br><span id="today"></span><br><span id="time"></span></p>
       </div>
       <div id="logout" class="lognone">
         <form action="./login.php" method="post">
@@ -118,9 +122,19 @@
       <button class="infoBtn speechBtn"><img src="../images/speech_off.png" alt="音声操作"></button>
     </div>
 
+    <!-- マイク -->
+    <div class="masc none"></div>
+    <div class="micWrap micOut">
+      <p>どの<span>惑星</span>を選びます?</p>
+      <div class="micImg"><img src="../images/mic.png" alt="マイク"></div>
+    </div>
+
     <div class="operationBtn"><button class="infoBtn opeBtn"><img src="../images/operation_off.png" alt="操作説明"></button></div>
 
-    <div class="inbg"></div>
+    <div class="inbg inbg1 none"></div>
+    <div class="inbg inbg2 none"></div>
+    <div class="inbg inbg3 none"></div>
+    <div class="inbg inbg4 none"></div>
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/three.min.js"></script>
@@ -129,7 +143,7 @@
     <script>
       let backcnt = <?php echo $backcnt; ?>;
     </script>
-    <script src="../js/all.min.js"></script>
+    <script src="../js/all.js"></script>
   <?php else: ?>
     <script>
       setTimeout(function () {

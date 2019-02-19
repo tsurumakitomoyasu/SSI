@@ -17,7 +17,8 @@ let camera;
 let controls;
 let material;
 let geometry;
-let jupiterMesh;
+let sun = new planet('../images/sun.jpg', 50, 20, 20);
+let sunMesh;
 let renderer;
 let light
 let width = $('#stage').width();
@@ -44,18 +45,16 @@ function init() {
   light = new THREE.AmbientLight(0xFFFFFF, 2.0);
   scene.add(light);
 
-  material = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('../images/jupiter.jpg')
-  });
+  material = sun.Material;
 
-  geometry = new THREE.SphereGeometry(50, 20, 20);
-  jupiterMesh = new THREE.Mesh(geometry, material);
-  scene.add(jupiterMesh);
+  geometry = sun.Geometry;
+  sunMesh = new THREE.Mesh(geometry, material);
+  scene.add(sunMesh);
 
   tick();
 
   function tick() {
-    jupiterMesh.rotation.y += 0.005;
+    sunMesh.rotation.y += 0.005;
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);

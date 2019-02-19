@@ -2,6 +2,22 @@
 @import "./ress.min.css";
 @import "./planet.css";
 
+.text {
+  color: #00afaf;
+}
+
+#info {
+  border: solid .5vw #007b7b;
+}
+
+.pnBtn {
+  background: #007b7b;
+}
+
+.pnBtn:hover {
+  box-shadow: 0 0 2.5vw #007b7b;
+}
+
 #uranusimg1 img {
   margin-left: 1vw;
   width: 24vw;

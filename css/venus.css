@@ -2,6 +2,22 @@
 @import "./ress.min.css";
 @import "./planet.css";
 
+.text {
+  color: #ff0;
+}
+
+#info {
+  border: solid .5vw #bb0;
+}
+
+.pnBtn {
+  background: #bb0;
+}
+
+.pnBtn:hover {
+  box-shadow: 0 0 2.5vw #bb0;
+}
+
 #venusimg1 img {
   margin-right: 1vw;
   width: 24vw;

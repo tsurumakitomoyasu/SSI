@@ -2,6 +2,22 @@
 @import "./ress.min.css";
 @import "./planet.css";
 
+.text {
+  color: #0f2;
+}
+
+#info {
+  border: solid .5vw #0a0;
+}
+
+.pnBtn {
+  background: #0a0;
+}
+
+.pnBtn:hover {
+  box-shadow: 0 0 2.5vw #0a0;
+}
+
 #jupiterimg1 img {
   margin-left: 1vw;
   width: 24vw;

@@ -15,9 +15,14 @@ window.addEventListener('load', init);
 let scene;
 let camera;
 let controls;
-let material;
-let geometry;
-let jupiterMesh;
+let earth = new planet('../images/earth.jpg', 50, 20, 20);
+let clowd = new crowd('../images/crowd.png', 51, 20, 20);
+let materialEarth;
+let materialCrowd;
+let geometryEarth;
+let geometryCrowd;
+let earthMesh;
+let crowdMesh;
 let renderer;
 let light
 let width = $('#stage').width();
@@ -44,18 +49,22 @@ function init() {
   light = new THREE.AmbientLight(0xFFFFFF, 2.0);
   scene.add(light);
 
-  material = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('../images/jupiter.jpg')
-  });
+  materialEarth = earth.Material;
 
-  geometry = new THREE.SphereGeometry(50, 20, 20);
-  jupiterMesh = new THREE.Mesh(geometry, material);
-  scene.add(jupiterMesh);
+  materialCrowd = clowd.Material;
+
+  geometryEarth = earth.Geometry;
+  geometryCrowd = clowd.Geometry;
+  earthMesh = new THREE.Mesh(geometryEarth, materialEarth);
+  crowdMesh = new THREE.Mesh(geometryCrowd, materialCrowd);
+  scene.add(earthMesh);
+  scene.add(crowdMesh);
 
   tick();
 
   function tick() {
-    jupiterMesh.rotation.y += 0.005;
+    earthMesh.rotation.y += 0.005;
+    crowdMesh.rotation.y += 0.003;
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);

@@ -71,6 +71,7 @@
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
+  <script src="../js/planet.js"></script>
   <script src="../js/earth.js"></script>
 </body>
 

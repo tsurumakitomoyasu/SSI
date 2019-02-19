@@ -2,22 +2,27 @@ setTimeout(function () {
   $('.loadingbg1').addClass('loadingani1');
   $('.loadingbg2').addClass('loadingani2');
   $('.loadingbg3').addClass('loadingani3');
-}, 700);
+}, 900);
 setTimeout(function () {
   $('.planetloadWrap').addClass('none');
-}, 1400);
+}, 1600);
 setTimeout(function () {
   $('.loadingbg').addClass('none');
-}, 2200);
+}, 2400);
 
 
 window.addEventListener('load', init);
 let scene;
 let camera;
 let controls;
-let material;
-let geometry;
-let jupiterMesh;
+let uranus = new planet('../images/uranus.jpg', 33, 20, 20);
+let hoop = new ring('../images/uranus-ring.jpg', 45, 10, 2, 1000)
+let materialUranus;
+let materialRing;
+let geometryUranus;
+let geometryRing;
+let uranusMesh;
+let ringMesh;
 let renderer;
 let light
 let width = $('#stage').width();
@@ -44,18 +49,22 @@ function init() {
   light = new THREE.AmbientLight(0xFFFFFF, 2.0);
   scene.add(light);
 
-  material = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('../images/jupiter.jpg')
-  });
+  materialUranus = uranus.Material;
 
-  geometry = new THREE.SphereGeometry(50, 20, 20);
-  jupiterMesh = new THREE.Mesh(geometry, material);
-  scene.add(jupiterMesh);
+  materialRing = hoop.Material;
+
+  geometryUranus = uranus.Geometry;
+  geometryRing = hoop.Geometry;
+  uranusMesh = new THREE.Mesh(geometryUranus, materialUranus);
+  ringMesh = new THREE.Mesh(geometryRing, materialRing);
+  scene.add(uranusMesh);
+  scene.add(ringMesh);
 
   tick();
 
   function tick() {
-    jupiterMesh.rotation.y += 0.005;
+    uranusMesh.rotation.y += 0.005;
+    ringMesh.rotation.x = 1.5;
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);

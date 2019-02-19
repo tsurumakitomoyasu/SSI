@@ -8,6 +8,10 @@ body {
   overflow: hidden;
 }
 
+.none {
+  display: none;
+}
+
 body {
   background: #000;
   letter-spacing: .2em;
@@ -285,24 +289,43 @@ button {
 .inbg {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 0;
+  width: 25vw;
   height: 100%;
   z-index: 100;
   background: #000;
+  opacity: 0;
 }
 
-.inbgani {
-  animation: inbg 500ms cubic-bezier(0.85, 0.01, 0.17, 1) 0s forwards;
+.inbgani1 {
+  right: 0;
+}
+
+.inbgani2 {
+  right: 25vw;
+}
+
+.inbgani3 {
+  right: 50vw;
+}
+
+.inbgani4 {
+  right: 75vw;
+}
+
+.inbgani1,
+.inbgani2,
+.inbgani3,
+.inbgani4 {
+  animation: inbg 0.05s linear 0s 3 alternate forwards;
 }
 
 @keyframes inbg {
   from {
-    width: 0;
+    opacity: 0;
   }
 
   to {
-    width: 100%;
+    opacity: 1;
   }
 }
 
@@ -373,7 +396,7 @@ button {
 .operationposi {
   position: relative;
   z-index: 30;
-  margin-top: 3vw;
+  margin-top: 6vh;
 }
 
 .page1 {
@@ -410,9 +433,10 @@ button {
 }
 
 .arrow {
-  margin-top: 9vh;
+  margin: 7vh 1vw 0;
   font-size: 12vw;
   color: #0ff;
+  font-weight: 900;
 }
 
 .btn {
@@ -444,35 +468,28 @@ button {
 }
 
 .list img {
+  margin-right: 2vw;
   padding: .3vw;
-  width: 9%;
+  width: 12%;
+  float: left;
   border: solid .1vw #0ff;
 }
 
+.clear {
+  clear: both;
+}
+
 .list ul {
-  margin-top: 17vh;
+  margin-top: 15vh;
   list-style-type: none;
 }
 
 .list li {
-  margin: 2vw 0;
+  margin: 5vw 0;
   padding: 1vh;
   color: #fff;
   font-size: 2vw;
   letter-spacing: .2em;
-}
-
-#sampleimg img {
-  margin-top: 2vh;
-  margin-right: 1vh;
-  padding: 0;
-  width: 24vw;
-  border: none;
-  border-radius: 2vw;
-}
-
-#sampletext {
-  color: #f00;
 }
 
 #opeBack {
@@ -491,4 +508,74 @@ button {
   top: 27%;
   right: 2%;
   z-index: 20;
+}
+
+.micWrap {
+  position: absolute;
+  z-index: 26;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  background: #fff;
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 2vw;
+  opacity: .7;
+}
+
+.micWrap p {
+  margin-top: 2vh;
+  text-align: center;
+  font-size: 2vw;
+}
+
+.micWrap p span {
+  font-weight: bold;
+}
+
+.micImg {
+  margin: 1vh auto 0;
+  width: 6%;
+  height: auto;
+}
+
+.micImg img {
+  width: 100%;
+}
+
+.micIn {
+  animation: micIn 300ms ease-in 0s forwards;
+}
+
+@keyframes micIn {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 20%;
+  }
+}
+
+.micOut {
+  animation: micOut 400ms ease-in 0s forwards;
+}
+
+@keyframes micOut {
+  from {
+    height: 20%;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+.masc {
+  position: absolute;
+  top: 0;
+  z-index: 25;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  opacity: .5;
 }

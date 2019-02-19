@@ -28,7 +28,6 @@ body {
   z-index: 20;
   background: #fff;
   opacity: .8;
-  border: solid .5vw #0ff;
   border-radius: 10%;
 }
 
@@ -42,7 +41,8 @@ h1 {
 }
 
 .main p {
-  font-size: 1.3vw;
+  margin-left: 1em;
+  font-size: 120%;
   letter-spacing: .1em;
   line-height: 1.5em;
 }
@@ -84,19 +84,38 @@ h1 {
 
 .pnBtn {
   position: absolute;
-  bottom: 0;
+  bottom: 2vh;
+  border-radius: 100%;
+  width: 3.5vw;
+  height: 3.5vw;
+  transform-origin: center center;
+  transition: all 350ms cubic-bezier(.27, .79, .47, .94) 0s;
+}
+
+.pnBtn:hover {
+  transform: scale(1.2);
 }
 
 .pnBtn img {
-  width: 4vw;
+  width: 2vw;
 }
 
 .prev {
   left: 10vw;
 }
 
+.prev img {
+  margin-top: .7vh;
+  margin-right: .6vh;
+}
+
 .next {
   right: 10vw;
+}
+
+.next img {
+  margin-top: .7vh;
+  margin-left: .6vh;
 }
 
 .infotext2 {
@@ -126,7 +145,6 @@ h1 {
 
 .text {
   position: relative;
-  color: #0ff;
   font-size: 15vw;
   font-weight: bold;
   opacity: 0;

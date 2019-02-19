@@ -6,6 +6,10 @@ setTimeout(function () {
 setTimeout(function () {
   $('.planetloadWrap').addClass('none');
 }, 1600);
+setTimeout(function () {
+  $('.loadingbg').addClass('none');
+}, 2400);
+
 
 window.addEventListener('load', init);
 let scene;

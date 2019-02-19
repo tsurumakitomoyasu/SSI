@@ -2,6 +2,22 @@
 @import "./ress.min.css";
 @import "./planet.css";
 
+.text {
+  color: #00f;
+}
+
+#info {
+  border: solid .5vw #00d;
+}
+
+.pnBtn {
+  background: #05d;
+}
+
+.pnBtn:hover {
+  box-shadow: 0 0 2.5vw #05d;
+}
+
 #earthimg1 img {
   margin-left: 1vw;
   width: 24vw;

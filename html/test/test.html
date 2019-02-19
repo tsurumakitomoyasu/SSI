@@ -1,236 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="../css/operation.css">
   <style>
-    .btn {
-      color: #fff;
-      font-size: 20vw;
-      position: absolute;
-      z-index: 30;
-      bottom: 25vh;
-      outline: none;
+    p {
+      width: 50px;
+      transform-origin: center center;
+      transform: rotate(10deg);
     }
 
-    .prev {
-      left: 8vw;
+    .test1 {
+      animation: test .5s steps(2, end) 0s infinite;
     }
 
-    .next {
-      right: 8vw;
-    }
-
-    .btnnone,
-    .pagenone {
-      display: none;
-    }
-
-    .list {
-      margin: 0 auto;
-      width: 50%;
-    }
-
-    .list img {
-      padding: .3vw;
-      width: 9%;
-      border: solid .1vw #0ff;
-    }
-
-    .list ul {
-      margin-top: 21vh;
-      list-style-type: none;
-    }
-
-    .list li {
-      margin: 2.5vw 0;
-      color: #fff;
-      font-size: 2vw;
-      letter-spacing: .2em;
-    }
-
-    #sample img {
-      margin-bottom: 1vh;
-      padding: 0;
-      width: 24vw;
-      border: none;
-      border-radius: 2vw;
-    }
-
-    #sample p {
-      color: #fff;
-      font-size: 2vw;
-    }
-
-    #sample span {
-      color: #f00;
-    }
-
-    .page4 {
-      margin: 0 auto;
-      margin-top: 17.3vw;
-      width: 20vw;
-    }
-
-    .page4 a {
-      padding: .5vw;
-      display: block;
-      text-align: center;
-      border-radius: 1.5vw;
-      color: #000;
-      font-weight: bold;
-      background: #0ff;
-      font-size: 3vw;
-      text-decoration: none;
-    }
-
-    @keyframes move-twink-back {
+    @keyframes test {
       from {
-        background-position: 0 0;
+        transform: rotate(10deg);
       }
 
       to {
-        background-position: -10000px 5000px;
+        transform: rotate(-30deg);
       }
-    }
-
-    @keyframes move-clouds-back {
-      from {
-        background-position: 0 0;
-      }
-
-      to {
-        background-position: 10000px 0;
-      }
-    }
-
-    .stars,
-    .twinkling,
-    .clouds {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .stars {
-      background: #000 url(../images/stars.png) repeat top center;
-      z-index: 0;
-    }
-
-    .twinkling {
-      background: transparent url(../images/twinkling.png) repeat top center;
-      z-index: 1;
-      animation: move-twink-back 200s linear infinite;
-    }
-
-    .clouds {
-      background: transparent url(../images/clouds.png) repeat top center;
-      z-index: 3;
-      animation: move-clouds-back 200s linear infinite;
-    }
-
-    header,
-    #main {
-      position: relative;
-      z-index: 30;
     }
   </style>
 </head>
-
 <body>
-  <div class="stars"></div>
-  <div class="twinkling"></div>
-  <div class="clouds"></div>
-  <header>
-    <h1>操作説明</h1>
-  </header>
-  <main id="main">
-    <!-- 1ページ -->
-    <div class="page1">
-      <div class="operation">
-        <img src="../images/operation_one.png" alt="クリック画像">
-        <div class="text">
-          <p>①知りたい惑星をクリック</p>
-        </div>
-      </div>
-      <p class="arrow">&rarr;</p>
-      <div class="operation">
-        <img src="../images/operation_twe.png" alt="勉強例">
-        <div class="text">
-          <p>②勉強！</p>
-        </div>
-      </div>
-      <div class="clear"></div>
-    </div>
-
-    <!-- 2ページ目 -->
-    <div class="page2 pagenone">
-      <div class="list">
-        <ul>
-          <li><img src="../images/user_off.png" alt="ユーザーボタン">：ログイン時間、ログアウトなどが出来る。Aキーでも可能。</li>
-          <li><img src="../images/stop_off.png" alt="ストップボタン">：惑星が動いている状態、止めている状態に切り替え可能。Sキー可能。</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 3ページ目 -->
-    <div class="page3 pagenone">
-      <div class="list">
-        <ul>
-          <li><img src="../images/speech_off.png" alt="音声認識ボタン">：音声入力可能。Dキーでも可能。</li>
-        </ul>
-        <div id="sample">
-          <p><img src="../images/speechsample.png" alt="サンプル画像"><br>タブの<span>赤丸</span>が音声入力中の目印</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4ページ目 -->
-    <div class="page4 pagenone">
-      <a href="./ssi.php">スタート</a>
-    </div>
-  </main>
-
-  <!-- prev -->
-  <button class="btn prev btnnone">&lsaquo;</button>
-  <!-- next -->
-  <button class="btn next">&rsaquo;</button>
-  <script src="../js/jquery-3.3.1.min.js"></script>
-  <script>
-    //web Speech API
-    let recognition = new webkitSpeechRecognition();
-    recognition.lang = "ja-JP";
-
-    recognition.addEventListener('result', function (e) {
-      let speechtext = e.results[0][0].transcript;
-      switch (speechtext) {
-        case '太陽':
-          alert(e.results[0][0].transcript);
-          break;
-        default:
-          alert(e.results[0][0].transcript);
-          break;
-      }
-    });
-
-    window.addEventListener('keydown', Keydown);
-
-    function Keydown(event) {
-      let keyCode = event.keyCode;
-
-      if (keyCode == 68) {
-        recognition.start();
-      }
-
-    }
-  </script>
+  <p class="test1">テスト</p>
+  <p class="test2">テスト</p>
+  <p class="test3">テスト</p>
+  <p class="test4">テスト</p>
 </body>
-
 </html>

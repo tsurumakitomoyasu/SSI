@@ -1,3 +1,23 @@
+// 関数生成
+$.fn.addClass_org = $.fn.addClass;
+$.fn.addClass = function () {
+  this.trigger('AddedClass', arguments);
+  return $.fn.addClass_org.apply(this, arguments);
+};
+$.fn.addedClass = function (className, callback) {
+  let _that = this,
+    _callback = callback || function () {};
+
+  this.on('AddedClass', function () {
+    let _arguments = arguments;
+    setTimeout(function () {
+      if (_arguments[1] === className && _that.hasClass(className)) {
+        _callback();
+      }
+    }, 0);
+  });
+}
+
 // ローディング
 setTimeout(function () {
   let countElm = $('.count'),
@@ -18,6 +38,13 @@ setTimeout(function () {
           clearInterval(countTimer);
           $('.loading').addClass('loadingOut');
           $('.loadingimg').addClass('loadingOut');
+
+          // 初回以降
+          if (backcnt > 0) {
+            $('#stage').addClass('plamouse');
+            $('.operationWrap').removeClass('operationin');
+            $('.operationWrap').addClass('operationout');
+          }
         }
       }, countSpeed);
     }
@@ -29,13 +56,6 @@ setTimeout(function () {
 setTimeout(function () {
   $('#stage').addClass('moveani');
 }, 1500);
-
-// 初回以降
-if (backcnt > 0) {
-  $('#stage').addClass('plamouse');
-  $('.operationWrap').removeClass('operationin');
-  $('.operationWrap').addClass('operationout');
-}
 
 $(function () {
   //画像変更処理
@@ -49,12 +69,14 @@ $(function () {
 
   //ユーザー
   $('.userBtn').click(function () {
-    if ($('.userinfo').hasClass('userOut')) {
-      $('.userinfo').removeClass('userOut');
-      $('#logout').removeClass('lognone');
-      $('.userinfo').addClass('userIn');
-      $('#logout').addClass('logblock');
-      $('#stage').addClass('useropen');
+    if (!$('#stage').hasClass('speechopen')) {
+      if ($('.userinfo').hasClass('userOut')) {
+        $('.userinfo').removeClass('userOut');
+        $('#logout').removeClass('lognone');
+        $('.userinfo').addClass('userIn');
+        $('#logout').addClass('logblock');
+        $('#stage').addClass('useropen');
+      }
     }
   });
 
@@ -80,14 +102,26 @@ $(function () {
 
   // API
   $('.speechBtn').click(function () {
-    if ($(this).hasClass('speechout')) {
-      recognition.stop();
-      $(this).removeClass('speechout');
-    } else {
+    if (!$('.speechBtn').hasClass('speechout')) {
       recognition.start();
-      $(this).addClass('speechout');
+      $('#stage').addClass('speechopen');
+      $('.speechBtn').addClass('speechout');
+      $('.micWrap').addClass('micIn');
+      $('.micWrap').removeClass('micOut');
+      $('.masc').removeClass('none');
     }
   });
+  $('.masc').click(function () {
+    if (!$('.masc').hasClass('none')) {
+      recognition.stop();
+      $('.speechBtn').removeClass('speechout');
+      $('#stage').removeClass('speechopen');
+      $('.micWrap').removeClass('micIn');
+      $('.micWrap').addClass('micOut');
+      $('.masc').addClass('none');
+      clearTimeout(speechtime);
+    }
+  })
 
   // ストップ処理
   $('.stopBtn').click(function () {
@@ -113,18 +147,20 @@ $(function () {
 
   // 説明処理
   $('.opeBtn').click(function () {
-    if ($('#stage').hasClass('plamouse')) {
-      $('#stage').removeClass('plamouse');
-      $('.operationWrap').removeClass('operationout');
-      $('#logout').removeClass('logblock');
-      $('.userinfo').removeClass('userIn');
-      $('.operationWrap').addClass('operationin');
-      $('.userinfo').addClass('userOut');
-      $('#logout').addClass('lognone');
-    } else if (!$('.move').hasClass('plamouse')) {
-      $('.operationWrap').removeClass('operationin');
-      $('.operationWrap').addClass('operationout');
-      $('#stage').addClass('plamouse');
+    if (!$('#stage').hasClass('speechopen')) {
+      if ($('#stage').hasClass('plamouse')) {
+        $('#stage').removeClass('plamouse');
+        $('.operationWrap').removeClass('operationout');
+        $('.userinfo').removeClass('userIn');
+        $('#logout').removeClass('logblock');
+        $('.userinfo').addClass('userOut');
+        $('.operationWrap').addClass('operationin');
+        $('#logout').addClass('lognone');
+      } else if (!$('#stage').hasClass('plamouse')) {
+        $('.operationWrap').removeClass('operationin');
+        $('.operationWrap').addClass('operationout');
+        $('#stage').addClass('plamouse');
+      }
     }
   });
 
@@ -305,6 +341,9 @@ let targetTextSaturn = [];
 let targetTextUranus = [];
 let targetTextNeptune = [];
 
+// 保存
+let speechtime;
+
 // テクスチャーリスト
 let manifest = [{
     id: 'sun',
@@ -417,7 +456,7 @@ loadQueue.on('complete', function () {
   textureUniverse.needsUpdate = true;
   textureMoon.needsUpdate = true;
 
-  sun = planetFactory(textureSun, 50, 20, 20, sunX, sunZ, 'isSun');
+  sun = planetFactory(textureSun, 50, 40, 40, sunX, sunZ, 'isSun');
   mercury = planetFactory(textureMercury, 5, 20, 20, mercuryX, mercuryZ, 'isMercury');
   venus = planetFactory(textureVenus, 10, 20, 20, venusX, venusZ, 'isVenus');
   earth = planetFactory(textureEarth, 13, 20, 20, earthX, earthZ, 'isEarth');
@@ -451,7 +490,7 @@ controls.minDistance = 350; //カメラ最小値
 controls.maxDistance = 700; //カメラ最大値
 controls.enableDamping = true; //滑らか
 controls.enableKeys = false; //矢印
-controls.enablePan = false;
+controls.enablePan = false; //水平方向
 controls.dampingFactor = .1;
 
 // レンダラー
@@ -549,11 +588,6 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     sphere.add(crowd);
     targetEarth.push(sphereEarth);
 
-    /*sphere.position.set(
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250
-    );*/
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isMoon') {
     //グループ化
@@ -569,11 +603,6 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     sphere.add(moonText);
     targetMoon.push(sphere);
 
-    /*sphere.position.set(
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250
-    );*/
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isMars') {
     //グループ化
@@ -638,11 +667,6 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     targetSaturn.push(sphereSaturn);
 
-    /*sphere.position.set(
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250
-    );*/
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isUranus') {
     //グループ化
@@ -673,11 +697,6 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
 
     targetUranus.push(sphereUranus);
 
-    /*sphere.position.set(
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250,
-      Math.random() * 500 - 250
-    );*/
     sphere.position.set(x, 0, z);
   } else if (planetName === 'isNeptune') {
     //グループ化
@@ -912,7 +931,7 @@ neptuneimageText = new THREE.SpriteMaterial({
   map: new THREE.TextureLoader().load('../images/neptunetext.png')
 });
 neptuneText = new THREE.Sprite(neptuneimageText);
-neptuneText.position.y = 25;
+neptuneText.position.y = 27;
 neptuneText.scale.set(50, 20, 40);
 targetTextNeptune.push(neptuneText);
 //ピッキング処理
@@ -928,7 +947,9 @@ function clickPosition(event) {
   let raycaster = new THREE.Raycaster();
   if ($('#stage').hasClass('plamouse')) {
     if (!$('#stage').hasClass('useropen')) {
-      raycaster.setFromCamera(mouse, camera);
+      if (!$('#stage').hasClass('speechopen')) {
+        raycaster.setFromCamera(mouse, camera);
+      }
     }
   }
 
@@ -960,55 +981,155 @@ function clickPosition(event) {
   //マウス操作
   if (interSu.length > 0 || interTSU.length > 0) {
     //alert('太陽');
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/sun.html';
-    }, 600);
+    }, 410);
   } else if (interMe.length > 0 || interTME.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/mercury.html';
-    }, 600);
+    }, 410);
   } else if (interVe.length > 0 || interTV.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/venus.html';
-    }, 600);
+    }, 410);
   } else if (interEa.length > 0 || interTE.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../php/earth.php';
-    }, 600);
+    }, 410);
   } else if (interMa.length > 0 || interTMA.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/mars.html';
-    }, 600);
+    }, 410);
   } else if (interJu.length > 0 || interTJ.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/jupiter.html';
-    }, 600);
+    }, 410);
   } else if (interSa.length > 0 || interTSA.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/saturn.html';
-    }, 600);
+    }, 410);
   } else if (interUr.length > 0 || interTU.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/uranus.html';
-    }, 600);
+    }, 410);
   } else if (interNe.length > 0 || interTN.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/neptune.html';
-    }, 600);
+    }, 410);
   } else if (interMo.length > 0 || interTMO.length > 0) {
-    $('.inbg').addClass('inbgani');
+    $('.inbg').removeClass('none');
+    $('.inbg1').addClass('inbgani1');
+    setTimeout(function () {
+      $('.inbg2').addClass('inbgani2');
+      setTimeout(function () {
+        $('.inbg3').addClass('inbgani3');
+        setTimeout(function () {
+          $('.inbg4').addClass('inbgani4');
+        }, 100);
+      }, 100);
+    }, 100);
     setTimeout(function () {
       location.href = '../html/moon.html';
-    }, 600);
+    }, 410);
   }
 };
 
@@ -1020,79 +1141,183 @@ recognition.addEventListener('result', function (e) {
   let speechtext = e.results[0][0].transcript;
   switch (speechtext) {
     case '太陽':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/sun.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '彗星':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/mercury.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case 'きんせい':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/venus.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '地球':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../php/earth.php';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '月':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/moon.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '火星':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/mars.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '木星':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/jupiter.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '土星':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/saturn.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '天王星':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/uranus.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     case '海王星':
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/neptune.html';
-      }, 600);
+      }, 410);
       //alert(e.results[0][0].transcript);
       break;
     default:
       //alert(e.results[0][0].transcript);
-      $(".speechBtn").removeClass("speechout");
-      recognition.stop();
+      $('.speechBtn').removeClass('speechout');
+      $('#stage').removeClass('speechopen');
+      $('.micWrap').removeClass('micIn');
+      $('.micWrap').addClass('micOut');
+      $('.masc').addClass('none');
+      clearTimeout(speechtime);
       break;
   }
 });
@@ -1104,18 +1329,20 @@ function Keydown(event) {
 
   // 説明分岐
   if (keyCode == 70) {
-    if ($('#stage').hasClass('plamouse')) {
-      $('#stage').removeClass('plamouse');
-      $('.operationWrap').removeClass('operationout');
-      $('.userinfo').removeClass('userIn');
-      $('#logout').removeClass('logblock');
-      $('.userinfo').addClass('userOut');
-      $('.operationWrap').addClass('operationin');
-      $('#logout').addClass('lognone');
-    } else if (!$('.move').hasClass('plamouse')) {
-      $('.operationWrap').removeClass('operationin');
-      $('.operationWrap').addClass('operationout');
-      $('#stage').addClass('plamouse');
+    if (!$('#stage').hasClass('speechopen')) {
+      if ($('#stage').hasClass('plamouse')) {
+        $('#stage').removeClass('plamouse');
+        $('.operationWrap').removeClass('operationout');
+        $('.userinfo').removeClass('userIn');
+        $('#logout').removeClass('logblock');
+        $('.userinfo').addClass('userOut');
+        $('.operationWrap').addClass('operationin');
+        $('#logout').addClass('lognone');
+      } else if (!$('#stage').hasClass('plamouse')) {
+        $('.operationWrap').removeClass('operationin');
+        $('.operationWrap').addClass('operationout');
+        $('#stage').addClass('plamouse');
+      }
     }
   }
 
@@ -1169,55 +1396,155 @@ function Keydown(event) {
     // 惑星分岐
     if (keyCode == 49 || keyCode == 97) {
       //alert('太陽');
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/sun.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 50 || keyCode == 98) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/mercury.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 51 || keyCode == 99) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/venus.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 52 || keyCode == 100) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../php/earth.php';
-      }, 600);
+      }, 410);
     } else if (keyCode == 53 || keyCode == 101) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/moon.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 54 || keyCode == 102) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/mars.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 55 || keyCode == 103) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/jupiter.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 56 || keyCode == 104) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/saturn.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 57 || keyCode == 105) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/uranus.html';
-      }, 600);
+      }, 410);
     } else if (keyCode == 48 || keyCode == 96) {
-      $('.inbg').addClass('inbgani');
+      $('.inbg').removeClass('none');
+      $('.inbg1').addClass('inbgani1');
+      setTimeout(function () {
+        $('.inbg2').addClass('inbgani2');
+        setTimeout(function () {
+          $('.inbg3').addClass('inbgani3');
+          setTimeout(function () {
+            $('.inbg4').addClass('inbgani4');
+          }, 100);
+        }, 100);
+      }, 100);
       setTimeout(function () {
         location.href = '../html/neptune.html';
-      }, 600);
+      }, 410);
     }
 
     // Web Speech API分岐
@@ -1226,27 +1553,38 @@ function Keydown(event) {
         if ($('.speechBtn').hasClass('speechout')) {
           recognition.stop();
           $('.speechBtn').removeClass('speechout');
+          $('#stage').removeClass('speechopen');
+          $('.micWrap').removeClass('micIn');
+          $('.micWrap').addClass('micOut');
+          $('.masc').addClass('none');
+          clearTimeout(speechtime);
         } else {
           recognition.start();
+          $('#stage').addClass('speechopen');
           $('.speechBtn').addClass('speechout');
+          $('.micWrap').addClass('micIn');
+          $('.micWrap').removeClass('micOut');
+          $('.masc').removeClass('none');
         }
       }
     }
 
     // ユーザー分岐
     if (keyCode == 65) {
-      if ($('.userinfo').hasClass('userOut')) {
-        $('.userinfo').removeClass('userOut');
-        $('#logout').removeClass('lognone');
-        $('.userinfo').addClass('userIn');
-        $('#logout').addClass('logblock');
-        $('#stage').addClass('useropen');
-      } else {
-        $('#logout').removeClass('logblock');
-        $('.userinfo').removeClass('userIn');
-        $('#stage').removeClass('useropen');
-        $('.userinfo').addClass('userOut');
-        $('#logout').addClass('lognone');
+      if (!$('#stage').hasClass('speechopen')) {
+        if ($('.userinfo').hasClass('userOut')) {
+          $('.userinfo').removeClass('userOut');
+          $('#logout').removeClass('lognone');
+          $('.userinfo').addClass('userIn');
+          $('#logout').addClass('logblock');
+          $('#stage').addClass('useropen');
+        } else {
+          $('#logout').removeClass('logblock');
+          $('.userinfo').removeClass('userIn');
+          $('#stage').removeClass('useropen');
+          $('.userinfo').addClass('userOut');
+          $('#logout').addClass('lognone');
+        }
       }
     }
 
@@ -1273,3 +1611,57 @@ function Keydown(event) {
     }
   }
 };
+
+$('.micWrap').addedClass('micIn', function () {
+  if ($('.micWrap').hasClass('micIn')) {
+    speechtime = setTimeout(function () {
+      $('.speechBtn').removeClass('speechout');
+      $('#stage').removeClass('speechopen');
+      $('.micWrap').removeClass('micIn');
+      $('.micWrap').addClass('micOut');
+      $('.masc').addClass('none');
+    }, 9250);
+  }
+});
+
+// 現在の時間
+let timerID = setInterval('clock()', 500);
+
+function clock() {
+  document.getElementById("time").innerHTML = getNow();
+  document.getElementById("today").innerHTML = getToday();
+}
+
+function getNow() {
+  let now = new Date();
+  let hour = now.getHours();
+  let min = now.getMinutes();
+
+  if (hour < 10) {
+    hour = "0" + hour;
+  }
+  if (min < 10) {
+    min = "0" + min;
+  }
+
+  let totime = hour + "：" + min;
+  return totime;
+}
+
+function getToday() {
+  let now = new Date();
+  let mon = now.getMonth() + 1;
+  let day = now.getDate();
+
+  if (mon < 10) {
+    mon = "0" + mon;
+  }
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+
+  //出力用
+  let today = mon + "/" + day;
+  return today;
+}

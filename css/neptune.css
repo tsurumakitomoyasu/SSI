@@ -2,6 +2,22 @@
 @import "./ress.min.css";
 @import "./planet.css";
 
+.text {
+  color: #0af;
+}
+
+#info {
+  border: solid .5vw #07b;
+}
+
+.pnBtn {
+  background: #07b;
+}
+
+.pnBtn:hover {
+  box-shadow: 0 0 2.5vw #07b;
+}
+
 #neptuneimg1 img {
   margin-left: 1vw;
   width: 24vw;

@@ -2,6 +2,22 @@
 @import "./ress.min.css";
 @import "./planet.css";
 
+.text {
+  color: #a52a2a;
+}
+
+#info {
+  border: solid .5vw #830808;
+}
+
+.pnBtn {
+  background: #830808;
+}
+
+.pnBtn:hover {
+  box-shadow: 0 0 2.5vw #830808;
+}
+
 #saturnimg1 img {
   margin-left: 1vw;
   width: 24vw;
