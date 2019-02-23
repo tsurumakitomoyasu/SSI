@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <!-- ページ遷移 -->
   <div class="planetloadWrap">
     <div class="loadingWrap">
       <div class="loadingtext">
@@ -30,13 +31,15 @@
     <input type="submit" value="BACK" id="back" name="backcnt">
   </form>
 
+  <!-- 描画 -->
   <canvas id="stage"></canvas>
-
+  <!-- 説明 -->
   <div id="info">
     <header>
       <h1>月/MOON</h1>
     </header>
     <main class="main">
+      <!-- 1ページ目 -->
       <div class="infotext1">
         <div class="title">
           <h2>月の特徴</h2>
@@ -48,6 +51,7 @@
           <p>月の誕生には様々な説がある。原子惑星系円盤中の塵が集まりかたまって地球とともにできた「兄弟説」、地球の自転が現在よりも速かったころ、赤道部分がちぎれて飛び出した「親子説」、地球の近くにきた天体が、地球の引力につかまり月となった「他人説」、地球ができたころに、他の惑星が衝突し、惑星と地球の破片から月が生まれた「ジャイアントインパクト説（巨大衝突説）」など様々な仮説がある。現在はジャイアントインパクト説が有力である。</p>
         </div>
       </div>
+      <!-- 2ページ目 -->
       <div class="infotext2 none">
         <div class="title">
           <h2>月探査計画「かぐや」</h2>
@@ -70,6 +74,7 @@
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
+  <script src="../js/planet.js"></script>
   <script src="../js/moon.js"></script>
 </body>
 

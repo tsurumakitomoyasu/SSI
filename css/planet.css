@@ -21,9 +21,9 @@ body {
 #info {
   padding: 1.5vw;
   width: 48vw;
-  height: 96vh;
+  height: 92vh;
   position: absolute;
-  top: 2%;
+  top: 4%;
   right: 1%;
   z-index: 20;
   background: #fff;
@@ -48,7 +48,7 @@ h1 {
 }
 
 #back {
-  padding: .8vw .3vw;
+  padding: .8vh .3vw;
   margin-bottom: 4vh;
   position: absolute;
   top: 4%;
@@ -135,7 +135,7 @@ h1 {
   margin: auto;
   position: absolute;
   z-index: 61;
-  top: 0;
+  top: 8vh;
   bottom: 0;
   left: 0;
   right: 0;

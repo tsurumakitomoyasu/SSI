@@ -14,6 +14,7 @@ window.addEventListener('load', init);
 let scene;
 let camera;
 let controls;
+let mercury = new planet('../images/mercury.jpg', 50, 20, 20);
 let material;
 let geometry;
 let mercuryMesh;
@@ -43,11 +44,9 @@ function init() {
   light = new THREE.AmbientLight(0xFFFFFF, 2.0);
   scene.add(light);
 
-  material = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('../images/mercury.jpg')
-  });
+  material = mercury.Material;
 
-  geometry = new THREE.SphereGeometry(50, 20, 20);
+  geometry = mercury.Geometry;
   mercuryMesh = new THREE.Mesh(geometry, material);
   scene.add(mercuryMesh);
 
@@ -60,49 +59,3 @@ function init() {
     requestAnimationFrame(tick);
   }
 };
-
-window.addEventListener('keydown', Keydown);
-
-function Keydown(event) {
-  let keycode = event.keyCode;
-
-  //ページ以降
-  if (keycode == 39) {
-    if (!$('.infotext1').hasClass('none')) {
-      $('.infotext2').removeClass('none');
-      $('.infotext1').addClass('none');
-      $('.next').addClass('none');
-      $('.prev').removeClass('none');
-    }
-  } else if (keycode == 37) {
-    if ($('.infotext1').hasClass('none')) {
-      $('.infotext1').removeClass('none');
-      $('.infotext2').addClass('none');
-      $('.prev').addClass('none');
-      $('.next').removeClass('none');
-    }
-  }
-};
-
-$(function () {
-  $('.prev').click(function () {
-    $('.infotext1').removeClass('none');
-    $('.infotext2').addClass('none');
-    $('.prev').addClass('none');
-    $('.next').removeClass('none');
-  });
-  $('.next').click(function () {
-    $('.infotext2').removeClass('none');
-    $('.infotext1').addClass('none');
-    $('.next').addClass('none');
-    $('.prev').removeClass('none');
-  });
-});
-
-history.pushState(null, null, null);
-$(window).on('popstate', function (event) {
-  if (!event.originalEvent.state) {
-    history.pushState(null, null, null);
-    return;
-  }
-});

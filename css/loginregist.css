@@ -75,7 +75,7 @@ input {
 
 #login,
 #regist,
-#singup {
+#signup {
   padding: .5vw;
   width: 100%;
   border: solid .1vw #fff;
@@ -85,7 +85,7 @@ input {
   transition: all 700ms;
 }
 
-#singup {
+#signup {
   margin: 0 auto;
   display: block;
   width: 20vw;
@@ -106,7 +106,7 @@ input {
   text-align: center;
 }
 
-#singup:hover {
+#signup:hover {
   background: #0ff;
   color: #000;
 }

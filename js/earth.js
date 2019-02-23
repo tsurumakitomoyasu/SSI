@@ -15,6 +15,8 @@ window.addEventListener('load', init);
 let scene;
 let camera;
 let controls;
+let earth = new planet('../images/earth.jpg', 50, 20, 20);
+let clowd = new crowd('../images/crowd.png', 51, 20, 20);
 let materialEarth;
 let materialCrowd;
 let geometryEarth;
@@ -47,18 +49,12 @@ function init() {
   light = new THREE.AmbientLight(0xFFFFFF, 2.0);
   scene.add(light);
 
-  materialEarth = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('../images/earth.jpg')
-  });
+  materialEarth = earth.Material;
 
-  materialCrowd = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('../images/crowd.png'),
-    transparent: true,
-    side: THREE.DoubleSide
-  });
+  materialCrowd = clowd.Material;
 
-  geometryEarth = new THREE.SphereGeometry(50, 20, 20);
-  geometryCrowd = new THREE.SphereGeometry(51, 20, 20);
+  geometryEarth = earth.Geometry;
+  geometryCrowd = clowd.Geometry;
   earthMesh = new THREE.Mesh(geometryEarth, materialEarth);
   crowdMesh = new THREE.Mesh(geometryCrowd, materialCrowd);
   scene.add(earthMesh);
@@ -74,49 +70,3 @@ function init() {
     requestAnimationFrame(tick);
   }
 };
-
-window.addEventListener('keydown', Keydown);
-
-function Keydown(event) {
-  let keycode = event.keyCode;
-
-  //ページ以降
-  if (keycode == 39) {
-    if (!$('.infotext1').hasClass('none')) {
-      $('.infotext2').removeClass('none');
-      $('.infotext1').addClass('none');
-      $('.next').addClass('none');
-      $('.prev').removeClass('none');
-    }
-  } else if (keycode == 37) {
-    if ($('.infotext1').hasClass('none')) {
-      $('.infotext1').removeClass('none');
-      $('.infotext2').addClass('none');
-      $('.prev').addClass('none');
-      $('.next').removeClass('none');
-    }
-  }
-};
-
-$(function () {
-  $('.prev').click(function () {
-    $('.infotext1').removeClass('none');
-    $('.infotext2').addClass('none');
-    $('.prev').addClass('none');
-    $('.next').removeClass('none');
-  });
-  $('.next').click(function () {
-    $('.infotext2').removeClass('none');
-    $('.infotext1').addClass('none');
-    $('.next').addClass('none');
-    $('.prev').removeClass('none');
-  });
-});
-
-history.pushState(null, null, null);
-$(window).on('popstate', function (event) {
-  if (!event.originalEvent.state) {
-    history.pushState(null, null, null);
-    return;
-  }
-});

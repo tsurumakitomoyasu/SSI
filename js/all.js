@@ -1,4 +1,4 @@
-// 関数生成
+// 生成
 $.fn.addClass_org = $.fn.addClass;
 $.fn.addClass = function () {
   this.trigger('AddedClass', arguments);
@@ -308,6 +308,7 @@ let uranusTheta;
 let neptuneTheta;
 let moonTheta;
 
+// テキストイメージ
 let sunimageText;
 let mercuryimageText;
 let venusimageText;
@@ -319,6 +320,7 @@ let saturnimageText;
 let uranusimageText;
 let neptuneimageText;
 
+// テキスト
 let sunText;
 let mercuryText;
 let venusText;
@@ -348,7 +350,7 @@ let speechtime;
 let manifest = [{
     id: 'sun',
     src: '../images/sun.jpg'
-  }, // 水星
+  }, // 太陽
   {
     id: 'mercury',
     src: '../images/mercury.jpg'
@@ -500,7 +502,7 @@ renderer = new THREE.WebGLRenderer({
 renderer.setSize(width, height);
 
 function planetFactory(texture, radius, widthSegments, heightSegments, x, z, planetName) {
-  var sphere,
+  let sphere,
     sphereMercury,
     sphereVenus,
     sphereEarth,
@@ -511,16 +513,15 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     sphereNeptune,
     ring;
 
-  //太陽
-  if (planetName === 'isSun') {
-    //グループ化
+
+  if (planetName === 'isSun') { //太陽
     sphere = new THREE.Group();
 
     sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshBasicMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshBasicMaterial({
         map: texture,
-        side: THREE.DoubleSide // 裏からも
+        side: THREE.DoubleSide // 裏
       })
     );
 
@@ -528,14 +529,13 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetSun.push(sphere);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isMercury') {
-    //グループ化
+  } else if (planetName === 'isMercury') { // 水星
     sphere = new THREE.Group();
     sphereMercury = new THREE.Group();
 
     sphereMercury = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
@@ -545,14 +545,14 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetMercury.push(sphereMercury);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isVenus') {
+  } else if (planetName === 'isVenus') { // 金星
     //グループ化
     sphere = new THREE.Group();
     sphereVenus = new THREE.Group();
 
     sphereVenus = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
@@ -562,24 +562,23 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetVenus.push(sphereVenus);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isEarth') {
-    //グループ化
+  } else if (planetName === 'isEarth') { // 地球
     sphere = new THREE.Group();
     sphereEarth = new THREE.Group();
 
     sphereEarth = new THREE.Mesh(
-      new THREE.SphereGeometry(13, 20, 20), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(13, 20, 20),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
 
     crowd = new THREE.Mesh(
-      new THREE.SphereGeometry(14, 20, 20), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(14, 20, 20),
+      new THREE.MeshLambertMaterial({
         map: textureCrowd,
         transparent: true,
-        side: THREE.DoubleSide // 裏からも
+        side: THREE.DoubleSide // 裏
       })
     );
 
@@ -589,13 +588,12 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetEarth.push(sphereEarth);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isMoon') {
-    //グループ化
+  } else if (planetName === 'isMoon') { // 月
     sphere = new THREE.Group();
 
     sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
@@ -604,14 +602,13 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetMoon.push(sphere);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isMars') {
-    //グループ化
+  } else if (planetName === 'isMars') { // 火星
     sphere = new THREE.Group();
     sphereMars = new THREE.Group();
 
     sphereMars = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
@@ -621,14 +618,13 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetMars.push(sphereMars);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isJupiter') {
-    //グループ化
+  } else if (planetName === 'isJupiter') { // 木星
     sphere = new THREE.Group();
     sphereJupiter = new THREE.Group();
 
     sphereJupiter = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
@@ -638,22 +634,21 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetJupiter.push(sphereJupiter);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isSaturn') {
-    //グループ化
+  } else if (planetName === 'isSaturn') { // 土星
     sphere = new THREE.Group();
     sphereSaturn = new THREE.Group();
 
     sphereSaturn = new THREE.Mesh(
-      new THREE.SphereGeometry(13, 20, 20), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(13, 20, 20),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
 
-    // 輪を作る
+    // 輪
     ring = new THREE.Mesh(
-      new THREE.TorusGeometry(22, 5, 2, 1000), // 芯円半径、断面円半径、断面円分割、芯円分割
-      new THREE.MeshPhongMaterial({ // 材質
+      new THREE.TorusGeometry(22, 5, 2, 1000),
+      new THREE.MeshPhongMaterial({
         map: texture,
         opacity: 0.7,
         transparent: true
@@ -668,22 +663,21 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetSaturn.push(sphereSaturn);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isUranus') {
-    //グループ化
+  } else if (planetName === 'isUranus') { // 天王星
     sphere = new THREE.Group();
     sphereUranus = new THREE.Group();
 
     sphereUranus = new THREE.Mesh(
-      new THREE.SphereGeometry(13, 20, 20), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(13, 20, 20),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
 
-    // 輪を作る
+    // 輪
     ring = new THREE.Mesh(
-      new THREE.TorusGeometry(18, 5, 2, 1000), // 芯円半径、断面円半径、断面円分割、芯円分割
-      new THREE.MeshPhongMaterial({ // 材質
+      new THREE.TorusGeometry(18, 5, 2, 1000),
+      new THREE.MeshPhongMaterial({
         map: texture,
         opacity: 0.7,
         transparent: true
@@ -698,14 +692,13 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetUranus.push(sphereUranus);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isNeptune') {
-    //グループ化
+  } else if (planetName === 'isNeptune') { // 海王星
     sphere = new THREE.Group();
     sphereNeptune = new THREE.Group();
 
     sphereNeptune = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture
       })
     );
@@ -715,12 +708,12 @@ function planetFactory(texture, radius, widthSegments, heightSegments, x, z, pla
     targetNeptune.push(sphereNeptune);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === 'isUniverse') {
+  } else if (planetName === 'isUniverse') { // 宇宙
     sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, widthSegments, heightSegments), // 形状
-      new THREE.MeshLambertMaterial({ // 材質
+      new THREE.SphereGeometry(radius, widthSegments, heightSegments),
+      new THREE.MeshLambertMaterial({
         map: texture,
-        side: THREE.DoubleSide // 裏からも
+        side: THREE.DoubleSide // 裏
       })
     );
     sphere.position.set(x, 0, z);
@@ -855,82 +848,85 @@ function render() {
   renderer.render(scene, camera);
 };
 
-sunimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/suntext.png')
-});
-sunText = new THREE.Sprite(sunimageText);
+// テキストクラス
+class text {
+  constructor(textimg) {
+    this.testimg = new THREE.SpriteMaterial({
+      map: new THREE.TextureLoader().load(textimg)
+    });
+  }
+
+  get TextImg() {
+    return this.testimg;
+  }
+}
+
+// 太陽テキスト
+sunimageText = new text('../images/suntext.png');
+sunText = new THREE.Sprite(sunimageText.TextImg);
 sunText.position.y = 64;
 sunText.scale.set(50, 35, 50);
 targetTextSun.push(sunText);
 
-mercuryimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/mercurytext.png')
-});
-mercuryText = new THREE.Sprite(mercuryimageText);
+// 水星テキスト
+mercuryimageText = new text('../images/mercurytext.png');
+mercuryText = new THREE.Sprite(mercuryimageText.TextImg);
 mercuryText.position.y = 15;
 mercuryText.scale.set(40, 27, 40);
 targetTextMercury.push(mercuryText);
 
-venusimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/venustext.png')
-});
-venusText = new THREE.Sprite(venusimageText);
+// 金星テキスト
+venusimageText = new text('../images/venustext.png');
+venusText = new THREE.Sprite(venusimageText.TextImg);
 venusText.position.y = 20;
 venusText.scale.set(40, 27, 40);
 targetTextVenus.push(venusText);
 
-earthimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/earthtext.png')
-});
-earthText = new THREE.Sprite(earthimageText);
+// 地球テキスト
+earthimageText = new text('../images/earthtext.png');
+earthText = new THREE.Sprite(earthimageText.TextImg);
 earthText.position.y = 25;
 earthText.scale.set(40, 27, 40);
 targetTextEarth.push(earthText);
 
-moonimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/moontext.png')
-});
-moonText = new THREE.Sprite(moonimageText);
+// 月テキスト
+moonimageText = new text('../images/moontext.png');
+moonText = new THREE.Sprite(moonimageText.TextImg);
 moonText.position.y = 16;
 moonText.scale.set(17, 17, 17);
 targetTextMoon.push(moonText);
 
-marsimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/marstext.png')
-});
-marsText = new THREE.Sprite(marsimageText);
+// 火星テキスト
+marsimageText = new text('../images/marstext.png');
+marsText = new THREE.Sprite(marsimageText.TextImg);
 marsText.position.y = 19;
 marsText.scale.set(40, 27, 40);
 targetTextMars.push(marsText);
 
-jupiterimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/jupitertext.png')
-});
-jupiterText = new THREE.Sprite(jupiterimageText);
+// 木星テキスト
+jupiterimageText = new text('../images/jupitertext.png');
+jupiterText = new THREE.Sprite(jupiterimageText.TextImg);
 jupiterText.position.y = 53;
 jupiterText.scale.set(40, 27, 40);
 targetTextJupiter.push(jupiterText);
 
-saturnimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/saturntext.png')
-});
-saturnText = new THREE.Sprite(saturnimageText);
+// 土星テキスト
+saturnimageText = new text('../images/saturntext.png');
+saturnText = new THREE.Sprite(saturnimageText.TextImg);
 saturnText.position.y = 25;
 saturnText.scale.set(40, 27, 40);
 targetTextSaturn.push(saturnText);
 
-uranusimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/uranustext.png')
-});
-uranusText = new THREE.Sprite(uranusimageText);
+// 天王星テキスト
+uranusimageText = new text('../images/uranustext.png');
+uranusText = new THREE.Sprite(uranusimageText.TextImg);
 uranusText.position.y = 25;
 uranusText.scale.set(50, 20, 40);
 targetTextUranus.push(uranusText);
 
-neptuneimageText = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load('../images/neptunetext.png')
-});
-neptuneText = new THREE.Sprite(neptuneimageText);
+// 海王星テキスト
+neptuneimageText = new text('../images/neptunetext.png');
+neptuneText = new THREE.Sprite(neptuneimageText.TextImg);
 neptuneText.position.y = 27;
 neptuneText.scale.set(50, 20, 40);
 targetTextNeptune.push(neptuneText);
@@ -979,7 +975,7 @@ function clickPosition(event) {
   let interTN = raycaster.intersectObjects(targetTextNeptune);
 
   //マウス操作
-  if (interSu.length > 0 || interTSU.length > 0) {
+  if (interSu.length > 0 || interTSU.length > 0) { // 太陽
     //alert('太陽');
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
@@ -995,7 +991,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/sun.html';
     }, 410);
-  } else if (interMe.length > 0 || interTME.length > 0) {
+  } else if (interMe.length > 0 || interTME.length > 0) { // 水星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1010,7 +1006,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/mercury.html';
     }, 410);
-  } else if (interVe.length > 0 || interTV.length > 0) {
+  } else if (interVe.length > 0 || interTV.length > 0) { // 金星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1025,7 +1021,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/venus.html';
     }, 410);
-  } else if (interEa.length > 0 || interTE.length > 0) {
+  } else if (interEa.length > 0 || interTE.length > 0) { // 地球
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1040,7 +1036,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../php/earth.php';
     }, 410);
-  } else if (interMa.length > 0 || interTMA.length > 0) {
+  } else if (interMa.length > 0 || interTMA.length > 0) { // 火星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1055,7 +1051,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/mars.html';
     }, 410);
-  } else if (interJu.length > 0 || interTJ.length > 0) {
+  } else if (interJu.length > 0 || interTJ.length > 0) { // 木星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1070,7 +1066,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/jupiter.html';
     }, 410);
-  } else if (interSa.length > 0 || interTSA.length > 0) {
+  } else if (interSa.length > 0 || interTSA.length > 0) { // 土星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1085,7 +1081,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/saturn.html';
     }, 410);
-  } else if (interUr.length > 0 || interTU.length > 0) {
+  } else if (interUr.length > 0 || interTU.length > 0) { // 天王星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1100,7 +1096,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/uranus.html';
     }, 410);
-  } else if (interNe.length > 0 || interTN.length > 0) {
+  } else if (interNe.length > 0 || interTN.length > 0) { // 海王星
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1115,7 +1111,7 @@ function clickPosition(event) {
     setTimeout(function () {
       location.href = '../html/neptune.html';
     }, 410);
-  } else if (interMo.length > 0 || interTMO.length > 0) {
+  } else if (interMo.length > 0 || interTMO.length > 0) { // 月
     $('.inbg').removeClass('none');
     $('.inbg1').addClass('inbgani1');
     setTimeout(function () {
@@ -1310,7 +1306,7 @@ recognition.addEventListener('result', function (e) {
       }, 410);
       //alert(e.results[0][0].transcript);
       break;
-    default:
+    default: // その他
       //alert(e.results[0][0].transcript);
       $('.speechBtn').removeClass('speechout');
       $('#stage').removeClass('speechopen');
@@ -1341,6 +1337,7 @@ function Keydown(event) {
       } else if (!$('#stage').hasClass('plamouse')) {
         $('.operationWrap').removeClass('operationin');
         $('.operationWrap').addClass('operationout');
+        $('#stage').removeClass('useropen');
         $('#stage').addClass('plamouse');
       }
     }
@@ -1394,7 +1391,7 @@ function Keydown(event) {
   // 説明未表示時
   if ($('#stage').hasClass('plamouse')) {
     // 惑星分岐
-    if (keyCode == 49 || keyCode == 97) {
+    if (keyCode == 49 || keyCode == 97) { // 太陽
       //alert('太陽');
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
@@ -1410,7 +1407,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/sun.html';
       }, 410);
-    } else if (keyCode == 50 || keyCode == 98) {
+    } else if (keyCode == 50 || keyCode == 98) { // 水星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1425,7 +1422,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/mercury.html';
       }, 410);
-    } else if (keyCode == 51 || keyCode == 99) {
+    } else if (keyCode == 51 || keyCode == 99) { // 金星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1440,7 +1437,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/venus.html';
       }, 410);
-    } else if (keyCode == 52 || keyCode == 100) {
+    } else if (keyCode == 52 || keyCode == 100) { // 地球
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1455,7 +1452,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../php/earth.php';
       }, 410);
-    } else if (keyCode == 53 || keyCode == 101) {
+    } else if (keyCode == 53 || keyCode == 101) { // 月
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1470,7 +1467,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/moon.html';
       }, 410);
-    } else if (keyCode == 54 || keyCode == 102) {
+    } else if (keyCode == 54 || keyCode == 102) { // 金星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1485,7 +1482,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/mars.html';
       }, 410);
-    } else if (keyCode == 55 || keyCode == 103) {
+    } else if (keyCode == 55 || keyCode == 103) { // 木星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1500,7 +1497,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/jupiter.html';
       }, 410);
-    } else if (keyCode == 56 || keyCode == 104) {
+    } else if (keyCode == 56 || keyCode == 104) { // 土星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1515,7 +1512,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/saturn.html';
       }, 410);
-    } else if (keyCode == 57 || keyCode == 105) {
+    } else if (keyCode == 57 || keyCode == 105) { // 天王星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1530,7 +1527,7 @@ function Keydown(event) {
       setTimeout(function () {
         location.href = '../html/uranus.html';
       }, 410);
-    } else if (keyCode == 48 || keyCode == 96) {
+    } else if (keyCode == 48 || keyCode == 96) { // 海王星
       $('.inbg').removeClass('none');
       $('.inbg1').addClass('inbgani1');
       setTimeout(function () {
@@ -1612,6 +1609,7 @@ function Keydown(event) {
   }
 };
 
+// マイク
 $('.micWrap').addedClass('micIn', function () {
   if ($('.micWrap').hasClass('micIn')) {
     speechtime = setTimeout(function () {

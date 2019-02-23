@@ -186,8 +186,10 @@ button {
 }
 
 #logout {
-  margin: 30vh auto 0;
+  position: relative;
+  margin: 0 auto;
   width: 80%;
+  bottom: -30vh;
 }
 
 #logout input {
@@ -385,7 +387,7 @@ button {
 }
 
 .opetitle h1 {
-  margin-top: 4vw;
+  margin-top: 8vh;
   color: #fff;
   text-align: center;
   font-size: 5.5vw;
@@ -396,7 +398,7 @@ button {
 .operationposi {
   position: relative;
   z-index: 30;
-  margin-top: 6vh;
+  margin-top: 3%;
 }
 
 .page1 {
@@ -412,9 +414,9 @@ button {
 .text {
   margin-top: .7vw;
   padding: 1vw;
-  padding-top: 1.2vw;
+  padding-top: 2vh;
   width: 25vw;
-  height: 5vw;
+  height: 8vh;
   border: solid .3vh #0ff;
   border-radius: 1.5vw;
 }
@@ -442,7 +444,7 @@ button {
 .btn {
   position: absolute;
   z-index: 30;
-  bottom: 25vh;
+  top: 23vh;
   color: #fff;
   font-size: 20vw;
   outline: none;

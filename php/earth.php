@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <!-- ページ遷移 -->
   <div class="planetloadWrap">
     <div class="loadingWrap">
       <div class="loadingtext">
@@ -28,7 +29,9 @@
     <input type="submit" value="BACK" id="back" name="backcnt">
   </form>
 
+  <!-- 描画 -->
   <canvas id="stage"></canvas>
+  <!-- 説明 -->
   <div id="info">
     <header>
       <h1>地球/EARTH</h1>
@@ -39,12 +42,12 @@
         <div class="title">
           <h2>地球の特徴</h2>
         </div>
-        <p id="earthimg1"><img src="../images/earthinfo.gif" alt="地球情報"><?php echo $_SESSION["NAME"]; ?>さんが生活している惑星。<br>地球は約46億年前に誕生いたと考えられている。<br>最初は宇宙のガスやちりが集まっただけで、大気はありませんでした。それが徐々に水ができて生命が生まれ、今の地球のように酸素ができました。地球の表面の7割は水がしめている。<br>太陽系の惑星の中で生命が存在しているのは地球だけである。</p>
+        <p id="earthimg1"><img src="../images/earthinfo.gif" alt="地球情報"><?php echo $_SESSION["NAME"]; ?>さんが生活している惑星。地球は約46億年前に誕生いたと考えられている。最初は宇宙のガスやちりが集まっただけで、大気はなかった。徐々に水ができて生命が生まれ、今の地球のように酸素ができた。地球の表面の7割は水がしめている。太陽系の惑星の中で生命が存在しているのは地球だけである。</p>
         <div class="clear"></div>
         <div class="title">
           <h2>生命の誕生</h2>
         </div>
-        <p id="earthimg2"><img src="../images/life.jpg" alt="生命">最初の生命が誕生したのは約38億年前である。生命誕生の場は海の中でした。この頃、地上には強い紫外線が降り注ぎ、火山活動は活発で、陸上は生物が生存するには厳しい環境だったためである。生物の材料となったのはアミノ酸、核酸塩基、糖などの有機物で、これらは原始大気中の二酸化炭素や窒素、水などの無機物に雷の放電、紫外線などのエネルギーが加えられて誕生した。</p>
+        <p id="earthimg2"><img src="../images/life.jpg" alt="生命">最初の生命が誕生したのは約38億年前。地上には強い紫外線が降り注ぎ、火山活動は活発で、陸上は生物が生存するには厳しい環境だったため生命誕生の場は海の中でした。生物の材料となったのはアミノ酸、核酸塩基、糖などの有機物で、これらは原始大気中の二酸化炭素や窒素、水などの無機物に雷の放電、紫外線などのエネルギーが加えられて誕生した。</p>
       </div>
       <!-- 2ページ目 -->
       <div class="infotext2 none">

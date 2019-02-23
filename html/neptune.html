@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <!-- ページ遷移 -->
   <div class="planetloadWrap">
     <div class="loadingWrap">
       <div class="loadingtext">
@@ -30,12 +31,15 @@
     <input type="submit" value="BACK" id="back" name="backcnt">
   </form>
 
+  <!-- 描画 -->
   <canvas id="stage"></canvas>
+  <!-- 説明 -->
   <div id="info">
     <header>
       <h1>海王星/NEPTUNE</h1>
     </header>
     <main class="main">
+      <!-- 1ページ目 -->
       <div class="infotext1">
         <div class="title">
           <h2>海王星の特徴</h2>
@@ -46,6 +50,7 @@
         </div>
         <p>天王星の発見以降、その軌道が天文力学の計算に合わないのはその外側にさらに惑星があるためだと考えられていた。</p>
       </div>
+      <!-- 2ページ目 -->
       <div class="infotext2 none">
         <p>そのためいろいろな科学者が未知の惑星の大きさや、軌道、位置を計算していた。イギリスでは天文学者ジョン・クーチ・アダムスが、フランスでは天文学者ユルバン・ルベリエが計算をし、ルベリエの依頼を受けたドイツの天文学者ヨハン・ガレが1846年9月23日、ベルリン天文台での観測で海王星を発見したのだ。ルベリエが計算としたものと発見された位置の誤差は1度。</p>
         <div class="title">
@@ -68,6 +73,7 @@
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
+  <script src="../js/planet.js"></script>
   <script src="../js/neptune.js"></script>
 </body>
 
