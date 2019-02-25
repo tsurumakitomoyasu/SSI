@@ -33,7 +33,7 @@
     });
 
     $(function () {
-      $('header, main').fadeMover({'inSpeed': 300});
+      $('header, main').fadeMover({'inSpeed': 500});
     });
 
     setTimeout(function () {

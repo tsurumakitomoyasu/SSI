@@ -107,7 +107,7 @@
       <p><?php echo $_SESSION["NAME"]; ?><br><span>さん</span></p>
     </div>
     <div id="logintime">
-      <p>-日時と時刻-<br><span id="today"></span><br><span id="time"></span></p>
+      <p>--- 日時 ---<br><span id="today"></span><br><span id="time"></span></p>
     </div>
     <div id="logout" class="lognone">
       <form action="./login.php" method="post">

@@ -18,7 +18,7 @@
   <main>
     <!-- エラーメッセージ -->
     <?php echo $Msg; ?>
-    <form action="./loginlib.php" method="POST">
+    <form action="./loginfile.php" method="POST">
       <table>
         <tr>
           <!-- ユーザID -->
@@ -57,7 +57,7 @@
       }
     });
     $(function(){
-      $('main').fadeMover({'inSpeed': 2000});
+      $('main').fadeMover({'inSpeed': 1000});
     });
     $('#signup').click(function () {
         location.href = './regist.php';

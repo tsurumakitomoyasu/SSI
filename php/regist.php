@@ -19,7 +19,7 @@
     <h1 onclick="eventClick();"><img src="../images/rogo.png" alt="SSI"></h1>
   </header>
   <main>
-    <form action="./registlib.php" method="POST">
+    <form action="./registfile.php" method="POST">
       <table>
         <tr>
           <!-- ユーザID -->
@@ -49,7 +49,7 @@
       location.href = "./login.php";
     };
     $(function(){
-      $('main').fadeMover({'inSpeed': 1800});
+      $('main').fadeMover({'inSpeed': 1000});
     });
   </script>
 </body>
