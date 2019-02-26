@@ -18,6 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SSI</title>
   <link rel="stylesheet" href="../css/ssi.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
@@ -130,7 +131,10 @@
   <div class="masc none"></div>
   <div class="micWrap micOut">
     <p>どの<span>惑星</span>を選びます?</p>
-    <div class="micImg"><img src="../images/mic.png" alt="マイク"></div>
+    <div class="micImg">
+      <i class="fa fa-microphone mic" aria-hidden="true"></i>
+      <div class="volume-viewer-volume"></div>
+    </div>
   </div>
 
   <!-- 操作説明ボタン -->
@@ -146,6 +150,7 @@
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
+  <script src="../js/audioManager.min.js"></script>
   <script>
     let backcnt = <?php echo $backcnt; ?>;
   </script>

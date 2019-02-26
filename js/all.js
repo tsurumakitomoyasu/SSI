@@ -346,6 +346,8 @@ let targetTextNeptune = [];
 // 保存
 let speechtime;
 
+// マイク
+let manager;
 // テクスチャーリスト
 let manifest = [{
     id: 'sun',
@@ -1663,3 +1665,18 @@ function getToday() {
   let today = mon + "/" + day;
   return today;
 }
+
+manager = (new AudioManager({
+  useMicrophone: true,
+  onEnterFrame: function () {
+    let volume = Utils.sum(this.analysers.mic.getByteFrequencyData());
+    let size = (92 + volume / 2000);
+    let adj = (80 - size) / 2 - 3;
+
+    $('.volume-viewer-volume')
+      .css('height', size + 'px')
+      .css('width', size + 'px')
+      .css('top', adj + 'px')
+      .css('left', adj + 'px')
+  }
+})).init();
