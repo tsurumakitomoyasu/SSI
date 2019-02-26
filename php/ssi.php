@@ -154,7 +154,7 @@
   <script>
     let backcnt = <?php echo $backcnt; ?>;
   </script>
-  <script src="../js/all.js"></script>
+  <script src="../js/min/all.min.js"></script>
 </body>
 
 </html>

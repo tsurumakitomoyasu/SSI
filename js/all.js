@@ -1630,7 +1630,7 @@ let timerID = setInterval('clock()', 500);
 function clock() {
   document.getElementById("time").innerHTML = getNow();
   document.getElementById("today").innerHTML = getToday();
-}
+};
 
 function getNow() {
   let now = new Date();
@@ -1646,7 +1646,7 @@ function getNow() {
 
   let totime = hour + "：" + min;
   return totime;
-}
+};
 
 function getToday() {
   let now = new Date();
@@ -1664,7 +1664,7 @@ function getToday() {
   //出力用
   let today = mon + "/" + day;
   return today;
-}
+};
 
 manager = (new AudioManager({
   useMicrophone: true,
