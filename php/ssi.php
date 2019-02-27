@@ -68,7 +68,7 @@
           <ul>
             <li><img src="../images/user_off.png" alt="ユーザーボタン">アカウント管理が出来る。<br>Aキーでも可能。</li>
             <div class="clear"></div>
-            <li><img src="../images/stop_off.png" alt="ストップボタン">惑星の動きを制御出来る<br>Sキーでも可能。</li>
+            <li><img src="../images/stop_off.png" alt="ストップボタン">惑星の動きを制御出来る。(3段階)<br>Sキーでも可能。</li>
             <div class="clear"></div>
           </ul>
         </div>
@@ -112,7 +112,7 @@
     </div>
     <div id="logout" class="lognone">
       <form action="./login.php" method="post">
-        <input type="submit" name="logout" value="Landing">
+        <input type="submit" name="logout" value="Sign Out">
       </form>
     </div>
   </div>
@@ -130,7 +130,7 @@
   <!-- マイク -->
   <div class="masc none"></div>
   <div class="micWrap micOut">
-    <p>どの<span>惑星</span>を選びます?</p>
+    <p>どの<span>惑星</span>を選びますか?</p>
     <div class="micImg">
       <i class="fa fa-microphone mic" aria-hidden="true"></i>
       <div class="volume-viewer-volume"></div>

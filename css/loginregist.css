@@ -63,6 +63,7 @@ input {
   border-radius: .2vw;
   color: #fff;
   font-size: 1.3vw;
+  font-weight: normal;
 }
 
 #name {
@@ -81,6 +82,7 @@ input {
   border: solid .1vw #fff;
   border-radius: .2vw;
   color: #fff;
+  font-size: 1.1vw;
   font-weight: bold;
   transition: all 700ms;
 }

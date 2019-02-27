@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SSI/ログインページ</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/loginregist.css">
 </head>
 
@@ -23,13 +24,13 @@
         <tr>
           <!-- ユーザID -->
           <td>
-            <input type="text" name="user" id="user" placeholder="ユーザID" autocomplete="off" required>
+            <input type="text" name="user" id="user" class="fas" placeholder="&#xf007; ユーザID" autocomplete="off" required>
           </td>
         </tr>
         <tr>
           <!-- パスワード -->
           <td class="passMa">
-            <input type="password" name="passwd" id="passwd"placeholder="パスワード" autocomplete="off" required required minlength="4">
+            <input type="password" name="passwd" id="passwd" class="fab" placeholder="&#xf3ba; パスワード" autocomplete="off" required required minlength="4">
           </td>
         </tr>
         <tr>

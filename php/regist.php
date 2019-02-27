@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SSI/ユーザー登録</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/loginregist.css">
   <link rel="stylesheet" href="../css/regist.css">
 </head>
@@ -24,16 +25,16 @@
         <tr>
           <!-- ユーザID -->
           <td>
-            <input type="text" name="user" id="user" placeholder="ユーザID" autocomplete="off" required>
+            <input type="text" name="user" id="user" class="fas" placeholder="&#xf007; ユーザID" autocomplete="off" required>
           </td>
         </tr>
         <tr>
           <!-- パスワード -->
-          <td><input type="password" name="passwd" id="passwd" placeholder="パスワード(4文字以上)" autocomplete="off" required minlength="4"></td>
+          <td><input type="password" name="passwd" class="fab" id="passwd" placeholder="&#xf3ba; パスワード(4文字以上)" autocomplete="off" required minlength="4"></td>
         </tr>
         <tr>
           <!-- ユーザネーム -->
-          <td><input type="text" name="username" id="name" placeholder="ユーザネーム(5文字以下)" autocomplete="off" required pattern=".{1,5}"></td>
+          <td><input type="text" name="username" id="name" class="far" placeholder="&#xf2bb; ユーザネーム(5文字以下)" autocomplete="off" required pattern=".{1,5}"></td>
         </tr>
         <tr>
           <!-- 作成ボタン -->
