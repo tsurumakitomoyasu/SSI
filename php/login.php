@@ -24,13 +24,13 @@
         <tr>
           <!-- ユーザID -->
           <td>
-            <input type="text" name="user" id="user" class="fas" placeholder="&#xf007; ユーザID" autocomplete="off" required>
+            <input type="text" name="user" id="user" class="far" placeholder="&#xf2bb; ユーザID" autocomplete="off" required>
           </td>
         </tr>
         <tr>
           <!-- パスワード -->
           <td class="passMa">
-            <input type="password" name="passwd" id="passwd" class="fab" placeholder="&#xf3ba; パスワード" autocomplete="off" required required minlength="4">
+            <input type="password" name="passwd" id="passwd" class="far" placeholder="&#xf11c; パスワード" autocomplete="off" required required minlength="4">
           </td>
         </tr>
         <tr>

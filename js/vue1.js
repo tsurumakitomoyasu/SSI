@@ -60,16 +60,7 @@ let planetVue = new Vue({
   el: '#planet',
   data: {
     text: true,
-    btn: false,
-    title1: '',
-    title2: '',
-    title3: '',
-    title4: '',
-    text1: '',
-    text2: '',
-    text3: '',
-    text4: '',
-    text5: ''
+    btn: false
   },
   methods: {
     prevBtn: function () {
