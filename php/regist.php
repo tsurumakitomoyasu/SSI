@@ -25,16 +25,16 @@
         <tr>
           <!-- ユーザID -->
           <td>
-            <input type="text" name="user" id="user" class="fas" placeholder="&#xf007; ユーザID" autocomplete="off" required>
+            <input type="text" name="user" id="user" class="far" placeholder="&#xf2bb; ユーザID" autocomplete="off" required>
           </td>
         </tr>
         <tr>
           <!-- パスワード -->
-          <td><input type="password" name="passwd" class="fab" id="passwd" placeholder="&#xf3ba; パスワード(4文字以上)" autocomplete="off" required minlength="4"></td>
+          <td><input type="password" name="passwd" id="passwd" class="far" placeholder="&#xf11c; パスワード(4文字以上)" autocomplete="off" required minlength="4"></td>
         </tr>
         <tr>
           <!-- ユーザネーム -->
-          <td><input type="text" name="username" id="name" class="far" placeholder="&#xf2bb; ユーザネーム(5文字以下)" autocomplete="off" required pattern=".{1,5}"></td>
+          <td><input type="text" name="username" id="name" class="fas" placeholder="&#xf007; ユーザネーム(5文字以下)" autocomplete="off" required pattern=".{1,5}"></td>
         </tr>
         <tr>
           <!-- 作成ボタン -->
