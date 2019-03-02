@@ -1,4 +1,10 @@
-<?php require("./logoutlib.php"); ?>
+<?php
+  require("./logoutlib.php");
+  $msgAns = true;
+  if (!empty($_SESSION["msgAns"])) {
+    $msgAns = $_SESSION["msgAns"];
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,60 +16,47 @@
 
 <body>
   <!-- background -->
-  <div class="stars"></div>
-  <div class="twinkling"></div>
-  <div class="clouds"></div>
-  <header>
-    <h1><img src="../images/rogo.png" alt="SSI"></h1>
+  <div id="bgstar">
+    <div v-for="item in items" v-html="item.bg"></div>
+  </div>
+  <header id="head">
+    <h1 style="cursor: default;" v-if="titleChange" v-html="titleImg"></h1>
+    <h1 @click="headerChange" style="cursor: pointer;" v-html="titleImg" v-else></h1>
   </header>
-  <main>
-    <!-- エラーメッセージ -->
-    <?php echo $Msg; ?>
-    <form action="./loginfile.php" method="POST">
-      <table>
-        <tr>
-          <!-- ユーザID -->
-          <td>
-            <input type="text" name="user" id="user" class="far" placeholder="&#xf2bb; ユーザID" autocomplete="off" required>
-          </td>
-        </tr>
-        <tr>
-          <!-- パスワード -->
-          <td class="passMa">
-            <input type="password" name="passwd" id="passwd" class="far" placeholder="&#xf11c; パスワード" autocomplete="off" required required minlength="4">
-          </td>
-        </tr>
-        <tr>
-          <!-- ログインボタン -->
-          <td>
-            <input type="submit" name="login" value="Lift-Off" id="login">
-          </td>
-        </tr>
-        <tr>
-          <td id="or">---------  or  ---------</td>
-        </tr>
-      </table>
-    </form>
+  <main id="main">
+    <div v-if="loginChange">
+      <!-- エラーメッセージ -->
+      <?php if(!empty($_SESSION["CNT"])): ?>
+        <div v-show="error">
+          <?php echo $Msg; ?>
+        </div>
+      <?php else: ?>
+        <div v-show="error" v-html="spase"></div>
+      <?php endif; ?>
+      <form action="./loginfile.php" method="POST">
+        <table>
+          <tr v-for="login in loginItems" v-html="login.input"></tr>
+        </table>
+      </form>
+    </div>
+    <div v-else>
+      <div v-html="spase"></div>
+      <form action="./registfile.php" method="POST">
+        <table>
+          <tr v-for="regist in registItems" v-html="regist.input"></tr>
+        </table>
+      </form>
+    </div>
     <!-- アカウント作成 -->
-    <button id="signup">Create Account</button>
+    <button id="signup" @click="change" v-show="changeBtn">
+      {{ createBtn }}
+    </button>
   </main>
-  <script src="../js/jquery-3.3.1.min.js"></script>
-  <script src="../js/jquery.fademover.min.js"></script>
+  <script src="../js/vue.min.js"></script>
   <script>
-    history.pushState(null, null, null);
-    $(window).on('popstate', function (event) {
-      if (!event.originalEvent.state) {
-        history.pushState(null, null, null);
-        return;
-      }
-    });
-    $(function(){
-      $('main').fadeMover({'inSpeed': 1000});
-    });
-    $('#signup').click(function () {
-        location.href = './regist.php';
-    });
+    let msgAns = <?php echo $msgAns; ?>
   </script>
+  <script src="../js/min/loginregist.min.js"></script>
 </body>
 
 </html>
