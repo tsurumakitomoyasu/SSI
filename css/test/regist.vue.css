@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+main {
+  opacity: 0;
+}
+
+#userRegist,
+#passwdRegist,
+#name {
+  border: solid .4vh #0ff;
+  color: #0ff;
+}

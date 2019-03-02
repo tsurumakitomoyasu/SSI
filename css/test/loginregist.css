@@ -25,19 +25,8 @@ h1 img {
   width: 20vw;
 }
 
-#main {
+main {
   opacity: 0;
-  animation: main 800ms linear 200ms forwards;
-}
-
-@keyframes main {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 table {
@@ -50,9 +39,7 @@ input {
 }
 
 #user,
-#userRegist,
 #passwd,
-#passwdRegist,
 #name {
   cursor: text;
 }
@@ -62,15 +49,12 @@ input {
   cursor: pointer;
 }
 
-#user,
-#userRegist {
+#user {
   margin-top: 3vh;
 }
 
 #user,
-#userRegist,
 #passwd,
-#passwdRegist,
 #name {
   margin-bottom: 4vh;
   padding: .8vw .3vw;
@@ -83,7 +67,7 @@ input {
 }
 
 #name {
-  margin-bottom: 8.5vh;
+  margin-bottom: 8vh;
 }
 
 .passMa #passwd {
@@ -130,7 +114,6 @@ input {
 }
 
 #error {
-  /* user-select: none; */
   color: #f00;
   text-align: center;
   font-size: 1.4vw;
@@ -140,27 +123,4 @@ header,
 main {
   position: relative;
   z-index: 30;
-}
-
-#userRegist,
-#passwdRegist,
-#name {
-  border: solid .4vh #0ff;
-  color: #0ff;
-}
-
-.spacc {
-  /* user-select: none; */
-  color: transparent;
-  text-align: center;
-  font-size: 1.4vw;
-}
-
-#regist {
-  border: solid .1vw #0ff;
-}
-
-#regist:hover {
-  background: #0ff;
-  color: #000;
 }

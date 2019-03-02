@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require("./registlib.php");
   if (!empty($_POST["user"])) {
     $user = $_POST["user"];
@@ -10,8 +11,10 @@
         $ans = regist($user, $passwd, $name);
         if ($ans == OK) {
           include("./registok.php");
+          unset($_SESSION["msgAns"]);
         } else {
           include("./registno.php");
+          $_SESSION["msgAns"] = 'false';
         }
       }
     }
