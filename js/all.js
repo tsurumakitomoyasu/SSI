@@ -885,7 +885,7 @@ camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000000);
 // カメラ操作
 controls = new THREE.OrbitControls(camera);
 controls.minDistance = 350; //カメラ最小値
-controls.maxDistance = 700; //カメラ最大値
+controls.maxDistance = 800; //カメラ最大値
 controls.enableDamping = true; //滑らか
 controls.enableKeys = false; //矢印
 controls.enablePan = false; //水平方向
@@ -1196,7 +1196,7 @@ function render() {
       uranusTheta = 200;
       neptuneTheta = 330;
       moonTheta = 0;
-      camera.position.set(400, 400, 700);
+      camera.position.set(400, 400, 800);
     }
   } else if (document.querySelector("#stage").classList.contains("stop")) {
     // ライト

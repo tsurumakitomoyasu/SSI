@@ -11,7 +11,8 @@
         include("./ssi.php");
       } else {
         $Msg = "<p id=\"error\">ユーザID又はパスワードが間違ってます</p>";
-        $_SESSION["CNT"] = 1;
+        $error = 'none';
+        $_SESSION["CNT"] = 'eror';
         unset($_SESSION["msgAns"]);
         include("./login.php");
       }

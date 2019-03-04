@@ -65,7 +65,7 @@
       <p tabindex="-1">--- 日時 ---<br><span id="today" tabindex="-1"></span><br><span id="time" tabindex="-1"></span></p>
     </div>
     <div id="logout" class="lognone" tabindex="-1">
-      <form action="./login.php" method="post" tabindex="-1">
+      <form action="./logoutlib.php" method="post" tabindex="-1">
         <input type="submit" name="logout" value="Sign Out" tabindex="-1">
       </form>
     </div>

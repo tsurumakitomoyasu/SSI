@@ -128,6 +128,10 @@ button {
   animation: userIn 500ms linear 0s 1 forwards;
 }
 
+.infoBtn img {
+  width: 6vh;
+}
+
 @keyframes userIn {
   0% {
     width: 0%;
@@ -173,7 +177,6 @@ button {
   right: 2%;
   z-index: 20;
 }
-
 
 #userBack,
 #opeBack {

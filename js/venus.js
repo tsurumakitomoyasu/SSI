@@ -63,6 +63,17 @@ function init() {
   }
 };
 
+let venusText = new Vue({
+  el: '#planetloadWrap',
+  data: {
+    venus: [{
+      text: '<p class="text text1">金</p>'
+    }, {
+      text: '<p class="text text3">星</p>'
+    }]
+  }
+});
+
 let maintitle = new Vue({
   el: '#maintitle',
   data: {

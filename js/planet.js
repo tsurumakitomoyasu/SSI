@@ -83,6 +83,28 @@ let planetVue = new Vue({
   }
 });
 
+let loadingBGWrap = new Vue({
+  el: '#loadingBGWrap',
+  data: {
+    bgs: [{
+      bg: '<div id="loadingbg1" class="loadingbg"></div>'
+    }, {
+      bg: '<div id="loadingbg2" class="loadingbg"></div>'
+    }, {
+      bg: '<div id="loadingbg3" class="loadingbg"></div>'
+    }]
+  }
+});
+
+let back = new Vue({
+  el: '#backBtn',
+  data: {
+    back: `<form action="../php/ssi.php" method="POST">
+             <input type="submit" value="BACK" id="back" name="backcnt">
+           </form>`
+  },
+})
+
 window.location.hash = "#noback";
 window.onhashchange = function () {
   window.location.hash = "#noback";

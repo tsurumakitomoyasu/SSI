@@ -73,17 +73,21 @@ input {
 #passwdRegist,
 #name {
   margin-bottom: 4vh;
-  padding: .8vw .3vw;
+  padding: 1.4vh .3vw;
   width: 20vw;
-  border: solid .4vh #fff;
-  border-radius: .2vw;
+  border: solid .3vh #fff;
+  border-radius: .3vh;
   color: #fff;
   font-size: 1.3vw;
   font-weight: normal;
 }
 
+.none {
+  display: none;
+}
+
 #name {
-  margin-bottom: 8.5vh;
+  margin-bottom: 9vh;
 }
 
 .passMa #passwd {
@@ -93,9 +97,9 @@ input {
 #login,
 #regist,
 #signup {
-  padding: .5vw;
+  padding: 1vh .3vw;
   width: 100%;
-  border: solid .1vw #fff;
+  border: solid .2vh #fff;
   border-radius: .2vw;
   color: #fff;
   font-size: 1.1vw;
@@ -110,7 +114,7 @@ input {
   text-decoration: none;
   text-align: center;
   color: #fff;
-  border: solid .1vw #0ff;
+  border: solid .2vh #0ff;
 }
 
 #login:hover {
@@ -145,7 +149,7 @@ main {
 #userRegist,
 #passwdRegist,
 #name {
-  border: solid .4vh #0ff;
+  border: solid .3vh #0ff;
   color: #0ff;
 }
 
@@ -157,7 +161,7 @@ main {
 }
 
 #regist {
-  border: solid .1vw #0ff;
+  border: solid .2vh #0ff;
 }
 
 #regist:hover {

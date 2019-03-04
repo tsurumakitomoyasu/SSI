@@ -1,6 +1,5 @@
 <?php
   session_start();
-  if ($_POST["logout"]) {
-    session_destroy();
-  }
+  session_destroy();
+  include('./login.php');
 ?>

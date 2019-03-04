@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Test Map</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 80%;
+      width: 80%;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap" async defer></script>
+  <script>
+    function initMap() {
+
+      // マップの初期化
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: {lat: 35.50992, lng: 139.56065}
+      });
+
+      // クリックイベントを追加
+      map.addListener('click', function(e) {
+        getClickLatLng(e.latLng, map);
+      });
+    }
+
+    function getClickLatLng(lat_lng, map) {
+
+      // 座標を表示
+      //document.getElementById('lat').textContent = lat_lng.lat();
+      //document.getElementById('lng').textContent = lat_lng.lng();
+
+      //座標をgurunavi.phpに転送
+      var form = document.createElement('form');
+      var request1 = document.createElement('input');
+      var request2 = document.createElement('input');
+
+      form.method = 'POST';
+      form.action = 'http://localhost/ph11/20190223_API/gurunavi.php';
+
+      request1.type = 'hidden'; //入力フォームが表示されないように
+      request1.name = 'lat';
+      request1.value = lat_lng.lat();
+
+      request2.type = 'hidden'; //入力フォームが表示されないように
+      request2.name = 'lng';
+      request2.value = lat_lng.lng();
+
+      form.appendChild(request1);
+      form.appendChild(request2);
+
+      document.body.appendChild(form);
+
+      form.submit();
+
+      //
+      // マーカーを設置
+      /*
+      var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+      });
+      */
+
+      // 座標の中心をずらす
+      // http://syncer.jp/google-maps-javascript-api-matome/map/method/panTo/
+      //map.panTo(lat_lng);
+    }
+  </script>
+
+</head>
+<body>
+  <div id="map"></div>
+</body>
+</html>

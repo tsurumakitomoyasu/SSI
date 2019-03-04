@@ -12,22 +12,15 @@
   <!-- ページ遷移 -->
   <div id="planetloadWrap">
     <div class="loadingWrap">
-      <div class="loadingtext">
-        <p class="text text1">地</p>
-      </div>
-      <div class="loadingtext">
-        <p class="text text3">球</p>
-      </div>
+      <div class="loadingtext" v-for="planet in earth" v-html="planet.text"></div>
     </div>
   </div>
-  <div id="loadingbg1" class="loadingbg"></div>
-  <div id="loadingbg2" class="loadingbg"></div>
-  <div id="loadingbg3" class="loadingbg"></div>
+  <div id="loadingBGWrap">
+    <div v-for="loadingbg in bgs" v-html="loadingbg.bg"></div>
+  </div>
 
   <!-- BACK -->
-  <form action="./ssi.php" method="POST">
-    <input type="submit" value="BACK" id="back" name="backcnt">
-  </form>
+  <div id="backBtn" v-html="back"></div>
 
   <!-- 描画 -->
   <canvas id="stage"></canvas>
