@@ -30,30 +30,18 @@
     <main class="main" id="planet">
       <!-- 1ページ目 -->
       <div class="infotext1" v-if="text">
-        <div class="title" v-html="title1"></div>
-        <p id="earthimg1"><img src="../images/earthinfo.gif" alt="地球情報"><?php echo $_SESSION["NAME"]; ?>{{ text1 }}</p>
-        <div class="clear"></div>
-
-        <div class="title" v-html="title2"></div>
-        <div id="earthimg2" v-html="text2"></div>
+        <div v-html="page1"></div>
       </div>
+
       <!-- 2ページ目 -->
       <div class="infotext2" v-else>
-        <div class="title" v-html="title3"></div>
-        <div id="earthimg3" v-html="text3"></div>
-        <div class="clear"></div>
-        <div id="earthimg4" v-html="text4"></div>
-        <div class="clear"></div>
+        <div v-html="page2"></div>
       </div>
 
       <!-- prev,nextボタン -->
       <div id="arrow">
-        <button class="pnBtn prev" @click="prevBtn" v-if="btn">
-          <img src="../images/arrowprev.png" alt="戻る">
-        </button>
-        <button class="pnBtn next" @click="nextBtn" v-else>
-          <img src="../images/arrownext.png" alt="進む">
-        </button>
+        <button class="pnBtn prev" @click="prevBtn" v-if="btn" v-html="pBtn"></button>
+        <button class="pnBtn next" @click="nextBtn" v-else v-html="nBtn"></button>
       </div>
     </main>
   </div>
@@ -61,7 +49,13 @@
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/vue.min.js"></script>
   <script src="../js/min/planet.min.js"></script>
+  <script>
+    let userName = '<?php echo $_SESSION["NAME"]; ?>';
+  </script>
   <script src="../js/min/earth.min.js"></script>
+  <script>
+    document.getElementById('name').innerHTML = userName;
+  </script>
 </body>
 
 </html>

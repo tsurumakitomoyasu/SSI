@@ -221,14 +221,15 @@ button {
 }
 
 #user p {
-  margin-top: 21%;
-  font-size: 2vw;
+  margin-top: 25%;
+  line-height: 1.5em;
+  font-size: 1.3vw;
   font-weight: normal;
   color: #000;
 }
 
-#user span {
-  font-size: 1.3vw;
+#user #name {
+  font-size: 2vw;
 }
 
 #stage {
@@ -240,6 +241,13 @@ button {
   transform: scale(0);
   animation: logNone 350ms linear 0s 1 forwards;
 }
+
+#logintime #today,
+#logintime #time {
+  font-size: 2vw;
+  font-family: "Orbitron", sans-serif;
+}
+
 
 @keyframes logNone {
   0% {

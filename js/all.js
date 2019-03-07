@@ -1,6 +1,107 @@
 window.onload = function () {
   document.getElementById("keyupText").focus();
-}
+};
+// ****************** 遷移 ******************
+// 共通
+function planetInbg() {
+  document.querySelector(".inbg1").classList.remove("none");
+  document.querySelector(".inbg2").classList.remove("none");
+  document.querySelector(".inbg3").classList.remove("none");
+  document.querySelector(".inbg4").classList.remove("none");
+
+  document.querySelector(".inbg1").classList.add("inbgani1");
+  setTimeout(function () {
+    document.querySelector(".inbg2").classList.add("inbgani2");
+    setTimeout(function () {
+      document.querySelector(".inbg3").classList.add("inbgani3");
+      setTimeout(function () {
+        document.querySelector(".inbg4").classList.add("inbgani4");
+      }, 100);
+    }, 100);
+  }, 100);
+};
+
+// 太陽
+function sunPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/sun.html";
+  }, 410);
+  // console.log('a')
+};
+
+// 水星
+function mercuryPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/mercury.html";
+  }, 410);
+};
+
+// 金星
+function venusPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/venus.html";
+  }, 410);
+};
+
+// 地球
+function earthPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../php/earth.php";
+  }, 410);
+};
+
+// 月
+function moonPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/moon.html";
+  }, 410);
+};
+
+// 火星
+function marsPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/mars.html";
+  }, 410);
+};
+
+// 木星
+function jupiterPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/jupiter.html";
+  }, 410);
+};
+
+// 土星
+function saturnPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/saturn.html";
+  }, 410);
+};
+
+// 天王星
+function uranusPage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/uranus.html";
+  }, 410);
+};
+
+// 海王星
+function neptunePage() {
+  planetInbg();
+  setTimeout(function () {
+    location.href = "../html/neptune.html";
+  }, 410);
+};
+
 // ****************** ローディング ******************
 setTimeout(function () {
   let num = 0;
@@ -43,10 +144,12 @@ let loading = new Vue({
               </div>`
   }
 });
+
 // 操作説明
 let operation = new Vue({
   el: "#operationwrap",
   data: {
+    opetitle: `操作説明`,
     page1: `<div class="operation" tabindex="-1">
               <img src="../images/operation_one.png" alt="クリック画像" tabindex="-1">
               <div class="text" tabindex="-1">
@@ -139,30 +242,59 @@ let operation = new Vue({
 let btnWrapU = new Vue({
   el: "#userWrap",
   data: {
-    imgChange: true
+    imgChange: '_off'
   },
   methods: {
     mouseover: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_on';
     },
     mouseleave: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_off';
     }
   }
 });
+
+let userWrap = new Vue({
+  el: '.infoWrap',
+  data: {
+    items: [{
+      div: `<button id="userBack" tabindex="-1" onclick="uback();"><img src="../images/back_on.png" alt="戻るボタン"></button>`
+    }, {
+      div: `<div id="user" tabindex="-1">
+              <p tabindex="-1">
+                <span id="name"></span><br>さん
+              </p>
+            </div>`
+    }, {
+      div: `<div id="logintime" tabindex="-1">
+              <p tabindex="-1">
+                --- 日時 ---<br><span id="today" tabindex="-1"></span><br><span id="time" tabindex="-1"></span>
+              </p>
+            </div>`
+    }, {
+      div: `<div id="logout" class="lognone" tabindex="-1">
+              <form action="./logoutlib.php" method="post" tabindex="-1">
+              <input type="submit" name="logout" value="Sign Out" tabindex="-1">
+            </form>
+          </div>`
+    }]
+  }
+});
+
+document.getElementById('name').innerHTML = userName;
 
 // 惑星操作
 let btnWrapS = new Vue({
   el: "#stopWrap",
   data: {
-    imgChange: true
+    imgChange: '_off'
   },
   methods: {
     mouseover: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_on';
     },
     mouseleave: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_off';
     }
   }
 });
@@ -171,17 +303,18 @@ let btnWrapS = new Vue({
 let btnWrapA = new Vue({
   el: "#speechWrap",
   data: {
-    imgChange: true
+    imgChange: '_off'
   },
   methods: {
     mouseover: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_on';
     },
     mouseleave: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_off';
     }
   }
 });
+
 let mic = new Vue({
   el: "#mic",
   data: {
@@ -200,14 +333,14 @@ let mic = new Vue({
 let btnWrapO = new Vue({
   el: "#opewrapbtn",
   data: {
-    imgChange: true
+    imgChange: '_off'
   },
   methods: {
     mouseover: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_on';
     },
     mouseleave: function () {
-      this.imgChange = !this.imgChange;
+      this.imgChange = '_off';
     }
   }
 });
@@ -230,6 +363,7 @@ let bggo = new Vue({
     ]
   }
 });
+
 Vue.config.keyCodes = {
   su: 49,
   su: [49],
@@ -256,205 +390,34 @@ let body = new Vue({
   el: "#keyup",
   methods: {
     su: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/sun.html";
-      }, 410);
-      // console.log('a')
+      sunPage();
     },
     me: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/mercury.html";
-      }, 410);
+      mercuryPage();
     },
     v: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/venus.html";
-      }, 410);
+      venusPage();
     },
     e: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../php/earth.php";
-      }, 410);
+      earthPage();
     },
     mo: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/moon.html";
-      }, 410);
+      moonPage();
     },
     ma: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/mars.html";
-      }, 410);
+      marsPage();
     },
     j: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/jupiter.html";
-      }, 410);
+      jupiterPage();
     },
     sa: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/saturn.html";
-      }, 410);
+      saturnPage();
     },
     u: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/uranus.html";
-      }, 410);
+      uranusPage();
     },
     n: function () {
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/neptune.html";
-      }, 410);
+      neptunePage();
     }
   }
 });
@@ -1394,204 +1357,34 @@ function clickPosition(event) {
   if (interSu.length > 0 || interTSU.length > 0) {
     // 太陽
     // console.log('太陽');
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/sun.html";
-    }, 410);
+    sunPage();
   } else if (interMe.length > 0 || interTME.length > 0) {
     // 水星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/mercury.html";
-    }, 410);
+    mercuryPage();
   } else if (interVe.length > 0 || interTV.length > 0) {
     // 金星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/venus.html";
-    }, 410);
+    venusPage();
   } else if (interEa.length > 0 || interTE.length > 0) {
     // 地球
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../php/earth.php";
-    }, 410);
+    earthPage();
   } else if (interMa.length > 0 || interTMA.length > 0) {
     // 火星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/mars.html";
-    }, 410);
+    venusPage();
   } else if (interJu.length > 0 || interTJ.length > 0) {
     // 木星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/jupiter.html";
-    }, 410);
+    jupiterPage();
   } else if (interSa.length > 0 || interTSA.length > 0) {
     // 土星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/saturn.html";
-    }, 410);
+    saturnPage();
   } else if (interUr.length > 0 || interTU.length > 0) {
     // 天王星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/uranus.html";
-    }, 410);
+    uranusPage();
   } else if (interNe.length > 0 || interTN.length > 0) {
     // 海王星
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/neptune.html";
-    }, 410);
+    neptunePage();
   } else if (interMo.length > 0 || interTMO.length > 0) {
     // 月
-    document.querySelector(".inbg1").classList.remove("none");
-    document.querySelector(".inbg2").classList.remove("none");
-    document.querySelector(".inbg3").classList.remove("none");
-    document.querySelector(".inbg4").classList.remove("none");
-
-    document.querySelector(".inbg1").classList.add("inbgani1");
-    setTimeout(function () {
-      document.querySelector(".inbg2").classList.add("inbgani2");
-      setTimeout(function () {
-        document.querySelector(".inbg3").classList.add("inbgani3");
-        setTimeout(function () {
-          document.querySelector(".inbg4").classList.add("inbgani4");
-        }, 100);
-      }, 100);
-    }, 100);
-    setTimeout(function () {
-      location.href = "../html/moon.html";
-    }, 410);
+    moonPage();
   }
 }
 
@@ -1603,213 +1396,43 @@ recognition.addEventListener("result", function (e) {
   let speechtext = e.results[0][0].transcript;
   switch (speechtext) {
     case "太陽":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/sun.html";
-      }, 410);
+      sunPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "彗星":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/mercury.html";
-      }, 410);
+      mercuryPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "きんせい":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/venus.html";
-      }, 410);
+      venusPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "地球":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../php/earth.php";
-      }, 410);
+      earthPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "月":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/moon.html";
-      }, 410);
+      moonPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "火星":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/mars.html";
-      }, 410);
+      marsPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "木星":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/jupiter.html";
-      }, 410);
+      jupiterPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "土星":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/saturn.html";
-      }, 410);
+      saturnPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "天王星":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/uranus.html";
-      }, 410);
+      uranusPage();
       // console.log(e.results[0][0].transcript);
       break;
     case "海王星":
-      document.querySelector(".inbg1").classList.remove("none");
-      document.querySelector(".inbg2").classList.remove("none");
-      document.querySelector(".inbg3").classList.remove("none");
-      document.querySelector(".inbg4").classList.remove("none");
-
-      document.querySelector(".inbg1").classList.add("inbgani1");
-      setTimeout(function () {
-        document.querySelector(".inbg2").classList.add("inbgani2");
-        setTimeout(function () {
-          document.querySelector(".inbg3").classList.add("inbgani3");
-          setTimeout(function () {
-            document.querySelector(".inbg4").classList.add("inbgani4");
-          }, 100);
-        }, 100);
-      }, 100);
-      setTimeout(function () {
-        location.href = "../html/neptune.html";
-      }, 410);
+      neptunePage();
       // console.log(e.results[0][0].transcript);
       break;
     default:

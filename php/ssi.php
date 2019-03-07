@@ -35,7 +35,9 @@
     <!-- operationmain -->
     <button id="opeBack" tabindex="-1" onclick="bbtn();" v-html="opeback"></button>
     <div class="opetitle" tabindex="-1">
-      <h1 tabindex="-1">操作説明</h1>
+      <h1 tabindex="-1">
+        {{ opetitle }}
+      </h1>
     </div>
     <div class="operationposi" tabindex="-1">
       <!-- 1ページ目 -->
@@ -57,50 +59,35 @@
 
   <!-- ユーザ詳細など -->
   <div class="infoWrap userinfo userOut" tabindex="-1">
-    <button id="userBack" tabindex="-1" onclick="uback();"><img src="../images/back_on.png" alt="戻るボタン"></button>
-    <div id="user" tabindex="-1">
-      <p tabindex="-1"><?php echo $_SESSION["NAME"]; ?><br><span tabindex="-1">さん</span></p>
-    </div>
-    <div id="logintime" tabindex="-1">
-      <p tabindex="-1">--- 日時 ---<br><span id="today" tabindex="-1"></span><br><span id="time" tabindex="-1"></span></p>
-    </div>
-    <div id="logout" class="lognone" tabindex="-1">
-      <form action="./logoutlib.php" method="post" tabindex="-1">
-        <input type="submit" name="logout" value="Sign Out" tabindex="-1">
-      </form>
-    </div>
+    <div v-for="item in items" v-html="item.div"></div>
   </div>
 
   <div id="btnWrap">
     <!-- ユーザボタン -->
     <div id="userWrap" tabindex="-1">
       <button class="infoBtn userBtn" tabindex="-1" onclick="ubtn();">
-        <img src="../images/user_off.png" alt="ユーザー情報" tabindex="-1" v-on:mouseover="mouseover" v-if="imgChange">
-        <img src="../images/user_on.png" alt="ユーザー情報" tabindex="-1" v-on:mouseleave="mouseleave" v-else>
+        <img :src="'../images/user' + imgChange + '.png'" alt="ユーザー情報" tabindex="-1" v-on:mouseover="mouseover"  v-on:mouseleave="mouseleave">
       </button>
     </div>
 
     <!-- ストップボタン -->
     <div id="stopWrap" tabindex="-1">
       <button class="infoBtn stopBtn" tabindex="-1" onclick="sbtn();">
-        <img src="../images/stop_off.png" alt="画面切り替え" tabindex="-1" v-on:mouseover="mouseover" v-if="imgChange">
-        <img src="../images/stop_on.png" alt="画面切り替え" tabindex="-1" v-on:mouseleave="mouseleave" v-else>
+        <img :src="'../images/stop' + imgChange + '.png'" alt="画面切り替え" tabindex="-1" v-on:mouseover="mouseover"  v-on:mouseleave="mouseleave">
       </button>
     </div>
 
     <!-- Web Speech API ボタン -->
     <div id="speechWrap" tabindex="-1" onclick="abtn();">
       <button class="infoBtn speechBtn" tabindex="-1">
-        <img src="../images/speech_off.png" alt="音声操作" tabindex="-1" v-on:mouseover="mouseover" v-if="imgChange">
-        <img src="../images/speech_on.png" alt="音声操作" tabindex="-1" v-on:mouseleave="mouseleave" v-else>
+        <img :src="'../images/speech' + imgChange + '.png'" alt="音声操作" tabindex="-1" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave">
       </button>
     </div>
 
     <!-- 操作説明ボタン -->
     <div id="opewrapbtn" class="operationBtn" tabindex="-1" onclick="obtn();">
       <button class="infoBtn opeBtn" tabindex="-1">
-        <img src="../images/operation_off.png" alt="操作説明" tabindex="-1" v-on:mouseover="mouseover" v-if="imgChange">
-        <img src="../images/operation_on.png" alt="操作説明" tabindex="-1" v-on:mouseleave="mouseleave" v-else>
+        <img :src="'../images/operation' + imgChange + '.png'" alt="操作説明" tabindex="-1" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave">
       </button>
     </div>
   </div>
@@ -120,6 +107,7 @@
   <script src="../js/audioManager.min.js"></script>
   <script>
     let backcnt = <?php echo $backcnt; ?>;
+    let userName = '<?php echo $_SESSION["NAME"]; ?>';
   </script>
   <script src="../js/min/all.min.js"></script>
 </body>
