@@ -128,3 +128,6 @@ planetVue.page2 = `<div class="title">
                      <br>
                      太陽は50億年水素を燃やし続けて、その後ガスを放出し、赤色巨星となる。
                    </p>`
+
+qr.planet = 'sun'
+qr.planetQR = '太陽QRコード'

@@ -168,3 +168,7 @@ main {
   background: #0ff;
   color: #000;
 }
+
+.fales {
+  cursor: pointer;
+}

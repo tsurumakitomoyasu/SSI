@@ -172,14 +172,9 @@ let operation = new Vue({
                 </li>
                 <div class="clear" tabindex="-1"></div>
                 <li tabindex="-1">
-                  <img src="../images/stop_off.png" alt="ストップボタン" tabindex="-1">惑星の動きを制御出来る。(3 段階)<br>Sキーでも可能。
+                  <img src="../images/stop_off.png" alt="ストップボタン" tabindex="-1">惑星の動きを制御出来る。(3段階)<br>Sキーでも可能。
                 </li>
                 <div class="clear" tabindex="-1"></div>
-              </ul>
-            </div>`,
-
-    page3: `<div class="list">
-              <ul tabindex="-1">
                 <li tabindex="-1">
                   <img src="../images/speech_off.png" alt="音声認識ボタン" tabindex="-1">音声入力によって惑星選択が出来る。<br>Dキーでも可能。
                 </li>
@@ -187,13 +182,16 @@ let operation = new Vue({
                 <li tabindex="-1">
                   <img src="../images/operation_off.png" alt="操作説明ボタン" tabindex="-1">操作説明表示が出来る。 <br>Fキーでも可能。
                 </li>
-                <div class="clear" tabindex="-1"></div>
+                <li>
+                  <i class="fas fa-vr-cardboard fa-4x"></i>
+                  <br>
+                  VR機能あり！（使用には携帯が必要です）
+                </li>
               </ul>
             </div>`,
 
     p1: true,
     p2: false,
-    p3: false,
     pbtn: false,
     nbtn: true,
     opeback: '<img src="../images/ope_back.png" alt="戻るボタン" tabindex="-1">',
@@ -215,10 +213,6 @@ let operation = new Vue({
         this.pbtn = !this.pbtn;
         this.p1 = !this.p1;
         this.p2 = !this.p2;
-      } else if (this.p3 == true) {
-        // 3ページ目
-        this.p2 = !this.p2;
-        this.p3 = !this.p3;
         this.nbtn = !this.nbtn;
       }
     },
@@ -228,10 +222,6 @@ let operation = new Vue({
         this.pbtn = !this.pbtn;
         this.p1 = !this.p1;
         this.p2 = !this.p2;
-      } else if (this.p2 == true) {
-        // 3ページ目
-        this.p2 = !this.p2;
-        this.p3 = !this.p3;
         this.nbtn = !this.nbtn;
       }
     }
@@ -1354,37 +1344,37 @@ function clickPosition(event) {
   let interTN = raycaster.intersectObjects(targetTextNeptune);
 
   //マウス操作
-  if (interSu.length > 0 || interTSU.length > 0) {
-    // 太陽
-    // console.log('太陽');
-    sunPage();
-  } else if (interMe.length > 0 || interTME.length > 0) {
-    // 水星
-    mercuryPage();
-  } else if (interVe.length > 0 || interTV.length > 0) {
-    // 金星
-    venusPage();
-  } else if (interEa.length > 0 || interTE.length > 0) {
-    // 地球
-    earthPage();
-  } else if (interMa.length > 0 || interTMA.length > 0) {
-    // 火星
-    venusPage();
-  } else if (interJu.length > 0 || interTJ.length > 0) {
-    // 木星
-    jupiterPage();
-  } else if (interSa.length > 0 || interTSA.length > 0) {
-    // 土星
-    saturnPage();
+  if (interNe.length > 0 || interTN.length > 0) {
+    // 海王星
+    neptunePage();
   } else if (interUr.length > 0 || interTU.length > 0) {
     // 天王星
     uranusPage();
-  } else if (interNe.length > 0 || interTN.length > 0) {
-    // 海王星
-    neptunePage();
+  } else if (interSa.length > 0 || interTSA.length > 0) {
+    // 土星
+    saturnPage();
+  } else if (interJu.length > 0 || interTJ.length > 0) {
+    // 木星
+    jupiterPage();
+  } else if (interMa.length > 0 || interTMA.length > 0) {
+    // 火星
+    venusPage();
   } else if (interMo.length > 0 || interTMO.length > 0) {
     // 月
     moonPage();
+  } else if (interEa.length > 0 || interTE.length > 0) {
+    // 地球
+    earthPage();
+  } else if (interVe.length > 0 || interTV.length > 0) {
+    // 金星
+    venusPage();
+  } else if (interMe.length > 0 || interTME.length > 0) {
+    // 水星
+    mercuryPage();
+  } else if (interSu.length > 0 || interTSU.length > 0) {
+    // 太陽
+    // console.log('太陽');
+    sunPage();
   }
 }
 
@@ -1399,7 +1389,15 @@ recognition.addEventListener("result", function (e) {
       sunPage();
       // console.log(e.results[0][0].transcript);
       break;
+    case "3":
+      sunPage();
+      // console.log(e.results[0][0].transcript);
+      break;
     case "彗星":
+      mercuryPage();
+      // console.log(e.results[0][0].transcript);
+      break;
+    case "マーキュリー":
       mercuryPage();
       // console.log(e.results[0][0].transcript);
       break;
@@ -1407,7 +1405,15 @@ recognition.addEventListener("result", function (e) {
       venusPage();
       // console.log(e.results[0][0].transcript);
       break;
+    case "ヴィーナス":
+      venusPage();
+      // console.log(e.results[0][0].transcript);
+      break;
     case "地球":
+      earthPage();
+      // console.log(e.results[0][0].transcript);
+      break;
+    case "アース":
       earthPage();
       // console.log(e.results[0][0].transcript);
       break;
@@ -1415,7 +1421,19 @@ recognition.addEventListener("result", function (e) {
       moonPage();
       // console.log(e.results[0][0].transcript);
       break;
+    case "ムーン":
+      moonPage();
+      // console.log(e.results[0][0].transcript);
+      break;
     case "火星":
+      marsPage();
+      // console.log(e.results[0][0].transcript);
+      break;
+    case "まず":
+      marsPage();
+      // console.log(e.results[0][0].transcript);
+      break;
+    case "まーず":
       marsPage();
       // console.log(e.results[0][0].transcript);
       break;
@@ -1423,7 +1441,15 @@ recognition.addEventListener("result", function (e) {
       jupiterPage();
       // console.log(e.results[0][0].transcript);
       break;
+    case "ジュピター":
+      jupiterPage();
+      // console.log(e.results[0][0].transcript);
+      break;
     case "土星":
+      saturnPage();
+      // console.log(e.results[0][0].transcript);
+      break;
+    case "サターン":
       saturnPage();
       // console.log(e.results[0][0].transcript);
       break;
@@ -1431,7 +1457,15 @@ recognition.addEventListener("result", function (e) {
       uranusPage();
       // console.log(e.results[0][0].transcript);
       break;
+    case "ウラヌス":
+      uranusPage();
+      // console.log(e.results[0][0].transcript);
+      break;
     case "海王星":
+      neptunePage();
+      // console.log(e.results[0][0].transcript);
+      break;
+    case "ネプチューン":
       neptunePage();
       // console.log(e.results[0][0].transcript);
       break;

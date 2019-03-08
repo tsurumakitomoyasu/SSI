@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>地球/EARTH</title>
-  <link rel="stylesheet" href="../css/earth.css">
+  <link rel="stylesheet" href="../css/earth.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
@@ -22,8 +22,23 @@
   <!-- BACK -->
   <div id="backBtn" v-html="back"></div>
 
+  <!-- VR -->
+  <div id="vr">
+    <button v-bind:class="vr" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave" v-on:click="vrIn" v-html="vr_i"></button>
+  </div>
+
+  <!-- QRcode -->
+  <div id="qr" :class="qrdisplay">
+    <div id="msc" :class="qrAni" @click="qrClick">
+      <div id="code" :class="qrImg">
+        <img v-bind:src="'../images/qr/' + planet + '.png'" :alt="planetQR">
+      </div>
+    </div>
+  </div>
+
   <!-- 描画 -->
   <canvas id="stage"></canvas>
+
   <!-- 説明 -->
   <div id="info">
     <header id="maintitle" v-html="maintitle"></header>
@@ -48,11 +63,11 @@
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/vue.min.js"></script>
-  <script src="../js/min/planet.min.js"></script>
+  <script src="../js/planet.js"></script>
   <script>
     let userName = '<?php echo $_SESSION["NAME"]; ?>';
   </script>
-  <script src="../js/min/earth.min.js"></script>
+  <script src="../js/earth.js"></script>
   <script>
     document.getElementById('name').innerHTML = userName;
   </script>

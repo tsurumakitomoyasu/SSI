@@ -123,3 +123,6 @@ planetVue.page2 = `<div class="title">
                      </p>
                    </div>
                    <div class="clear"></div>`
+
+qr.planet = 'neptune'
+qr.planetQR = '海王星QRコード'

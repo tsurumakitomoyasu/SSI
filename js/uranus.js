@@ -135,3 +135,6 @@ planetVue.page2 = `<div>
                      </p>
                    </div>
                    <div class="clear"></div>`
+
+qr.planet = 'uranus'
+qr.planetQR = '天王星QRコード'

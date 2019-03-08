@@ -127,3 +127,6 @@ planetVue.page2 = `<div>
                      </p>
                    </div>
                    <div class="clear"></div>`
+
+qr.planet = 'mercury'
+qr.planetQR = '水星QRコード'

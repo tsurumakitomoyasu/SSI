@@ -57,7 +57,7 @@
   <script>
     let msgAns = <?php echo $msgAns; ?>
   </script>
-  <script src="../js/min/loginregist.min.js"></script>
+  <script src="../js/loginregist.js"></script>
 </body>
 
 </html>

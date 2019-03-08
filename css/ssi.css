@@ -494,12 +494,16 @@ button {
   z-index: 30;
   margin: 0 auto;
   width: 50%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .list img {
   margin-right: 2vw;
   padding: .3vw;
-  width: 12%;
+  width: 11%;
   float: left;
   border: solid .1vw #0ff;
 }
@@ -509,16 +513,20 @@ button {
 }
 
 .list ul {
-  margin-top: 15vh;
+  margin-top: 10vh;
   list-style-type: none;
 }
 
 .list li {
-  margin: 5vw 0;
+  margin: 1vw 0;
   padding: 1vh;
   color: #fff;
-  font-size: 2vw;
+  font-size: 1.5vw;
   letter-spacing: .2em;
+}
+
+.list i {
+  margin-left: 37%;
 }
 
 #opeBack {

@@ -44,8 +44,6 @@
       <div class="page1" tabindex="-1" v-html="page1" v-show="p1"></div>
       <!-- 2ページ目 -->
       <div class="page2" tabindex="-1" v-html="page2" v-show="p2"></div>
-      <!-- 3ページ目 -->
-      <div class="page3" tabindex="-1" v-html="page3" v-show="p3"></div>
     </div>
 
     <!-- prev -->
@@ -109,7 +107,7 @@
     let backcnt = <?php echo $backcnt; ?>;
     let userName = '<?php echo $_SESSION["NAME"]; ?>';
   </script>
-  <script src="../js/min/all.min.js"></script>
+  <script src="../js/all.js"></script>
 </body>
 
 </html>

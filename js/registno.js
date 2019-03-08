@@ -11,6 +11,19 @@ function eventClick() {
   location.href = "./login.php";
 };
 
+let background = new Vue({
+  el: '#bgstar',
+  data: {
+    items: [{
+      bg: `<div class="stars"></div>`
+    }, {
+      bg: `<div class="twinkling"></div>`
+    }, {
+      bg: `<div class="clouds"></div>`
+    }]
+  }
+})
+
 let registno = new Vue({
   el: "#inWrap",
   data: {

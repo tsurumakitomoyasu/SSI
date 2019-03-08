@@ -104,3 +104,44 @@ window.location.hash = "#noback";
 window.onhashchange = function () {
   window.location.hash = "#noback";
 };
+
+let vr = new Vue({
+  el: '#vr',
+  data: {
+    vr: '',
+    vr_i: `<i class="fas fa-vr-cardboard fa-4x"></i>`,
+  },
+  methods: {
+    mouseover: function () {
+      this.vr = 'vrani'
+    },
+    mouseleave: function () {
+      this.vr = ''
+    },
+    vrIn: function () {
+      qr.qrdisplay = 'dis'
+      qr.qrAni = ''
+      qr.qrImg = 'qrIn'
+    }
+  },
+});
+
+let qr = new Vue({
+  el: '#qr',
+  data: {
+    qrdisplay: 'disnone',
+    qrAni: 'none',
+    qrImg: 'qrOut',
+    planet: '',
+    planetQR: ''
+  },
+  methods: {
+    qrClick: function () {
+      setTimeout(() => {
+        this.qrdisplay = 'disnone'
+      }, 600)
+      this.qrAni = 'none'
+      this.qrImg = 'qrOut'
+    }
+  }
+})

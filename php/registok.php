@@ -10,9 +10,10 @@
 
 <body>
   <!-- background -->
-  <div class="stars"></div>
-  <div class="twinkling"></div>
-  <div class="clouds"></div>
+  <div id="bgstar">
+    <div v-for="item in items" v-html="item.bg"></div>
+  </div>
+
   <div id="inWrap">
     <header>
       <h1>

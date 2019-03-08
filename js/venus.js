@@ -131,3 +131,6 @@ planetVue.page2 = `<div class="title">
                      </p>
                    </div>
                    <div class="clear"></div>`
+
+qr.planet = 'venus'
+qr.planetQR = '金星QRコード'
