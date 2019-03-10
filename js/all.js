@@ -412,6 +412,48 @@ let body = new Vue({
   }
 });
 
+let vr = new Vue({
+  el: '#vr',
+  data: {
+    vr: '',
+    vr_i: `<i class="fas fa-vr-cardboard fa-5x"></i>`,
+  },
+  methods: {
+    mouseover: function () {
+      this.vr = 'vrani'
+    },
+    mouseleave: function () {
+      this.vr = ''
+    },
+    vrIn: function () {
+      qr.qrdisplay = 'dis'
+      qr.qrAni = ''
+      qr.qrImg = 'qrIn'
+      document.getElementById('stage').classList.remove('plamouse');
+    }
+  },
+});
+
+let qr = new Vue({
+  el: '#qr',
+  data: {
+    qrdisplay: 'disnone',
+    qrAni: 'none',
+    qrImg: 'qrOut',
+    img: `<img src="../images/qr/planet.png" alt=" 惑星QRコード">`
+  },
+  methods: {
+    qrClick: function () {
+      setTimeout(() => {
+        this.qrdisplay = 'disnone'
+      }, 600)
+      this.qrAni = 'none'
+      this.qrImg = 'qrOut'
+      document.getElementById('stage').classList.add('plamouse');
+    }
+  }
+});
+
 // 戻り禁止
 window.location.hash = "#noback";
 window.onhashchange = function () {

@@ -98,6 +98,18 @@
     <div tabindex="-1" v-for="item in items" v-html="item.bg"></div>
   </div>
 
+  <!-- VR -->
+  <div id="vr">
+    <button v-bind:class="vr" v-on:mouseover="mouseover" v-on:mouseleave="mouseleave" v-on:click="vrIn" v-html="vr_i"></button>
+  </div>
+
+  <!-- QRcode -->
+  <div id="qr" :class="qrdisplay">
+    <div id="msc" :class="qrAni" @click="qrClick">
+      <div id="code" :class="qrImg" v-html="img"></div>
+    </div>
+  </div>
+
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>

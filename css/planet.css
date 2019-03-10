@@ -309,7 +309,7 @@ h1 {
 }
 
 .qrIn {
-  animation: qrIn 500ms cubic-bezier(.38, -0.5, .62, .89) 0s forwards;
+  animation: qrIn 500ms cubic-bezier(.74, .82, .6, 1.32) 0s forwards;
 }
 
 @keyframes qrIn {
