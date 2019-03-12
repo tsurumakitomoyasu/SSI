@@ -1,3 +1,4 @@
+// ページ遷移
 let loadingbg = document.getElementsByClassName('loadingbg');
 setTimeout(function () {
   document.getElementById('loadingbg1').classList.add('loadingani1');
@@ -13,6 +14,7 @@ setTimeout(function () {
   }
 }, 2200);
 
+// メッシュ作成s
 window.addEventListener('load', init);
 let scene;
 let camera;
@@ -63,7 +65,7 @@ function init() {
   }
 };
 
-let moonText = new Vue({
+let moonText = new Vue({ // 惑星名
   el: '#planetloadWrap',
   data: {
     moon: [{
@@ -76,7 +78,7 @@ let moonText = new Vue({
   }
 });
 
-let maintitle = new Vue({
+let maintitle = new Vue({ // タイトル
   el: '#maintitle',
   data: {
     maintitle: '<h1>月/MOON</h1>'

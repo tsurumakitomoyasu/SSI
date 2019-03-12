@@ -21,8 +21,7 @@ function planetInbg() {
   }, 100);
 };
 
-// 太陽
-function sunPage() {
+function sunPage() { // 太陽
   planetInbg();
   setTimeout(function () {
     location.href = "../html/sun.html";
@@ -30,72 +29,63 @@ function sunPage() {
   // console.log('a')
 };
 
-// 水星
-function mercuryPage() {
+function mercuryPage() { // 水星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/mercury.html";
   }, 410);
 };
 
-// 金星
-function venusPage() {
+function venusPage() { // 金星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/venus.html";
   }, 410);
 };
 
-// 地球
-function earthPage() {
+function earthPage() { // 地球
   planetInbg();
   setTimeout(function () {
     location.href = "../php/earth.php";
   }, 410);
 };
 
-// 月
-function moonPage() {
+function moonPage() { // 月
   planetInbg();
   setTimeout(function () {
     location.href = "../html/moon.html";
   }, 410);
 };
 
-// 火星
-function marsPage() {
+function marsPage() { // 火星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/mars.html";
   }, 410);
 };
 
-// 木星
-function jupiterPage() {
+function jupiterPage() { // 木星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/jupiter.html";
   }, 410);
 };
 
-// 土星
-function saturnPage() {
+function saturnPage() { // 土星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/saturn.html";
   }, 410);
 };
 
-// 天王星
-function uranusPage() {
+function uranusPage() { // 天王星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/uranus.html";
   }, 410);
 };
 
-// 海王星
-function neptunePage() {
+function neptunePage() { // 海王星
   planetInbg();
   setTimeout(function () {
     location.href = "../html/neptune.html";
@@ -131,7 +121,7 @@ setTimeout(function () {
   document.getElementById("stage").classList.add("moveani");
 }, 1500);
 
-// ****************** vue ******************
+// ****************** Vue ******************
 // ローディング
 let loading = new Vue({
   el: "#loading",
@@ -150,6 +140,7 @@ let operation = new Vue({
   el: "#operationwrap",
   data: {
     opetitle: `操作説明`,
+    // 1ページ目
     page1: `<div class="operation" tabindex="-1">
               <img src="../images/operation_one.png" alt="クリック画像" tabindex="-1">
               <div class="text" tabindex="-1">
@@ -165,6 +156,7 @@ let operation = new Vue({
             </div>
             <div class="clear" tabindex ="-1"></div>`,
 
+    // 2ページ目
     page2: `<div class="list">
               <ul>
                 <li tabindex="-1">
@@ -196,12 +188,15 @@ let operation = new Vue({
     nbtn: true,
     opeback: '<img src="../images/ope_back.png" alt="戻るボタン" tabindex="-1">',
     items: [{
+        // 星
         bg: '<div class="stars" tabindex="-1"></div>'
       },
       {
+        // 動かし
         bg: '<div class="twinkling" tabindex="-1"></div>'
       },
       {
+        // 雲
         bg: '<div class="clouds" tabindex="-1"></div>'
       }
     ]
@@ -248,20 +243,24 @@ let userWrap = new Vue({
   el: '.infoWrap',
   data: {
     items: [{
+      // 戻るボタン
       div: `<button id="userBack" tabindex="-1" onclick="uback();"><img src="../images/back_on.png" alt="戻るボタン"></button>`
     }, {
+      // ユーザネーム
       div: `<div id="user" tabindex="-1">
               <p tabindex="-1">
                 <span id="name"></span><br>さん
               </p>
             </div>`
     }, {
+      // 日時
       div: `<div id="logintime" tabindex="-1">
               <p tabindex="-1">
                 --- 日時 ---<br><span id="today" tabindex="-1"></span><br><span id="time" tabindex="-1"></span>
               </p>
             </div>`
     }, {
+      // ログアウト
       div: `<div id="logout" class="lognone" tabindex="-1">
               <form action="./logoutlib.php" method="post" tabindex="-1">
               <input type="submit" name="logout" value="Sign Out" tabindex="-1">
@@ -308,6 +307,7 @@ let btnWrapA = new Vue({
 let mic = new Vue({
   el: "#mic",
   data: {
+    // マイク
     mic: `<div class="masc none" tabindex="-1"></div>
             <div class = "micWrap micOut" tabindex = "-1">
               <p>どの<span>惑星</span>を選びますか?</p>
@@ -335,6 +335,7 @@ let btnWrapO = new Vue({
   }
 });
 
+// ページ遷移
 let bggo = new Vue({
   el: "#bggo",
   data: {
@@ -412,11 +413,12 @@ let body = new Vue({
   }
 });
 
+// VR
 let vr = new Vue({
   el: '#vr',
   data: {
     vr: '',
-    vr_i: `<i class="fas fa-vr-cardboard fa-5x"></i>`,
+    vr_i: `<i class="fas fa-vr-cardboard"></i>`,
   },
   methods: {
     mouseover: function () {
@@ -434,6 +436,7 @@ let vr = new Vue({
   },
 });
 
+// QR
 let qr = new Vue({
   el: '#qr',
   data: {
@@ -809,7 +812,15 @@ loadQueue.on("complete", function () {
   textureUniverse.needsUpdate = true;
   textureMoon.needsUpdate = true;
 
-  sun = planetFactory(textureSun, 50, 40, 40, sunX, sunZ, "isSun");
+  sun = planetFactory(
+    textureSun,
+    50,
+    40,
+    40,
+    sunX,
+    sunZ,
+    "isSun"
+  );
   mercury = planetFactory(
     textureMercury,
     5,
@@ -819,9 +830,33 @@ loadQueue.on("complete", function () {
     mercuryZ,
     "isMercury"
   );
-  venus = planetFactory(textureVenus, 10, 20, 20, venusX, venusZ, "isVenus");
-  earth = planetFactory(textureEarth, 13, 20, 20, earthX, earthZ, "isEarth");
-  mars = planetFactory(textureMars, 7, 20, 20, marsX, marsZ, "isMars");
+  venus = planetFactory(
+    textureVenus,
+    10,
+    20,
+    20,
+    venusX,
+    venusZ,
+    "isVenus"
+  );
+  earth = planetFactory(
+    textureEarth,
+    13,
+    20,
+    20,
+    earthX,
+    earthZ,
+    "isEarth"
+  );
+  mars = planetFactory(
+    textureMars,
+    7,
+    20,
+    20,
+    marsX,
+    marsZ,
+    "isMars"
+  );
   jupiter = planetFactory(
     textureJupiter,
     40,
@@ -858,8 +893,24 @@ loadQueue.on("complete", function () {
     neptuneZ,
     "isNeptune"
   );
-  universe = planetFactory(textureUniverse, 10000, 20, 20, 0, 0, "isUniverse");
-  moon = planetFactory(textureMoon, 5, 20, 20, 0, 0, "isMoon");
+  universe = planetFactory(
+    textureUniverse,
+    10000,
+    20,
+    20,
+    0,
+    0,
+    "isUniverse"
+  );
+  moon = planetFactory(
+    textureMoon,
+    5,
+    20,
+    20,
+    0,
+    0,
+    "isMoon"
+  );
   render();
 });
 
@@ -884,7 +935,7 @@ controls.maxDistance = 800; //カメラ最大値
 controls.enableDamping = true; //滑らか
 controls.enableKeys = false; //矢印
 controls.enablePan = false; //水平方向
-controls.dampingFactor = 0.1;
+controls.dampingFactor = 0.1; // 動く速さ
 
 // レンダラー
 renderer = new THREE.WebGLRenderer({
@@ -912,8 +963,7 @@ function planetFactory(
     sphereNeptune,
     ring;
 
-  if (planetName === "isSun") {
-    //太陽
+  if (planetName === "isSun") { //太陽
     sphere = new THREE.Group();
 
     sphere = new THREE.Mesh(
@@ -928,8 +978,7 @@ function planetFactory(
     targetSun.push(sphere);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isMercury") {
-    // 水星
+  } else if (planetName === "isMercury") { // 水星
     sphere = new THREE.Group();
     sphereMercury = new THREE.Group();
 
@@ -945,9 +994,7 @@ function planetFactory(
     targetMercury.push(sphereMercury);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isVenus") {
-    // 金星
-    //グループ化
+  } else if (planetName === "isVenus") { // 金星
     sphere = new THREE.Group();
     sphereVenus = new THREE.Group();
 
@@ -963,8 +1010,7 @@ function planetFactory(
     targetVenus.push(sphereVenus);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isEarth") {
-    // 地球
+  } else if (planetName === "isEarth") { // 地球
     sphere = new THREE.Group();
     sphereEarth = new THREE.Group();
 
@@ -990,8 +1036,7 @@ function planetFactory(
     targetEarth.push(sphereEarth);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isMoon") {
-    // 月
+  } else if (planetName === "isMoon") { // 月
     sphere = new THREE.Group();
 
     sphere = new THREE.Mesh(
@@ -1005,8 +1050,7 @@ function planetFactory(
     targetMoon.push(sphere);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isMars") {
-    // 火星
+  } else if (planetName === "isMars") { // 火星
     sphere = new THREE.Group();
     sphereMars = new THREE.Group();
 
@@ -1022,8 +1066,7 @@ function planetFactory(
     targetMars.push(sphereMars);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isJupiter") {
-    // 木星
+  } else if (planetName === "isJupiter") { // 木星
     sphere = new THREE.Group();
     sphereJupiter = new THREE.Group();
 
@@ -1039,8 +1082,7 @@ function planetFactory(
     targetJupiter.push(sphereJupiter);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isSaturn") {
-    // 土星
+  } else if (planetName === "isSaturn") { // 土星
     sphere = new THREE.Group();
     sphereSaturn = new THREE.Group();
 
@@ -1051,8 +1093,7 @@ function planetFactory(
       })
     );
 
-    // 輪
-    ring = new THREE.Mesh(
+    ring = new THREE.Mesh( // 輪
       new THREE.TorusGeometry(22, 5, 2, 1000),
       new THREE.MeshPhongMaterial({
         map: texture,
@@ -1069,8 +1110,7 @@ function planetFactory(
     targetSaturn.push(sphereSaturn);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isUranus") {
-    // 天王星
+  } else if (planetName === "isUranus") { // 天王星
     sphere = new THREE.Group();
     sphereUranus = new THREE.Group();
 
@@ -1081,8 +1121,7 @@ function planetFactory(
       })
     );
 
-    // 輪
-    ring = new THREE.Mesh(
+    ring = new THREE.Mesh( // 輪
       new THREE.TorusGeometry(18, 5, 2, 1000),
       new THREE.MeshPhongMaterial({
         map: texture,
@@ -1099,8 +1138,7 @@ function planetFactory(
     targetUranus.push(sphereUranus);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isNeptune") {
-    // 海王星
+  } else if (planetName === "isNeptune") { // 海王星
     sphere = new THREE.Group();
     sphereNeptune = new THREE.Group();
 
@@ -1116,8 +1154,7 @@ function planetFactory(
     targetNeptune.push(sphereNeptune);
 
     sphere.position.set(x, 0, z);
-  } else if (planetName === "isUniverse") {
-    // 宇宙
+  } else if (planetName === "isUniverse") { // 宇宙
     sphere = new THREE.Mesh(
       new THREE.SphereGeometry(radius, widthSegments, heightSegments),
       new THREE.MeshLambertMaterial({
@@ -1250,10 +1287,8 @@ function render() {
   uranus.position.z = Math.sin(THREE.Math.degToRad(uranusTheta)) * uranusZ;
   neptune.position.x = Math.cos(THREE.Math.degToRad(neptuneTheta)) * neptuneX;
   neptune.position.z = Math.sin(THREE.Math.degToRad(neptuneTheta)) * neptuneZ;
-  moon.position.x =
-    Math.cos(THREE.Math.degToRad(moonTheta)) * moonX + earth.position.x;
-  moon.position.z =
-    Math.sin(THREE.Math.degToRad(moonTheta)) * moonZ + earth.position.z;
+  moon.position.x = Math.cos(THREE.Math.degToRad(moonTheta)) * moonX + earth.position.x;
+  moon.position.z = Math.sin(THREE.Math.degToRad(moonTheta)) * moonZ + earth.position.z;
 
   controls.update();
   renderer.render(scene, camera);
@@ -1386,35 +1421,25 @@ function clickPosition(event) {
   let interTN = raycaster.intersectObjects(targetTextNeptune);
 
   //マウス操作
-  if (interNe.length > 0 || interTN.length > 0) {
-    // 海王星
+  if (interNe.length > 0 || interTN.length > 0) { // 海王星
     neptunePage();
-  } else if (interUr.length > 0 || interTU.length > 0) {
-    // 天王星
+  } else if (interUr.length > 0 || interTU.length > 0) { // 天王星
     uranusPage();
-  } else if (interSa.length > 0 || interTSA.length > 0) {
-    // 土星
+  } else if (interSa.length > 0 || interTSA.length > 0) { // 土星
     saturnPage();
-  } else if (interJu.length > 0 || interTJ.length > 0) {
-    // 木星
+  } else if (interJu.length > 0 || interTJ.length > 0) { // 木星
     jupiterPage();
-  } else if (interMa.length > 0 || interTMA.length > 0) {
-    // 火星
+  } else if (interMa.length > 0 || interTMA.length > 0) { // 火星
     venusPage();
-  } else if (interMo.length > 0 || interTMO.length > 0) {
-    // 月
+  } else if (interMo.length > 0 || interTMO.length > 0) { // 月
     moonPage();
-  } else if (interEa.length > 0 || interTE.length > 0) {
-    // 地球
+  } else if (interEa.length > 0 || interTE.length > 0) { // 地球
     earthPage();
-  } else if (interVe.length > 0 || interTV.length > 0) {
-    // 金星
+  } else if (interVe.length > 0 || interTV.length > 0) { // 金星
     venusPage();
-  } else if (interMe.length > 0 || interTME.length > 0) {
-    // 水星
+  } else if (interMe.length > 0 || interTME.length > 0) { // 水星
     mercuryPage();
-  } else if (interSu.length > 0 || interTSU.length > 0) {
-    // 太陽
+  } else if (interSu.length > 0 || interTSU.length > 0) { // 太陽
     // console.log('太陽');
     sunPage();
   }
@@ -1428,99 +1453,97 @@ recognition.addEventListener("result", function (e) {
   let speechtext = e.results[0][0].transcript;
   switch (speechtext) {
     case "太陽":
-      sunPage();
       // console.log(e.results[0][0].transcript);
+      sunPage();
       break;
     case "3":
-      sunPage();
       // console.log(e.results[0][0].transcript);
+      sunPage();
       break;
     case "彗星":
-      mercuryPage();
       // console.log(e.results[0][0].transcript);
+      mercuryPage();
       break;
     case "マーキュリー":
-      mercuryPage();
       // console.log(e.results[0][0].transcript);
+      mercuryPage();
       break;
     case "きんせい":
-      venusPage();
       // console.log(e.results[0][0].transcript);
+      venusPage();
       break;
     case "ヴィーナス":
-      venusPage();
       // console.log(e.results[0][0].transcript);
+      venusPage();
       break;
     case "地球":
-      earthPage();
       // console.log(e.results[0][0].transcript);
+      earthPage();
       break;
     case "アース":
-      earthPage();
       // console.log(e.results[0][0].transcript);
+      earthPage();
       break;
     case "月":
-      moonPage();
       // console.log(e.results[0][0].transcript);
+      moonPage();
       break;
     case "ムーン":
-      moonPage();
       // console.log(e.results[0][0].transcript);
+      moonPage();
       break;
     case "火星":
-      marsPage();
       // console.log(e.results[0][0].transcript);
+      marsPage();
       break;
     case "まず":
-      marsPage();
       // console.log(e.results[0][0].transcript);
+      marsPage();
       break;
     case "まーず":
-      marsPage();
       // console.log(e.results[0][0].transcript);
+      marsPage();
       break;
     case "木星":
-      jupiterPage();
       // console.log(e.results[0][0].transcript);
+      jupiterPage();
       break;
     case "ジュピター":
-      jupiterPage();
       // console.log(e.results[0][0].transcript);
+      jupiterPage();
       break;
     case "土星":
-      saturnPage();
       // console.log(e.results[0][0].transcript);
+      saturnPage();
       break;
     case "サターン":
-      saturnPage();
       // console.log(e.results[0][0].transcript);
+      saturnPage();
       break;
     case "天王星":
-      uranusPage();
       // console.log(e.results[0][0].transcript);
+      uranusPage();
       break;
     case "ウラヌス":
-      uranusPage();
       // console.log(e.results[0][0].transcript);
+      uranusPage();
       break;
     case "海王星":
-      neptunePage();
       // console.log(e.results[0][0].transcript);
+      neptunePage();
       break;
     case "ネプチューン":
-      neptunePage();
       // console.log(e.results[0][0].transcript);
+      neptunePage();
       break;
-    default:
-      // その他
-      //alert(e.results[0][0].transcript);
+    default: // その他
+      // console.log(e.results[0][0].transcript);
       document.querySelector(".speechBtn").classList.remove("speechout");
       document.querySelector("#stage").classList.remove("speechopen");
       document.querySelector(".micWrap").classList.remove("micIn");
       document.querySelector(".micWrap").classList.add("micOut");
       document.querySelector(".masc").classList.add("none");
       clearTimeout(speechtime);
-      // console.log(e.results[0][0].transcript);
       break;
   }
 });
@@ -1533,8 +1556,7 @@ function clock() {
   document.getElementById("today").innerHTML = getToday();
 }
 
-// 時間
-function getNow() {
+function getNow() { // 時間
   let now = new Date();
   let hour = now.getHours();
   let min = now.getMinutes();
@@ -1550,8 +1572,7 @@ function getNow() {
   return totime;
 }
 
-// 日付
-function getToday() {
+function getToday() { // 日付
   let now = new Date();
   let mon = now.getMonth() + 1;
   let day = now.getDate();
@@ -1569,7 +1590,7 @@ function getToday() {
   return today;
 }
 
-// ******************AudioManager******************
+// ****************** AudioManager ******************
 manager = new AudioManager({
   useMicrophone: true,
   onEnterFrame: function () {

@@ -321,3 +321,7 @@ h1 {
     transform: translateY(0);
   }
 }
+
+#vr i {
+  font-size: 4.5vw;
+}

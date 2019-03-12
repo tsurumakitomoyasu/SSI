@@ -19,6 +19,7 @@
   <div id="bgstar">
     <div v-for="item in items" v-html="item.bg"></div>
   </div>
+  <!-- タイトル -->
   <header id="head">
     <h1>
       <div style="cursor: default;" v-if="titleChange" v-html="titleImg"></div>
@@ -34,6 +35,7 @@
           <div v-html="spase"></div>
         </div>
       </div>
+      <!-- ログインFROM -->
       <form action="./loginfile.php" method="POST">
         <table>
           <tr v-for="login in loginItems" v-html="login.input"></tr>
@@ -42,6 +44,7 @@
     </div>
     <div v-else>
       <div v-html="spase"></div>
+      <!-- アカウント作成FROM -->
       <form action="./registfile.php" method="POST">
         <table>
           <tr v-for="regist in registItems" v-html="regist.input"></tr>
@@ -57,7 +60,7 @@
   <script>
     let msgAns = <?php echo $msgAns; ?>
   </script>
-  <script src="../js/loginregist.js"></script>
+  <script src="../js/min/loginregist.min.js"></script>
 </body>
 
 </html>

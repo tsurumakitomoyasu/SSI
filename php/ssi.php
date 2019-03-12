@@ -60,6 +60,7 @@
     <div v-for="item in items" v-html="item.div"></div>
   </div>
 
+  <!-- ボタン類 -->
   <div id="btnWrap">
     <!-- ユーザボタン -->
     <div id="userWrap" tabindex="-1">
@@ -110,6 +111,7 @@
     </div>
   </div>
 
+  <!-- js -->
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/preloadjs-min.js"></script>
@@ -119,7 +121,7 @@
     let backcnt = <?php echo $backcnt; ?>;
     let userName = '<?php echo $_SESSION["NAME"]; ?>';
   </script>
-  <script src="../js/all.js"></script>
+  <script src="../js/min/all.min.js"></script>
 </body>
 
 </html>

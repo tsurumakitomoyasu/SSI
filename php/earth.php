@@ -63,11 +63,11 @@
   <script src="../js/three.min.js"></script>
   <script src="../js/orbitcontrols.js"></script>
   <script src="../js/vue.min.js"></script>
-  <script src="../js/planet.js"></script>
+  <script src="../js/min/planet.min.js"></script>
   <script>
     let userName = '<?php echo $_SESSION["NAME"]; ?>';
   </script>
-  <script src="../js/earth.js"></script>
+  <script src="../js/min/earth.min.js"></script>
   <script>
     document.getElementById('name').innerHTML = userName;
   </script>

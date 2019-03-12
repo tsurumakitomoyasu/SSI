@@ -4,7 +4,7 @@ window.onhashchange = function () {
   window.location.hash = "#noback";
 };
 
-let bgstar = new Vue({
+let bgstar = new Vue({ // background
   el: "#bgstar",
   data: {
     items: [{
@@ -20,7 +20,7 @@ let bgstar = new Vue({
   }
 });
 
-let loginregist = new Vue({
+let loginregist = new Vue({ // input欄
   el: "#main",
   data: {
     loginChange: msgAns,
@@ -73,6 +73,7 @@ let loginregist = new Vue({
   }
 });
 
+// タイトル
 let headerChange = new Vue({
   el: "#head",
   data: {

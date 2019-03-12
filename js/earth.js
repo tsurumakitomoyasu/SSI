@@ -1,3 +1,4 @@
+// ローディング
 let loadingbg = document.getElementsByClassName('loadingbg');
 setTimeout(function () {
   document.getElementById('loadingbg1').classList.add('loadingani1');
@@ -13,6 +14,7 @@ setTimeout(function () {
   }
 }, 2200);
 
+// メッシュ作成
 window.addEventListener('load', init);
 let scene;
 let camera;
@@ -73,7 +75,7 @@ function init() {
   }
 };
 
-let earthText = new Vue({
+let earthText = new Vue({ // 惑星名
   el: '#planetloadWrap',
   data: {
     earth: [{
@@ -84,13 +86,14 @@ let earthText = new Vue({
   }
 });
 
-let maintitle = new Vue({
+let maintitle = new Vue({ // タイトル
   el: '#maintitle',
   data: {
     maintitle: '<h1>地球/EARTH</h1>'
   }
 });
 
+// 1ページ目
 planetVue.page1 = `<div class="title">
                      <h2>
                        地球の特徴
@@ -114,6 +117,7 @@ planetVue.page1 = `<div class="title">
                      </p>
                    </div>`
 
+// 2ページ目
 planetVue.page2 = `<div class="title">
                      <h2>磁気圏</h2>
                    </div>
@@ -128,5 +132,6 @@ planetVue.page2 = `<div class="title">
                      </p>
                    </div>`
 
+// QRコード
 qr.planet = 'earth'
 qr.planetQR = '地球QRコード'
